@@ -120,43 +120,71 @@ function CustomersContent() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-2 mb-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            className="input pl-9"
-            placeholder="Search name, ID, phone..."
-            value={search}
-            onChange={e => { setSearch(e.target.value); setPage(1); }}
-          />
+      {/* Filters & Search */}
+      <div className="bg-white dark:bg-gray-900 p-3.5 sm:p-4 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm mb-5 space-y-3">
+        <div className="flex flex-col md:flex-row gap-3">
+          {/* Main Prominent Search Bar */}
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] pointer-events-none" />
+            <input
+              id="customer-search-input"
+              className="w-full pl-12 pr-4 py-3 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f] transition-all"
+              placeholder="Search by customer name, order ID, phone number or address..."
+              value={search}
+              onChange={e => { setSearch(e.target.value); setPage(1); }}
+            />
+            {search && (
+              <button
+                onClick={() => { setSearch(''); setPage(1); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+
+          {/* Filter Dropdowns with High-Contrast Filter Icon */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f] dark:text-blue-400 uppercase tracking-wider px-1 hidden sm:flex">
+              <Filter className="w-4 h-4 text-[#1e3a5f] dark:text-blue-400 stroke-[2.5]" />
+              <span>Filter:</span>
+            </div>
+
+            <select
+              className="flex-1 sm:w-44 px-3.5 py-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+              value={statusFilter}
+              onChange={e => { setStatusFilter(e.target.value as SubscriptionStatus | ''); setPage(1); }}
+            >
+              <option value="">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="expiring_this_month">Expiring This Month</option>
+              <option value="expired">Expired</option>
+              <option value="renewed">Renewed</option>
+            </select>
+
+            <select
+              className="flex-1 sm:w-48 px-3.5 py-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+              value={vendorFilter}
+              onChange={e => { setVendorFilter(e.target.value); setPage(1); }}
+            >
+              <option value="">All Vendors ({vendors.length})</option>
+              {vendors.map(v => (
+                <option key={v.id} value={v.vendor_name}>{v.vendor_name}</option>
+              ))}
+            </select>
+
+            {hasFilters && (
+              <button
+                onClick={clearFilters}
+                className="px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-xs font-semibold flex items-center gap-1 transition-colors"
+                title="Clear all filters"
+              >
+                <X className="w-3.5 h-3.5 text-red-500" />
+                <span>Reset</span>
+              </button>
+            )}
+          </div>
         </div>
-        <select
-          className="input sm:w-44"
-          value={statusFilter}
-          onChange={e => { setStatusFilter(e.target.value as SubscriptionStatus | ''); setPage(1); }}
-        >
-          <option value="">All Statuses</option>
-          <option value="active">Active</option>
-          <option value="expiring_this_month">Expiring This Month</option>
-          <option value="expired">Expired</option>
-          <option value="renewed">Renewed</option>
-        </select>
-        <select
-          className="input sm:w-44"
-          value={vendorFilter}
-          onChange={e => { setVendorFilter(e.target.value); setPage(1); }}
-        >
-          <option value="">All Vendors</option>
-          {vendors.map(v => (
-            <option key={v.id} value={v.vendor_name}>{v.vendor_name}</option>
-          ))}
-        </select>
-        {hasFilters && (
-          <button onClick={clearFilters} className="btn-ghost text-xs">
-            <X className="w-3.5 h-3.5" /> Clear
-          </button>
-        )}
       </div>
 
       {/* Table */}

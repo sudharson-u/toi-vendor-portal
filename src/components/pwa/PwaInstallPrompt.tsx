@@ -68,11 +68,11 @@ export default function PwaInstallPrompt() {
 
   const handleDismiss = () => {
     setShowPrompt(false);
-    sessionStorage.setItem('pwa_dismissed', 'true');
+    localStorage.setItem('pwa_dismissed', 'true');
   };
 
   if (isStandalone) return null;
-  if (!showPrompt && !deferredPrompt) return null;
+  if (!showPrompt) return null;
 
   return (
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-96 z-50 bg-white dark:bg-gray-900 border border-blue-200 dark:border-blue-900/50 rounded-2xl shadow-2xl p-4 flex flex-col gap-3 animate-in slide-in-from-bottom duration-300">

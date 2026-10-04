@@ -332,27 +332,27 @@ export default function ReportsPage() {
         {/* Month, Filter Type & Status Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pb-4 border-b border-gray-100 dark:border-gray-800">
           <div>
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-blue-600" />
+            <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1.5 flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2]" />
               <span>Select Month</span>
             </label>
             <input
               type="month"
               value={selectedMonth === 'all' ? '' : selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value || 'all')}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
             />
           </div>
 
           <div>
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1.5">
-              <CalendarDays className="w-3.5 h-3.5 text-indigo-600" />
+            <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1.5 flex items-center gap-1.5">
+              <CalendarDays className="w-4 h-4 text-indigo-600 dark:text-indigo-400 stroke-[2.2]" />
               <span>Filter By Date Type</span>
             </label>
             <select
               value={monthFilterType}
               onChange={(e) => setMonthFilterType(e.target.value as any)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
             >
               <option value="ending">Subscriptions Ending In This Month</option>
               <option value="starting">Subscriptions Starting In This Month</option>
@@ -361,14 +361,14 @@ export default function ReportsPage() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1.5">
-              <Filter className="w-3.5 h-3.5 text-amber-600" />
+            <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1.5 flex items-center gap-1.5">
+              <Filter className="w-4 h-4 text-amber-600 dark:text-amber-400 stroke-[2.2]" />
               <span>Subscription Status</span>
             </label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
             >
               <option value="all">All Statuses</option>
               <option value="active">Active Subscriptions</option>
@@ -380,7 +380,7 @@ export default function ReportsPage() {
           <div className="flex flex-col justify-end">
             <button
               onClick={() => setSelectedMonth('all')}
-              className="px-3 py-2 text-xs font-semibold text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 rounded-lg transition-colors text-center"
+              className="px-4 py-2.5 text-xs font-bold text-[#1e3a5f] dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 rounded-xl transition-colors text-center border border-blue-200 dark:border-blue-900 shadow-sm"
             >
               {selectedMonth === 'all' ? 'Filtering: All Months' : 'Show All Months'}
             </button>

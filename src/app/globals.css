@@ -80,11 +80,11 @@ body {
    FORM STYLES
    ========================================= */
 .input {
-  @apply w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700
-    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+  @apply w-full px-3.5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700
+    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium
     placeholder:text-gray-400 text-sm
-    focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/30 focus:border-[#1e3a5f]
-    transition-colors duration-150;
+    focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]
+    transition-colors duration-150 shadow-sm;
 }
 
 .label {

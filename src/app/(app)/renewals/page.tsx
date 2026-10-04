@@ -133,22 +133,22 @@ export default function RenewalsPage() {
       <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="flex flex-1 items-center gap-3 w-full sm:w-auto">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-5 h-5 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               placeholder="Search by customer name, order ID, phone..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
+              className="w-full pl-11 pr-4 py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-gray-400 flex-shrink-0" />
+            <Filter className="w-4 h-4 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] flex-shrink-0" />
             <select
               value={selectedVendor}
               onChange={(e) => setSelectedVendor(e.target.value)}
-              className="px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+              className="px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
             >
               <option value="">All Vendors ({vendors.length})</option>
               {vendors.map((v) => (

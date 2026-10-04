@@ -100,11 +100,11 @@ export default function VendorsPage() {
       </div>
 
       {/* Search */}
-      <div className="relative mb-4 max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+      <div className="relative mb-5 max-w-md">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] pointer-events-none" />
         <input
-          className="input pl-9"
-          placeholder="Search vendors..."
+          className="w-full pl-11 pr-4 py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+          placeholder="Search vendors by name or code..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
