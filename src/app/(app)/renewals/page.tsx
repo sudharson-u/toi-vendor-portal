@@ -540,14 +540,17 @@ export default function RenewalsPage() {
 
       {/* Quick Renew Modal */}
       {activeCustomer && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-xl border border-gray-200 dark:border-gray-800 animate-scaleIn">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
+            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600">
+                <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
                   <RefreshCw className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
+                <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
                   Renew Subscription
                 </h3>
               </div>
@@ -560,7 +563,7 @@ export default function RenewalsPage() {
             </div>
 
             <form onSubmit={handleRenewSubmit} className="space-y-4">
-              <div className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800 text-xs space-y-1">
+              <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs space-y-1 text-gray-800" style={{ backgroundColor: '#f8fafc', color: '#1e293b' }}>
                 <p>
                   <strong>Customer:</strong> {activeCustomer.customer_name}
                 </p>
@@ -573,7 +576,7 @@ export default function RenewalsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
                   New Start Date
                 </label>
                 <input
@@ -581,12 +584,13 @@ export default function RenewalsPage() {
                   required
                   value={renewStartDate}
                   onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
                   New Expiry Date (1 Year)
                 </label>
                 <input
@@ -594,15 +598,16 @@ export default function RenewalsPage() {
                   required
                   value={renewEndDate}
                   onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
                 <button
                   type="button"
                   onClick={() => setActiveCustomer(null)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>

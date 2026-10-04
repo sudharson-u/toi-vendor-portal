@@ -524,10 +524,15 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
 
       {/* Edit Customer Modal */}
       {showEdit && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-xl border border-gray-200 dark:border-gray-800 animate-scaleIn">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
-              <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Edit Customer Information</h3>
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
+            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
+              <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
+                Edit Customer Information
+              </h3>
               <button onClick={() => setShowEdit(false)} className="text-gray-400 hover:text-gray-600">
                 <X className="w-5 h-5" />
               </button>
@@ -535,22 +540,28 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
 
             <form onSubmit={handleSaveEdit} className="space-y-3.5">
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Customer Name</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  Customer Name
+                </label>
                 <input
                   type="text"
                   required
                   value={editForm.customer_name}
                   onChange={(e) => setEditForm({ ...editForm, customer_name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Assigned Vendor</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  Assigned Vendor
+                </label>
                 <select
                   value={editForm.vendor_name}
                   onChange={(e) => setEditForm({ ...editForm, vendor_name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 >
                   <option value="">Select Vendor...</option>
                   {vendors.map((v) => (
@@ -562,41 +573,50 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Mobile Number</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  Mobile Number
+                </label>
                 <input
                   type="text"
                   value={editForm.mobile_number}
                   onChange={(e) => setEditForm({ ...editForm, mobile_number: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                   placeholder="e.g. 9840123456"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Order / Coupon ID</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  Order / Coupon ID
+                </label>
                 <input
                   type="text"
                   value={editForm.order_id}
                   onChange={(e) => setEditForm({ ...editForm, order_id: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Address</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  Address
+                </label>
                 <textarea
                   rows={3}
                   value={editForm.address}
                   onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
                 <button
                   type="button"
                   onClick={() => setShowEdit(false)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
@@ -614,14 +634,19 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
 
       {/* Renew Subscription Modal */}
       {showRenew && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-xl border border-gray-200 dark:border-gray-800 animate-scaleIn">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
+            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600">
+                <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
                   <RefreshCw className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Renew Subscription</h3>
+                <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
+                  Renew Subscription
+                </h3>
               </div>
               <button onClick={() => setShowRenew(false)} className="text-gray-400 hover:text-gray-600">
                 <X className="w-5 h-5" />
@@ -629,37 +654,43 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
             </div>
 
             <form onSubmit={handleRenewSubmit} className="space-y-4">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-600" style={{ color: '#475569' }}>
                 Renew subscription for <strong>{customer.customer_name}</strong> under vendor <strong>{vendorName}</strong>.
               </p>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">New Start Date</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  New Start Date
+                </label>
                 <input
                   type="date"
                   required
                   value={renewStartDate}
                   onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">New Expiry Date</label>
+                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                  New Expiry Date
+                </label>
                 <input
                   type="date"
                   required
                   value={renewEndDate}
                   onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
                 <button
                   type="button"
                   onClick={() => setShowRenew(false)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>

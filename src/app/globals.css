@@ -31,11 +31,27 @@ body {
 }
 
 input, textarea, select {
-  color: #111827;
+  color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
 }
 
-.dark input, .dark textarea, .dark select {
-  color: #f9fafb;
+.modal-card {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.modal-input {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+.modal-input::placeholder {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 1 !important;
 }
 
 /* =========================================
