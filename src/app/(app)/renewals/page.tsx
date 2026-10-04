@@ -130,39 +130,66 @@ export default function RenewalsPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
-        <div className="flex flex-1 items-center gap-3 w-full sm:w-auto">
+      <div className="bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+          {/* Prominent Large Search Bar */}
           <div className="relative flex-1">
-            <Search className="w-5 h-5 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-5 h-5 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search by customer name, order ID, phone..."
+              id="renewals-search-input"
+              placeholder="Search renewals by customer name, order ID, phone number or address..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+              className="w-full pl-12 pr-10 py-3 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f] transition-all"
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-[#1e3a5f] dark:text-blue-400 stroke-[2.2] flex-shrink-0" />
-            <select
-              value={selectedVendor}
-              onChange={(e) => setSelectedVendor(e.target.value)}
-              className="px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
-            >
-              <option value="">All Vendors ({vendors.length})</option>
-              {vendors.map((v) => (
-                <option key={v.id} value={v.vendor_name}>
-                  {v.vendor_name}
-                </option>
-              ))}
-            </select>
+          {/* Vendor Filter & Count Controls */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3">
+            <div className="flex items-center gap-2 flex-1 sm:flex-initial">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f] dark:text-blue-400 uppercase tracking-wider px-1 hidden sm:flex">
+                <Filter className="w-4 h-4 text-[#1e3a5f] dark:text-blue-400 stroke-[2.5]" />
+                <span>Vendor:</span>
+              </div>
+              <select
+                value={selectedVendor}
+                onChange={(e) => setSelectedVendor(e.target.value)}
+                className="w-full sm:w-52 px-3.5 py-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+              >
+                <option value="">All Vendors ({vendors.length})</option>
+                {vendors.map((v) => (
+                  <option key={v.id} value={v.vendor_name}>
+                    {v.vendor_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {selectedVendor && (
+              <button
+                onClick={() => setSelectedVendor('')}
+                className="px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-xs font-semibold flex items-center gap-1 transition-colors"
+                title="Reset vendor filter"
+              >
+                <X className="w-3.5 h-3.5 text-red-500" />
+                <span>Reset</span>
+              </button>
+            )}
+
+            <span className="text-xs font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-3.5 py-3 rounded-xl border border-gray-200 dark:border-gray-700 whitespace-nowrap">
+              Showing <strong className="text-gray-900 dark:text-white">{filteredCustomers.length}</strong> renewals
+            </span>
           </div>
         </div>
-
-        <span className="text-xs font-medium text-gray-500 self-end sm:self-center">
-          Showing {filteredCustomers.length} renewals
-        </span>
       </div>
 
       {/* Renewals Table */}
