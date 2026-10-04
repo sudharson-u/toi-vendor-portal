@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCustomerById, updateCustomer } from '@/lib/data-source';
-import { createServiceClient, isSupabaseConfigured } from '@/lib/supabase/server';
+import { getCustomerById, updateCustomer, deleteCustomer } from '@/lib/data-source';
 
 export async function GET(
   req: NextRequest,
@@ -33,6 +32,7 @@ export async function PUT(
       order_id: body.order_id?.trim() || null,
       vendor_id: body.vendor_id || null,
       vendor_name: body.vendor_name || null,
+      notes: body.notes !== undefined ? body.notes : undefined,
     });
 
     return NextResponse.json({ customer: updated });
@@ -46,15 +46,10 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-
-  if (isSupabaseConfigured()) {
-    try {
-      const supabase = await createServiceClient();
-      await supabase.from('customers').delete().eq('id', id);
-    } catch (e) {
-      // Fallback
-    }
+  try {
+    const success = await deleteCustomer(id);
+    return NextResponse.json({ success });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
-
-  return NextResponse.json({ success: true });
 }

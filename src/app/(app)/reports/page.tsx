@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import {
   FileText, Download, Printer, Filter, CheckSquare, Square,
-  Building2, Calendar, CheckCircle2, ChevronDown, RefreshCw
+  Building2, Calendar, CheckCircle2, ChevronDown, RefreshCw, CalendarDays
 } from 'lucide-react';
 import { formatDate, getStatusLabel, cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -14,6 +14,7 @@ export default function ReportsPage() {
   const [vendors, setVendors] = useState<any[]>([]);
   const [selectedVendors, setSelectedVendors] = useState<string[]>([]);
   const [selectedMonth, setSelectedMonth] = useState(''); // YYYY-MM
+  const [monthFilterType, setMonthFilterType] = useState<'ending' | 'starting' | 'both'>('ending');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [customers, setCustomers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -40,13 +41,12 @@ export default function ReportsPage() {
     setSelectedMonth(format(now, 'yyyy-MM'));
   }, []);
 
-  // Fetch report data whenever filters change
+  // Fetch report data
   useEffect(() => {
     async function fetchReportData() {
       setLoading(true);
       try {
-        // Fetch up to 500 customers
-        const res = await fetch('/api/customers?limit=500');
+        const res = await fetch('/api/customers?limit=1000');
         const data = await res.json();
         if (data.customers) {
           setCustomers(data.customers);
@@ -76,18 +76,25 @@ export default function ReportsPage() {
     setSelectedVendors([]);
   }
 
-  // Filter customers by selected vendors, month, status
+  // Filter customers by selected vendors, month, date type, status
   const filteredCustomers = customers.filter((c) => {
     const vName = c.vendor_name || c.vendors?.vendor_name;
     const vendorMatches = selectedVendors.length === 0 || selectedVendors.includes(vName);
     if (!vendorMatches) return false;
 
     const sub = c.subscriptions?.[0];
+    const startDate = sub?.start_date || '';
     const endDate = sub?.end_date || '';
 
-    // Month filter
+    // Month filter (Starting vs Ending vs Both)
     if (selectedMonth && selectedMonth !== 'all') {
-      if (!endDate.startsWith(selectedMonth)) return false;
+      if (monthFilterType === 'ending') {
+        if (!endDate.startsWith(selectedMonth)) return false;
+      } else if (monthFilterType === 'starting') {
+        if (!startDate.startsWith(selectedMonth)) return false;
+      } else if (monthFilterType === 'both') {
+        if (!endDate.startsWith(selectedMonth) && !startDate.startsWith(selectedMonth)) return false;
+      }
     }
 
     // Status filter
@@ -99,7 +106,7 @@ export default function ReportsPage() {
     return true;
   });
 
-  // Generate Portrait PDF with at least 20 records per page
+  // Generate Portrait PDF with 20+ records per page
   async function generatePDF() {
     try {
       setGeneratingPdf(true);
@@ -129,13 +136,13 @@ export default function ReportsPage() {
           logoData = canvas.toDataURL('image/jpeg');
         }
       } catch (e) {
-        // Logo not available or canvas error, continue with text header
+        // Logo fallback
       }
 
       const pageWidth = doc.internal.pageSize.getWidth();
       const pageHeight = doc.internal.pageSize.getHeight();
 
-      // Table rows
+      // Table rows: Address next to Customer Name, separate Start Date and End Date, NO status column
       const tableData = filteredCustomers.map((c, idx) => {
         const sub = c.subscriptions?.[0];
         const vName = c.vendor_name || c.vendors?.vendor_name || '—';
@@ -145,38 +152,45 @@ export default function ReportsPage() {
         return [
           String(idx + 1),
           c.customer_name || '—',
+          c.address || '—',
           vName,
           c.order_id || '—',
           c.mobile_number || '—',
-          `${start}\nto ${end}`,
-          getStatusLabel(c.computed_status || sub?.status || 'active'),
+          start,
+          end,
         ];
       });
 
-      // Format header title
+      // Header summary text
       const vendorSummary =
         selectedVendors.length === vendors.length
           ? 'All Vendors'
           : selectedVendors.length <= 3
           ? selectedVendors.join(', ')
-          : `${selectedVendors.length} Selected Vendors`;
+          : `${selectedVendors.length} Vendors`;
+
+      const typeLabel =
+        monthFilterType === 'starting'
+          ? 'Starts'
+          : monthFilterType === 'ending'
+          ? 'Ends'
+          : 'Starts/Ends';
 
       const monthSummary =
         selectedMonth === 'all'
           ? 'All Months'
-          : format(new Date(selectedMonth + '-01'), 'MMMM yyyy');
+          : `${format(new Date(selectedMonth + '-01'), 'MMMM yyyy')} (${typeLabel})`;
 
-      // AutoTable with compact rows to fit at least 20 per page!
-      // A4 portrait height is 297mm. Top margin 38mm, bottom margin 15mm => 244mm usable.
-      // 20 rows + header row => each row ~8.5mm to 9mm.
+      // AutoTable in Portrait Mode: 20+ details per page!
+      // Total column width = 8 + 34 + 44 + 26 + 24 + 20 + 17 + 17 = 190mm (Margins: left 10mm, right 10mm)
       autoTable(doc, {
-        head: [['#', 'Customer Name', 'Vendor', 'Order ID', 'Mobile', 'Term Period', 'Status']],
+        head: [['#', 'Customer Name', 'Address', 'Vendor', 'Order ID', 'Mobile', 'Start Date', 'End Date']],
         body: tableData,
-        startY: 38,
+        startY: 36,
         theme: 'grid',
         styles: {
-          fontSize: 7.5,
-          cellPadding: { top: 1.8, bottom: 1.8, left: 1.5, right: 1.5 },
+          fontSize: 7,
+          cellPadding: { top: 1.6, bottom: 1.6, left: 1.5, right: 1.5 },
           overflow: 'linebreak',
           valign: 'middle',
           textColor: [30, 41, 59],
@@ -185,30 +199,31 @@ export default function ReportsPage() {
           fillColor: [30, 58, 95], // TOI Navy #1e3a5f
           textColor: [255, 255, 255],
           fontStyle: 'bold',
-          fontSize: 8,
+          fontSize: 7.5,
           halign: 'left',
         },
         columnStyles: {
           0: { cellWidth: 8, halign: 'center' }, // #
-          1: { cellWidth: 44, fontStyle: 'bold' }, // Customer Name
-          2: { cellWidth: 32 }, // Vendor
-          3: { cellWidth: 26, fontStyle: 'normal' }, // Order ID
-          4: { cellWidth: 24 }, // Mobile
-          5: { cellWidth: 30, fontSize: 6.5 }, // Term
-          6: { cellWidth: 26, fontStyle: 'bold' }, // Status
+          1: { cellWidth: 34, fontStyle: 'bold' }, // Customer Name
+          2: { cellWidth: 44, fontSize: 6.3 }, // Address (next to Customer Name!)
+          3: { cellWidth: 26 }, // Vendor
+          4: { cellWidth: 24, fontStyle: 'normal' }, // Order ID
+          5: { cellWidth: 20 }, // Mobile
+          6: { cellWidth: 17, fontSize: 6.8 }, // Start Date
+          7: { cellWidth: 17, fontSize: 6.8 }, // End Date
         },
         alternateRowStyles: {
           fillColor: [248, 250, 252],
         },
-        margin: { top: 38, left: 10, right: 10, bottom: 15 },
+        margin: { top: 36, left: 10, right: 10, bottom: 14 },
         didDrawPage: (data) => {
           // Top Header (draw on every page)
           doc.setFillColor(30, 58, 95);
-          doc.rect(0, 0, pageWidth, 28, 'F');
+          doc.rect(0, 0, pageWidth, 26, 'F');
 
           if (logoData) {
             try {
-              doc.addImage(logoData, 'JPEG', 10, 4, 20, 20);
+              doc.addImage(logoData, 'JPEG', 10, 3, 20, 20);
             } catch (e) {
               // fallback
             }
@@ -216,28 +231,28 @@ export default function ReportsPage() {
 
           // Header Text
           doc.setTextColor(255, 255, 255);
-          doc.setFontSize(13);
+          doc.setFontSize(12);
           doc.setFont('helvetica', 'bold');
-          doc.text('THE TIMES OF INDIA — VENDOR DISTRIBUTION REPORT', 34, 11);
+          doc.text('THE TIMES OF INDIA — VENDOR DISTRIBUTION REPORT', 33, 10);
 
-          doc.setFontSize(8.5);
+          doc.setFontSize(8);
           doc.setFont('helvetica', 'normal');
           doc.text(
-            `Vendors: ${vendorSummary}  |  Period: ${monthSummary}  |  Records: ${filteredCustomers.length}`,
-            34,
-            17
+            `Vendors: ${vendorSummary}  |  Filter: ${monthSummary}  |  Records: ${filteredCustomers.length}`,
+            33,
+            16
           );
 
-          doc.setFontSize(7);
+          doc.setFontSize(6.8);
           doc.setTextColor(200, 215, 235);
-          doc.text(`Generated on: ${format(new Date(), 'dd MMM yyyy, hh:mm a')} | Royapuram & Chennai Depot`, 34, 23);
+          doc.text(`Generated: ${format(new Date(), 'dd MMM yyyy, hh:mm a')} | Royapuram & Chennai Depot`, 33, 22);
 
           // Footer
           doc.setFontSize(7.5);
           doc.setTextColor(140, 150, 160);
           const pageStr = `Page ${data.pageNumber} of ${doc.internal.pages.length - 1}`;
-          doc.text(pageStr, pageWidth - 30, pageHeight - 7);
-          doc.text('Confidential — Times of India Multi-Vendor Portal', 10, pageHeight - 7);
+          doc.text(pageStr, pageWidth - 28, pageHeight - 6);
+          doc.text('Confidential — Times of India Multi-Vendor Portal', 10, pageHeight - 6);
         },
       });
 
@@ -251,22 +266,21 @@ export default function ReportsPage() {
     }
   }
 
-  // Export CSV
+  // Export CSV without Status & Publication, Address next to Customer Name
   function exportCSV() {
-    const headers = ['S.No', 'Customer Name', 'Vendor Name', 'Order ID', 'Mobile', 'Address', 'Depot', 'Start Date', 'Expiry Date', 'Status'];
+    const headers = ['S.No', 'Customer Name', 'Address', 'Vendor Name', 'Order ID', 'Mobile', 'Start Date', 'Expiry Date', 'Depot'];
     const rows = filteredCustomers.map((c, idx) => {
       const sub = c.subscriptions?.[0];
       return [
         idx + 1,
         `"${(c.customer_name || '').replace(/"/g, '""')}"`,
+        `"${(c.address || '').replace(/"/g, '""')}"`,
         `"${(c.vendor_name || c.vendors?.vendor_name || '').replace(/"/g, '""')}"`,
         `"${c.order_id || ''}"`,
         `"${c.mobile_number || ''}"`,
-        `"${(c.address || '').replace(/"/g, '""')}"`,
-        `"${c.depot || ''}"`,
         `"${sub?.start_date || ''}"`,
         `"${sub?.end_date || ''}"`,
-        `"${c.computed_status || sub?.status || 'active'}"`,
+        `"${c.depot || 'Royapuram'}"`,
       ].join(',');
     });
 
@@ -274,7 +288,7 @@ export default function ReportsPage() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `TOI_Customers_Report_${selectedMonth}.csv`);
+    link.setAttribute('download', `TOI_Customers_Report_${selectedMonth}_${monthFilterType}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -290,7 +304,7 @@ export default function ReportsPage() {
           </span>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Reports & PDF Generation</h1>
           <p className="text-white/80 text-sm mt-1">
-            Generate custom portrait PDF reports with 20+ entries per page for any selected vendors and months.
+            Generate custom portrait PDF reports with 20+ entries per page for starting or ending subscriptions across selected vendors.
           </p>
         </div>
 
@@ -315,8 +329,8 @@ export default function ReportsPage() {
 
       {/* Filter Controls */}
       <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5 shadow-sm space-y-4">
-        {/* Month & Status Filter Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pb-4 border-b border-gray-100 dark:border-gray-800">
+        {/* Month, Filter Type & Status Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pb-4 border-b border-gray-100 dark:border-gray-800">
           <div>
             <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-blue-600" />
@@ -328,6 +342,22 @@ export default function ReportsPage() {
               onChange={(e) => setSelectedMonth(e.target.value || 'all')}
               className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium"
             />
+          </div>
+
+          <div>
+            <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1.5">
+              <CalendarDays className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Filter By Date Type</span>
+            </label>
+            <select
+              value={monthFilterType}
+              onChange={(e) => setMonthFilterType(e.target.value as any)}
+              className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium"
+            >
+              <option value="ending">Subscriptions Ending In This Month</option>
+              <option value="starting">Subscriptions Starting In This Month</option>
+              <option value="both">Starting OR Ending In This Month</option>
+            </select>
           </div>
 
           <div>
@@ -420,7 +450,7 @@ export default function ReportsPage() {
               Report Preview ({filteredCustomers.length} Records Matching)
             </h3>
             <p className="text-xs text-gray-500">
-              Estimated pages: ~{Math.max(1, Math.ceil(filteredCustomers.length / 22))} pages (Portrait layout, 20+ per page)
+              Portrait layout, 20+ records per page | Address included next to Customer Name | Columns: Customer Name, Address, Vendor, Order ID, Mobile, Start Date, End Date
             </p>
           </div>
 
@@ -430,7 +460,7 @@ export default function ReportsPage() {
             className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold text-xs rounded-xl shadow flex items-center gap-1.5 transition-colors"
           >
             <Printer className="w-4 h-4" />
-            <span>Generate PDF</span>
+            <span>Generate Portrait PDF</span>
           </button>
         </div>
 
@@ -443,7 +473,7 @@ export default function ReportsPage() {
           <div className="py-16 text-center text-gray-400">
             <FileText className="w-10 h-10 mx-auto mb-2 opacity-50" />
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">No records match the selected filters</p>
-            <p className="text-xs text-gray-500 mt-1">Try selecting different vendors or showing all months.</p>
+            <p className="text-xs text-gray-500 mt-1">Try selecting different vendors, toggling starting/ending month, or showing all months.</p>
           </div>
         ) : (
           <div className="overflow-x-auto max-h-[500px]">
@@ -452,11 +482,12 @@ export default function ReportsPage() {
                 <tr className="border-b border-gray-200 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300">
                   <th className="py-2.5 px-3 w-10">#</th>
                   <th className="py-2.5 px-3">Customer Name</th>
+                  <th className="py-2.5 px-3">Address</th>
                   <th className="py-2.5 px-3">Vendor</th>
                   <th className="py-2.5 px-3">Order / Coupon</th>
                   <th className="py-2.5 px-3">Mobile</th>
-                  <th className="py-2.5 px-3">Expiry Date</th>
-                  <th className="py-2.5 px-3">Status</th>
+                  <th className="py-2.5 px-3">Start Date</th>
+                  <th className="py-2.5 px-3">End Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -466,15 +497,12 @@ export default function ReportsPage() {
                     <tr key={c.id || idx} className="hover:bg-gray-50 dark:hover:bg-gray-800/40">
                       <td className="py-2 px-3 text-gray-400 font-mono">{idx + 1}</td>
                       <td className="py-2 px-3 font-semibold text-gray-900 dark:text-gray-100">{c.customer_name}</td>
-                      <td className="py-2 px-3 text-gray-700 dark:text-gray-300">{c.vendor_name || c.vendors?.vendor_name}</td>
+                      <td className="py-2 px-3 text-gray-600 dark:text-gray-400 max-w-xs truncate">{c.address || '—'}</td>
+                      <td className="py-2 px-3 text-gray-700 dark:text-gray-300 font-medium">{c.vendor_name || c.vendors?.vendor_name}</td>
                       <td className="py-2 px-3 font-mono text-gray-600 dark:text-gray-400">{c.order_id || '—'}</td>
                       <td className="py-2 px-3 text-gray-600 dark:text-gray-400">{c.mobile_number || '—'}</td>
+                      <td className="py-2 px-3 font-medium">{formatDate(sub?.start_date)}</td>
                       <td className="py-2 px-3 font-medium">{formatDate(sub?.end_date)}</td>
-                      <td className="py-2 px-3">
-                        <span className="px-2 py-0.5 rounded-full font-bold text-[10px] uppercase bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                          {c.computed_status || sub?.status || 'active'}
-                        </span>
-                      </td>
                     </tr>
                   );
                 })}

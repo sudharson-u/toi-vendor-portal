@@ -16,6 +16,7 @@ export interface DataCustomer {
   vendor_name: string;
   vendor_code?: string;
   publication?: string;
+  notes?: string;
   subscriptions: Array<{
     id: string;
     customer_id: string;
@@ -251,7 +252,7 @@ export async function getCustomerById(id: string) {
 
   return {
     ...found,
-    notes: '',
+    notes: found.notes || '',
     vendors: {
       id: found.vendor_id || '',
       vendor_name: found.vendor_name,
@@ -311,6 +312,7 @@ export async function createCustomer(data: {
     address: data.address || '',
     depot: 'Royapuram',
     mobile_number: data.mobile_number || null,
+    notes: data.notes || '',
     vendor_id: data.vendor_id || null,
     vendor_name: data.vendor_name || 'Unassigned',
     subscriptions: [
@@ -342,6 +344,7 @@ export async function updateCustomer(id: string, updates: Partial<DataCustomer>)
           address: updates.address,
           order_id: updates.order_id,
           vendor_id: updates.vendor_id,
+          notes: updates.notes,
         })
         .eq('id', id);
     } catch (e) {
@@ -356,6 +359,26 @@ export async function updateCustomer(id: string, updates: Partial<DataCustomer>)
     return localCustomers[idx];
   }
   return null;
+}
+
+export async function deleteCustomer(id: string) {
+  if (isSupabaseConfigured()) {
+    try {
+      const supabase = await createServiceClient();
+      await supabase.from('subscriptions').delete().eq('customer_id', id);
+      await supabase.from('customers').delete().eq('id', id);
+    } catch (e) {
+      // Fallback
+    }
+  }
+
+  const idx = localCustomers.findIndex((c) => c.id === id);
+  if (idx !== -1) {
+    localCustomers.splice(idx, 1);
+    saveLocal();
+    return true;
+  }
+  return false;
 }
 
 export async function renewCustomerSubscription(

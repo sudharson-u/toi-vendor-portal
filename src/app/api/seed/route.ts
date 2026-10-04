@@ -50,6 +50,7 @@ export async function POST() {
             mobile_number: c.mobile_number,
             order_id: c.order_id,
             vendor_id: vId,
+            notes: (c as any).notes || null,
           })
           .select()
           .single();

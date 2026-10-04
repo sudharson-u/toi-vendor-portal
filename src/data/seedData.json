@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T16:04:35.040Z",
+  "updatedAt": "2026-10-04T17:26:07.399Z",
   "vendors": [
     {
       "id": "vendor-1",
@@ -1916,13 +1916,12 @@
     {
       "id": "cust-81",
       "customer_id": "cust-81",
-      "order_id": "SCT45437817",
-      "customer_name": "Abbas D",
-      "address": "No 137/70, 3Rd Floor, East, Madha Chruch Street, Royapuram, 600013",
+      "order_id": null,
+      "address": null,
       "depot": "Royapuram",
       "mobile_number": null,
-      "vendor_id": "vendor-5",
-      "vendor_name": "Jeeva",
+      "vendor_id": null,
+      "vendor_name": null,
       "vendor_code": "V12494",
       "publication": "TOI",
       "subscriptions": [
@@ -1934,7 +1933,8 @@
           "status": "active",
           "is_current": true
         }
-      ]
+      ],
+      "notes": "Morning delivery requested"
     },
     {
       "id": "cust-82",

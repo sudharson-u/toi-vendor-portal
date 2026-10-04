@@ -81,25 +81,37 @@ export default function ImportExportPage() {
         return;
       }
 
-      // Format for spreadsheet
+      // Format for spreadsheet (Clean printing format without Status/Publication)
       const sheetData = exportList.map((c: any, idx: number) => {
         const sub = c.subscriptions?.[0];
         return {
           'S.No': idx + 1,
-          'Coupon / Order ID': c.order_id || '',
           'Customer Name': c.customer_name || '',
+          'Address': c.address || '',
           'Vendor Name': c.vendor_name || c.vendors?.vendor_name || '',
+          'Coupon / Order ID': c.order_id || '',
           'Mobile Number': c.mobile_number || '',
           'Start Date': sub?.start_date || '',
           'Expiry Date': sub?.end_date || '',
-          'Address': c.address || '',
           'Depot': c.depot || 'Royapuram',
-          'Status': c.computed_status || sub?.status || 'active',
-          'Publication': c.publication || 'TOI',
         };
       });
 
       const worksheet = XLSX.utils.json_to_sheet(sheetData);
+
+      // Set column widths for proper indentation and easy printing
+      worksheet['!cols'] = [
+        { wch: 8 },  // S.No
+        { wch: 28 }, // Customer Name
+        { wch: 42 }, // Address
+        { wch: 20 }, // Vendor Name
+        { wch: 18 }, // Coupon / Order ID
+        { wch: 16 }, // Mobile Number
+        { wch: 14 }, // Start Date
+        { wch: 14 }, // Expiry Date
+        { wch: 15 }, // Depot
+      ];
+
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Customers');
 

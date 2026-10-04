@@ -198,11 +198,11 @@ function CustomersContent() {
                 return (
                   <tr key={c.id}>
                     <td>
-                      <Link href={`/customers/${c.id}`} className="hover:text-[#1e3a5f] dark:hover:text-blue-300 transition-colors">
-                        <div className="font-medium text-gray-900 dark:text-gray-100">{c.customer_name}</div>
-                        {c.customer_id && (
-                          <div className="text-xs text-gray-400 dark:text-gray-500">{c.customer_id}</div>
-                        )}
+                      <Link href={`/customers/${c.id}`} className="hover:text-[#1e3a5f] dark:hover:text-blue-300 transition-colors block">
+                        <div className="font-semibold text-gray-900 dark:text-gray-100">{c.customer_name}</div>
+                        <div className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5 flex items-center gap-1">
+                          <span>Vendor: {c.vendors?.vendor_name || (c as any).vendor_name || 'Unassigned'}</span>
+                        </div>
                       </Link>
                     </td>
                     <td className="hidden sm:table-cell">
