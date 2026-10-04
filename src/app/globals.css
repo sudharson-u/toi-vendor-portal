@@ -58,7 +58,7 @@ input, textarea, select {
    LAYOUT HELPERS
    ========================================= */
 .page-container {
-  @apply max-w-full px-4 py-5 sm:px-6;
+  @apply w-full space-y-6;
 }
 
 /* =========================================

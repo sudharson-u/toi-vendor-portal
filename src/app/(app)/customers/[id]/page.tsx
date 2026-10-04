@@ -265,64 +265,111 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Top Navigation & Action Buttons Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      {/* Top Navigation & Action Buttons Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
         <Link
           href="/customers"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 transition-colors self-start"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Customers</span>
         </Link>
 
-        {/* Action Buttons: Share, Edit, Renew, Delete */}
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Share Button */}
-          <button
-            onClick={handleShare}
-            className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors"
-            title="Share customer details"
-          >
-            {copiedShare ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
-            <span>{copiedShare ? 'Copied Details!' : 'Share'}</span>
-          </button>
+        {/* Action Buttons: Perfectly aligned on both mobile & desktop */}
+        <div className="w-full sm:w-auto">
+          {/* Mobile Layout: 2 neatly balanced rows + centered full-width delete */}
+          <div className="grid grid-cols-2 gap-2 sm:hidden w-full">
+            {/* Primary Action 1: Renew */}
+            <button
+              onClick={() => setShowRenew(true)}
+              className="py-2.5 px-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-gray-950 text-xs font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all"
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span>Renew Plan</span>
+            </button>
 
-          {/* WhatsApp Share */}
-          <button
-            onClick={handleShareWhatsApp}
-            className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-lg border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5 transition-colors"
-            title="Share directly to WhatsApp"
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>WhatsApp</span>
-          </button>
+            {/* Primary Action 2: WhatsApp */}
+            <button
+              onClick={handleShareWhatsApp}
+              className="py-2.5 px-3 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-xl border border-emerald-300 dark:border-emerald-800 flex items-center justify-center gap-2 shadow-xs active:scale-98 transition-all"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>WhatsApp</span>
+            </button>
 
-          {/* Edit Info */}
-          <button
-            onClick={() => setShowEdit(true)}
-            className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors"
-          >
-            <Edit3 className="w-3.5 h-3.5" />
-            <span>Edit</span>
-          </button>
+            {/* Action 3: Edit */}
+            <button
+              onClick={() => setShowEdit(true)}
+              className="py-2.5 px-3 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-bold rounded-xl border border-gray-300 dark:border-gray-700 flex items-center justify-center gap-2 shadow-xs active:scale-98 transition-all"
+            >
+              <Edit3 className="w-4 h-4 text-blue-600" />
+              <span>Edit Details</span>
+            </button>
 
-          {/* Renew Subscription */}
-          <button
-            onClick={() => setShowRenew(true)}
-            className="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Renew</span>
-          </button>
+            {/* Action 4: Share */}
+            <button
+              onClick={handleShare}
+              className="py-2.5 px-3 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-bold rounded-xl border border-gray-300 dark:border-gray-700 flex items-center justify-center gap-2 shadow-xs active:scale-98 transition-all"
+            >
+              {copiedShare ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4 text-gray-600" />}
+              <span>{copiedShare ? 'Copied!' : 'Share Info'}</span>
+            </button>
 
-          {/* Delete Customer Button */}
-          <button
-            onClick={() => setShowDeleteModal(true)}
-            className="px-3 py-1.5 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs font-semibold rounded-lg border border-rose-200 dark:border-rose-800 flex items-center gap-1.5 transition-colors"
-            title="Delete this customer"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-            <span>Delete</span>
-          </button>
+            {/* Action 5: Delete - spanning both cols symmetrically */}
+            <button
+              onClick={() => setShowDeleteModal(true)}
+              className="col-span-2 py-2 px-3 bg-rose-50/80 dark:bg-rose-950/30 hover:bg-rose-100/90 text-rose-700 dark:text-rose-400 text-xs font-bold rounded-xl border border-rose-200 dark:border-rose-900/60 flex items-center justify-center gap-2 active:scale-98 transition-all"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span>Delete Customer</span>
+            </button>
+          </div>
+
+          {/* Desktop & Tablet Layout: Sleek unified horizontal toolbar */}
+          <div className="hidden sm:flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="px-3.5 py-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs font-bold rounded-xl border border-gray-200 dark:border-gray-700 flex items-center gap-1.5 shadow-xs transition-colors"
+              title="Share customer details"
+            >
+              {copiedShare ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
+              <span>{copiedShare ? 'Copied Details!' : 'Share'}</span>
+            </button>
+
+            <button
+              onClick={handleShareWhatsApp}
+              className="px-3.5 py-2 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-xl border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5 shadow-xs transition-colors"
+              title="Share directly to WhatsApp"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </button>
+
+            <button
+              onClick={() => setShowEdit(true)}
+              className="px-3.5 py-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs font-bold rounded-xl border border-gray-200 dark:border-gray-700 flex items-center gap-1.5 shadow-xs transition-colors"
+            >
+              <Edit3 className="w-3.5 h-3.5 text-blue-600" />
+              <span>Edit</span>
+            </button>
+
+            <button
+              onClick={() => setShowRenew(true)}
+              className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-gray-950 text-xs font-extrabold rounded-xl flex items-center gap-1.5 shadow-sm transition-colors"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Renew</span>
+            </button>
+
+            <button
+              onClick={() => setShowDeleteModal(true)}
+              className="px-3.5 py-2 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs font-bold rounded-xl border border-rose-200 dark:border-rose-800 flex items-center gap-1.5 shadow-xs transition-colors"
+              title="Delete this customer"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Delete</span>
+            </button>
+          </div>
         </div>
       </div>
 
