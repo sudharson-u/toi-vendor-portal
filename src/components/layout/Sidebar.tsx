@@ -59,19 +59,19 @@ export default function Sidebar() {
           collapsed ? 'justify-center px-2 py-4' : 'justify-between px-4 py-4'
         )}>
           {!collapsed && (
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-[#1e3a5f] font-black text-xs leading-none">TOI</span>
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-9 h-9 bg-white rounded-xl p-0.5 shadow-md flex items-center justify-center flex-shrink-0 overflow-hidden">
+                <img src="/logo.jpg" alt="Times of India" className="w-full h-full object-contain" />
               </div>
               <div className="min-w-0">
-                <p className="font-bold text-sm truncate">Vendor Portal</p>
-                <p className="text-white/60 text-xs truncate">Multi-Vendor</p>
+                <p className="font-bold text-sm tracking-tight truncate">Vendor Portal</p>
+                <p className="text-white/60 text-xs truncate">Times of India</p>
               </div>
             </div>
           )}
           {collapsed && (
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-              <span className="text-[#1e3a5f] font-black text-xs leading-none">TOI</span>
+            <div className="w-9 h-9 bg-white rounded-xl p-0.5 shadow-md flex items-center justify-center overflow-hidden">
+              <img src="/logo.jpg" alt="Times of India" className="w-full h-full object-contain" />
             </div>
           )}
           <button

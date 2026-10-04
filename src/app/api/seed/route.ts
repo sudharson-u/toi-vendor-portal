@@ -13,24 +13,28 @@ export async function POST() {
     // 1. Check or insert vendors
     const vendorMap: Record<string, string> = {};
     for (const v of seedData.vendors) {
+      const vName = v.vendor_name || (v as any).name;
       const { data: existing } = await supabase
         .from('vendors')
         .select('id, vendor_name')
-        .eq('vendor_name', v.vendor_name)
+        .eq('vendor_name', vName)
         .maybeSingle();
 
       if (existing) {
-        vendorMap[v.vendor_name] = existing.id;
+        vendorMap[vName] = existing.id;
       } else {
         const { data: inserted, error: vErr } = await supabase
           .from('vendors')
-          .insert({ vendor_name: v.vendor_name })
+          .insert({
+            vendor_name: vName,
+            mobile_number: v.mobile || null,
+          })
           .select()
           .single();
         if (inserted) {
-          vendorMap[v.vendor_name] = inserted.id;
+          vendorMap[vName] = inserted.id;
         } else if (vErr) {
-          console.error('Error inserting vendor:', v.vendor_name, vErr.message);
+          console.error('Error inserting vendor:', vName, vErr.message);
         }
       }
     }

@@ -1,4 +1,5 @@
 import Sidebar from '@/components/layout/Sidebar';
+import PwaInstallPrompt from '@/components/pwa/PwaInstallPrompt';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </main>
+      <PwaInstallPrompt />
     </div>
   );
 }

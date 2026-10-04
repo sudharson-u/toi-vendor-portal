@@ -31,6 +31,24 @@ export interface DataCustomer {
 let localVendors = [...seedData.vendors];
 let localCustomers: DataCustomer[] = [...(seedData.customers as DataCustomer[])];
 
+function ensureLatestLocalData() {
+  try {
+    const dataPath = path.join(process.cwd(), 'src/data/seedData.json');
+    if (fs.existsSync(dataPath)) {
+      const content = fs.readFileSync(dataPath, 'utf-8');
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed.vendors) && parsed.vendors.length > 0) {
+        localVendors = parsed.vendors;
+      }
+      if (Array.isArray(parsed.customers) && parsed.customers.length > 0) {
+        localCustomers = parsed.customers;
+      }
+    }
+  } catch (err) {
+    // Keep in-memory fallback
+  }
+}
+
 function saveLocal() {
   try {
     const dataPath = path.join(process.cwd(), 'src/data/seedData.json');
@@ -71,6 +89,7 @@ export async function getAllVendors() {
   }
 
   // Recalculate local vendor customer counts
+  ensureLatestLocalData();
   const countMap: Record<string, number> = {};
   localCustomers.forEach((c) => {
     if (c.vendor_name) {
@@ -162,6 +181,7 @@ export async function getAllCustomers(options: {
   }
 
   // Fallback to local data
+  ensureLatestLocalData();
   const today = new Date();
   let list = localCustomers.map((c) => {
     const sub = c.subscriptions?.[0];
@@ -247,6 +267,7 @@ export async function getCustomerById(id: string) {
     }
   }
 
+  ensureLatestLocalData();
   const found = localCustomers.find((c) => c.id === id || c.order_id === id);
   if (!found) return null;
 
