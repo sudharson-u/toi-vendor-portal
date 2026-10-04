@@ -65,7 +65,7 @@ function saveLocal() {
 export async function getAllVendors() {
   if (isSupabaseConfigured()) {
     try {
-      const supabase = await createClient();
+      const supabase = await createServiceClient();
       const { data, error } = await supabase
         .from('vendors')
         .select('id, vendor_name, mobile_number, created_at')
@@ -126,7 +126,7 @@ export async function getAllCustomers(options: {
 
   if (isSupabaseConfigured()) {
     try {
-      const supabase = await createClient();
+      const supabase = await createServiceClient();
       let query = supabase
         .from('customers')
         .select(`
@@ -250,17 +250,23 @@ export async function getAllCustomers(options: {
 export async function getCustomerById(id: string) {
   if (isSupabaseConfigured()) {
     try {
-      const supabase = await createClient();
-      const { data, error } = await supabase
+      const supabase = await createServiceClient();
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+      let query = supabase
         .from('customers')
         .select(`
           id, customer_id, customer_name, address, mobile_number, order_id, notes, vendor_id,
           vendors(id, vendor_name, mobile_number),
           subscriptions(id, start_date, end_date, status, is_current, notification_date, created_at)
-        `)
-        .eq('id', id)
-        .single();
+        `);
 
+      if (isUuid) {
+        query = query.eq('id', id);
+      } else {
+        query = query.or(`customer_id.eq.${id},order_id.eq.${id}`);
+      }
+
+      const { data, error } = await query.maybeSingle();
       if (!error && data) return data;
     } catch (e) {
       // Fallback
@@ -357,23 +363,40 @@ export async function updateCustomer(id: string, updates: Partial<DataCustomer>)
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createServiceClient();
-      await supabase
-        .from('customers')
-        .update({
-          customer_name: updates.customer_name,
-          mobile_number: updates.mobile_number,
-          address: updates.address,
-          order_id: updates.order_id,
-          vendor_id: updates.vendor_id,
-          notes: updates.notes,
-        })
-        .eq('id', id);
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+      const updateData: Record<string, any> = {};
+      if (updates.customer_name !== undefined) updateData.customer_name = updates.customer_name;
+      if (updates.mobile_number !== undefined) updateData.mobile_number = updates.mobile_number;
+      if (updates.address !== undefined) updateData.address = updates.address;
+      if (updates.order_id !== undefined) updateData.order_id = updates.order_id;
+      if (updates.vendor_id !== undefined) updateData.vendor_id = updates.vendor_id;
+      if (updates.notes !== undefined) updateData.notes = updates.notes;
+
+      let query = supabase.from('customers').update(updateData);
+      if (isUuid) {
+        query = query.eq('id', id);
+      } else {
+        query = query.or(`customer_id.eq.${id},order_id.eq.${id}`);
+      }
+
+      const { data, error } = await query.select().maybeSingle();
+      if (!error && data) {
+        ensureLatestLocalData();
+        const idx = localCustomers.findIndex((c) => c.id === id || c.order_id === id);
+        if (idx !== -1) {
+          localCustomers[idx] = { ...localCustomers[idx], ...updates };
+          saveLocal();
+        }
+        return data;
+      }
     } catch (e) {
       // Fallback
     }
   }
 
-  const idx = localCustomers.findIndex((c) => c.id === id);
+  ensureLatestLocalData();
+  const idx = localCustomers.findIndex((c) => c.id === id || c.order_id === id);
   if (idx !== -1) {
     localCustomers[idx] = { ...localCustomers[idx], ...updates };
     saveLocal();
@@ -386,14 +409,30 @@ export async function deleteCustomer(id: string) {
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createServiceClient();
-      await supabase.from('subscriptions').delete().eq('customer_id', id);
-      await supabase.from('customers').delete().eq('id', id);
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+      if (isUuid) {
+        await supabase.from('subscriptions').delete().eq('customer_id', id);
+        await supabase.from('customers').delete().eq('id', id);
+      } else {
+        // Find customer uuid first
+        const { data: c } = await supabase
+          .from('customers')
+          .select('id')
+          .or(`customer_id.eq.${id},order_id.eq.${id}`)
+          .maybeSingle();
+        if (c) {
+          await supabase.from('subscriptions').delete().eq('customer_id', c.id);
+          await supabase.from('customers').delete().eq('id', c.id);
+        }
+      }
     } catch (e) {
       // Fallback
     }
   }
 
-  const idx = localCustomers.findIndex((c) => c.id === id);
+  ensureLatestLocalData();
+  const idx = localCustomers.findIndex((c) => c.id === id || c.order_id === id);
   if (idx !== -1) {
     localCustomers.splice(idx, 1);
     saveLocal();
