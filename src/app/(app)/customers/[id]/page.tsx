@@ -535,22 +535,22 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
 
             <form onSubmit={handleSaveEdit} className="space-y-3.5">
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">Customer Name</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Customer Name</label>
                 <input
                   type="text"
                   required
                   value={editForm.customer_name}
                   onChange={(e) => setEditForm({ ...editForm, customer_name: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">Assigned Vendor</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Assigned Vendor</label>
                 <select
                   value={editForm.vendor_name}
                   onChange={(e) => setEditForm({ ...editForm, vendor_name: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
                 >
                   <option value="">Select Vendor...</option>
                   {vendors.map((v) => (
@@ -562,33 +562,33 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">Mobile Number</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Mobile Number</label>
                 <input
                   type="text"
                   value={editForm.mobile_number}
                   onChange={(e) => setEditForm({ ...editForm, mobile_number: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
                   placeholder="e.g. 9840123456"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">Order / Coupon ID</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Order / Coupon ID</label>
                 <input
                   type="text"
                   value={editForm.order_id}
                   onChange={(e) => setEditForm({ ...editForm, order_id: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">Address</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">Address</label>
                 <textarea
                   rows={3}
                   value={editForm.address}
                   onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent resize-none"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
                 />
               </div>
 
@@ -596,13 +596,13 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
                 <button
                   type="button"
                   onClick={() => setShowEdit(false)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-gray-800"
+                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#1e3a5f] text-white text-xs font-bold rounded-lg shadow-sm"
+                  className="px-5 py-2 bg-[#1e3a5f] hover:bg-[#2d5080] text-white text-xs font-bold rounded-lg shadow-sm transition-colors"
                 >
                   Save Changes
                 </button>
@@ -634,24 +634,24 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
               </p>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">New Start Date</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">New Start Date</label>
                 <input
                   type="date"
                   required
                   value={renewStartDate}
                   onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">New Expiry Date</label>
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">New Expiry Date</label>
                 <input
                   type="date"
                   required
                   value={renewEndDate}
                   onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
                 />
               </div>
 
@@ -659,14 +659,14 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
                 <button
                   type="button"
                   onClick={() => setShowRenew(false)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-gray-800"
+                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={renewing}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors"
                 >
                   {renewing ? 'Processing...' : 'Confirm Renewal'}
                 </button>

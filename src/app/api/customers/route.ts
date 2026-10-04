@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const sort = searchParams.get('sort') || 'customer_name';
   const dir = (searchParams.get('dir') === 'desc' ? 'desc' : 'asc') as 'asc' | 'desc';
   const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
-  const limit = Math.min(200, parseInt(searchParams.get('limit') || '20'));
+  const limit = Math.min(1000, parseInt(searchParams.get('limit') || '20'));
 
   try {
     const res = await getAllCustomers({

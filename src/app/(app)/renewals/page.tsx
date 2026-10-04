@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   CalendarClock, Phone, RefreshCw, Filter, Search, ArrowRight,
-  CheckCircle2, Clock, Building2, User, Download, AlertCircle, X
+  CheckCircle2, Clock, Building2, User, Download, AlertCircle, X,
+  Calendar, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { formatDate, calculateDaysRemaining, cn } from '@/lib/utils';
-import { format, addYears, parseISO } from 'date-fns';
+import { format, addYears, addMonths, parseISO } from 'date-fns';
 
 export default function RenewalsPage() {
   const [customers, setCustomers] = useState<any[]>([]);
@@ -16,36 +17,79 @@ export default function RenewalsPage() {
   const [selectedVendor, setSelectedVendor] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const today = new Date();
+  const currentMonthKey = format(today, 'yyyy-MM');
+  const [selectedMonth, setSelectedMonth] = useState<string>(currentMonthKey);
+
   // Quick renew state
   const [activeCustomer, setActiveCustomer] = useState<any>(null);
   const [renewStartDate, setRenewStartDate] = useState('');
   const [renewEndDate, setRenewEndDate] = useState('');
   const [renewing, setRenewing] = useState(false);
 
-  const today = new Date();
-  const currentMonthName = format(today, 'MMMM yyyy');
-
+  // Fetch vendors once
   useEffect(() => {
-    async function fetchData() {
+    fetch('/api/vendors')
+      .then((r) => r.json())
+      .then((vData) => {
+        if (vData.vendors) setVendors(vData.vendors);
+      })
+      .catch((err) => console.error('Failed to load vendors:', err));
+  }, []);
+
+  // Fetch renewals when selectedMonth changes
+  useEffect(() => {
+    async function fetchRenewals() {
       try {
         setLoading(true);
-        // Fetch expiring this month
-        const [cRes, vRes] = await Promise.all([
-          fetch('/api/customers?status=expiring_this_month&limit=500'),
-          fetch('/api/vendors'),
-        ]);
-        const cData = await cRes.json();
-        const vData = await vRes.json();
-        if (cData.customers) setCustomers(cData.customers);
-        if (vData.vendors) setVendors(vData.vendors);
+        let url = '/api/customers?limit=1000';
+        if (selectedMonth && selectedMonth !== 'all') {
+          url = `/api/customers?expiry=${selectedMonth}&limit=1000`;
+        }
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.customers) {
+          setCustomers(data.customers);
+        } else {
+          setCustomers([]);
+        }
       } catch (err) {
         console.error('Failed to load renewals:', err);
+        setCustomers([]);
       } finally {
         setLoading(false);
       }
     }
-    fetchData();
-  }, []);
+    fetchRenewals();
+  }, [selectedMonth]);
+
+  function handleStepMonth(delta: number) {
+    if (selectedMonth === 'all') {
+      setSelectedMonth(currentMonthKey);
+      return;
+    }
+    try {
+      const [y, m] = selectedMonth.split('-').map(Number);
+      const dateObj = new Date(y, m - 1 + delta, 1);
+      setSelectedMonth(format(dateObj, 'yyyy-MM'));
+    } catch {
+      setSelectedMonth(currentMonthKey);
+    }
+  }
+
+  const isAllMonths = selectedMonth === 'all';
+  const isCurrentMonth = selectedMonth === currentMonthKey;
+
+  let displayMonthTitle = 'All Months';
+  if (!isAllMonths) {
+    try {
+      const [year, month] = selectedMonth.split('-').map(Number);
+      const dateObj = new Date(year, month - 1, 1);
+      displayMonthTitle = format(dateObj, 'MMMM yyyy');
+    } catch {
+      displayMonthTitle = selectedMonth;
+    }
+  }
 
   function handleOpenRenew(c: any) {
     setActiveCustomer(c);
@@ -113,24 +157,136 @@ export default function RenewalsPage() {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
               <CalendarClock className="w-3.5 h-3.5" />
-              <span>Current Month Alone</span>
+              <span>
+                {isCurrentMonth
+                  ? `Current Month Alone (${displayMonthTitle})`
+                  : isAllMonths
+                  ? 'All Upcoming Renewals'
+                  : `Selected Month: ${displayMonthTitle}`}
+              </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Upcoming Renewals — {currentMonthName}
+              Upcoming Renewals — {displayMonthTitle}
             </h1>
             <p className="text-white/80 text-sm mt-1">
-              Active subscriptions expiring during this month alone. Timely follow-up ensures zero circulation disruption.
+              {isAllMonths
+                ? 'Viewing all upcoming renewals. Filter by any month and year anytime below.'
+                : `Active subscriptions expiring during ${displayMonthTitle}. Select any month and year below to plan renewals in advance.`}
             </p>
           </div>
-          <div className="text-left sm:text-right bg-white/10 px-5 py-3 rounded-xl border border-white/20">
-            <span className="text-xs uppercase font-medium text-white/80 block">Total Due This Month</span>
+          <div className="text-left sm:text-right bg-white/10 px-5 py-3 rounded-xl border border-white/20 whitespace-nowrap">
+            <span className="text-xs uppercase font-medium text-white/80 block">
+              {isAllMonths ? 'Total Renewals' : `Total Due in ${displayMonthTitle}`}
+            </span>
             <span className="text-3xl font-black">{customers.length}</span>
           </div>
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+      {/* Filter and Month & Year Selection Bar */}
+      <div className="bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-4">
+        {/* Month & Year Navigation & Quick Jump Pills */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 pb-4 border-b border-gray-100 dark:border-gray-800">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f] dark:text-blue-400 uppercase tracking-wider">
+              <Calendar className="w-4 h-4 stroke-[2.5]" />
+              <span>Select Month & Year:</span>
+            </div>
+
+            <div className="flex items-center gap-1 bg-gray-50 dark:bg-gray-800/80 p-1 rounded-xl border border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                onClick={() => handleStepMonth(-1)}
+                className="p-1.5 hover:bg-white dark:hover:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 transition-colors"
+                title="Previous Month"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <input
+                type="month"
+                id="renewals-month-picker"
+                value={isAllMonths ? '' : selectedMonth}
+                onChange={(e) => {
+                  if (e.target.value) setSelectedMonth(e.target.value);
+                }}
+                className="px-2.5 py-1 text-sm font-bold bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg border border-gray-200 dark:border-gray-700 shadow-xs focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 cursor-pointer"
+              />
+
+              <button
+                type="button"
+                onClick={() => handleStepMonth(1)}
+                className="p-1.5 hover:bg-white dark:hover:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 transition-colors"
+                title="Next Month"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <span className="text-xs sm:text-sm font-extrabold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-200 dark:border-amber-800">
+              {displayMonthTitle}
+            </span>
+          </div>
+
+          {/* Quick Jump Buttons */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-bold text-gray-500 mr-1 hidden sm:inline">Quick Jump:</span>
+
+            <button
+              type="button"
+              onClick={() => setSelectedMonth(currentMonthKey)}
+              className={cn(
+                "px-3 py-1.5 text-xs font-bold rounded-xl transition-all border",
+                selectedMonth === currentMonthKey
+                  ? "bg-[#1e3a5f] text-white border-[#1e3a5f] shadow-sm"
+                  : "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              Current Month ({format(today, 'MMM yyyy')})
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedMonth(format(addMonths(today, 1), 'yyyy-MM'))}
+              className={cn(
+                "px-3 py-1.5 text-xs font-bold rounded-xl transition-all border",
+                selectedMonth === format(addMonths(today, 1), 'yyyy-MM')
+                  ? "bg-[#1e3a5f] text-white border-[#1e3a5f] shadow-sm"
+                  : "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              Next Month ({format(addMonths(today, 1), 'MMM yyyy')})
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedMonth(format(addMonths(today, 2), 'yyyy-MM'))}
+              className={cn(
+                "px-3 py-1.5 text-xs font-bold rounded-xl transition-all border",
+                selectedMonth === format(addMonths(today, 2), 'yyyy-MM')
+                  ? "bg-[#1e3a5f] text-white border-[#1e3a5f] shadow-sm"
+                  : "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              {format(addMonths(today, 2), 'MMM yyyy')}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedMonth('all')}
+              className={cn(
+                "px-3 py-1.5 text-xs font-bold rounded-xl transition-all border",
+                isAllMonths
+                  ? "bg-[#1e3a5f] text-white border-[#1e3a5f] shadow-sm"
+                  : "bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              )}
+            >
+              All Months
+            </button>
+          </div>
+        </div>
+
+        {/* Search Bar & Vendor Filter */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
           {/* Prominent Large Search Bar */}
           <div className="relative flex-1">
@@ -141,7 +297,7 @@ export default function RenewalsPage() {
               placeholder="Search renewals by customer name, order ID, phone number or address..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-10 py-3 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f] transition-all"
+              className="w-full pl-12 pr-10 py-3 text-sm sm:text-base rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f] transition-all"
             />
             {searchTerm && (
               <button
@@ -163,7 +319,7 @@ export default function RenewalsPage() {
               <select
                 value={selectedVendor}
                 onChange={(e) => setSelectedVendor(e.target.value)}
-                className="w-full sm:w-52 px-3.5 py-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
+                className="w-full sm:w-52 px-3.5 py-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]"
               >
                 <option value="">All Vendors ({vendors.length})</option>
                 {vendors.map((v) => (
@@ -185,7 +341,7 @@ export default function RenewalsPage() {
               </button>
             )}
 
-            <span className="text-xs font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-3.5 py-3 rounded-xl border border-gray-200 dark:border-gray-700 whitespace-nowrap">
+            <span className="text-xs font-bold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-3.5 py-3 rounded-xl border border-gray-200 dark:border-gray-700 whitespace-nowrap">
               Showing <strong className="text-gray-900 dark:text-white">{filteredCustomers.length}</strong> renewals
             </span>
           </div>
@@ -197,7 +353,7 @@ export default function RenewalsPage() {
         {loading ? (
           <div className="py-20 text-center">
             <div className="w-8 h-8 border-3 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-sm text-gray-500">Checking this month&apos;s upcoming renewals...</p>
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Loading renewals for {displayMonthTitle}...</p>
           </div>
         ) : filteredCustomers.length === 0 ? (
           <div className="py-16 text-center text-gray-400 dark:text-gray-600">
@@ -208,7 +364,7 @@ export default function RenewalsPage() {
             <p className="text-xs text-gray-500 max-w-sm mx-auto">
               {selectedVendor || searchTerm
                 ? 'No matching customer renewals found for the selected filter.'
-                : 'All customers under management are active and renewed!'}
+                : `No customer subscriptions are expiring in ${displayMonthTitle}. You can select any other month and year above.`}
             </p>
           </div>
         ) : (
@@ -417,7 +573,7 @@ export default function RenewalsPage() {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">
                   New Start Date
                 </label>
                 <input
@@ -425,12 +581,12 @@ export default function RenewalsPage() {
                   required
                   value={renewStartDate}
                   onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
+                <label className="text-xs font-bold text-gray-800 dark:text-gray-200 block mb-1">
                   New Expiry Date (1 Year)
                 </label>
                 <input
@@ -438,7 +594,7 @@ export default function RenewalsPage() {
                   required
                   value={renewEndDate}
                   onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/25 focus:border-amber-500"
                 />
               </div>
 
@@ -446,14 +602,14 @@ export default function RenewalsPage() {
                 <button
                   type="button"
                   onClick={() => setActiveCustomer(null)}
-                  className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-gray-800"
+                  className="px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={renewing}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors"
                 >
                   {renewing ? 'Renewing...' : 'Confirm Renewal'}
                 </button>
