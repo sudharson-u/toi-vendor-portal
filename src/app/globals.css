@@ -1,26 +1,175 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
+  /* TOI Brand Colors */
+  --color-toi-blue: #1e3a5f;
+  --color-toi-blue-light: #2d5080;
+  --color-toi-blue-dark: #152940;
+  --color-toi-red: #c41e3a;
+  --color-toi-gold: #d4a017;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* =========================================
+   BASE STYLES
+   ========================================= */
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-gray-50 text-gray-900;
 }
+
+.dark body {
+  @apply bg-gray-950 text-gray-100;
+}
+
+/* =========================================
+   LAYOUT HELPERS
+   ========================================= */
+.page-container {
+  @apply max-w-full px-4 py-5 sm:px-6;
+}
+
+/* =========================================
+   CARD STYLES
+   ========================================= */
+.card {
+  @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm;
+}
+
+.card-header {
+  @apply px-5 py-4 border-b border-gray-100 dark:border-gray-800;
+}
+
+.card-body {
+  @apply p-5;
+}
+
+/* =========================================
+   BUTTON STYLES
+   ========================================= */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1e3a5f] text-white font-medium text-sm
+    hover:bg-[#2d5080] active:scale-95 transition-all duration-150 shadow-sm;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200
+    border border-gray-200 dark:border-gray-700 font-medium text-sm
+    hover:bg-gray-50 dark:hover:bg-gray-700 active:scale-95 transition-all duration-150 shadow-sm;
+}
+
+.btn-danger {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white font-medium text-sm
+    hover:bg-red-700 active:scale-95 transition-all duration-150 shadow-sm;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 font-medium text-sm
+    hover:bg-gray-100 dark:hover:bg-gray-800 active:scale-95 transition-all duration-150;
+}
+
+/* =========================================
+   FORM STYLES
+   ========================================= */
+.input {
+  @apply w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700
+    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+    placeholder:text-gray-400 text-sm
+    focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/30 focus:border-[#1e3a5f]
+    transition-colors duration-150;
+}
+
+.label {
+  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+}
+
+/* =========================================
+   BADGE STYLES
+   ========================================= */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+}
+
+/* =========================================
+   TABLE STYLES
+   ========================================= */
+.table-wrapper {
+  @apply overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800;
+}
+
+table {
+  @apply w-full border-collapse text-sm;
+}
+
+thead {
+  @apply bg-gray-50 dark:bg-gray-900;
+}
+
+thead th {
+  @apply px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide;
+}
+
+tbody tr {
+  @apply border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50/60 dark:hover:bg-gray-800/40 transition-colors;
+}
+
+tbody td {
+  @apply px-4 py-3 text-gray-700 dark:text-gray-300;
+}
+
+/* =========================================
+   STATUS BADGE COLORS
+   ========================================= */
+.status-active {
+  @apply text-emerald-700 bg-emerald-50 border-emerald-200;
+}
+
+.status-expiring {
+  @apply text-orange-700 bg-orange-50 border-orange-200;
+}
+
+.status-expired {
+  @apply text-red-700 bg-red-50 border-red-200;
+}
+
+.status-renewed {
+  @apply text-blue-700 bg-blue-50 border-blue-200;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn  { animation: fadeIn  0.25s ease both; }
+.animate-slideIn { animation: slideInLeft 0.25s ease both; }
+.animate-scaleIn { animation: scaleIn 0.2s ease both; }
+
+/* =========================================
+   SCROLLBAR
+   ========================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }

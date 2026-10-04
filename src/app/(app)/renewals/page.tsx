@@ -1,0 +1,362 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import {
+  CalendarClock, Phone, RefreshCw, Filter, Search, ArrowRight,
+  CheckCircle2, Clock, Building2, User, Download, AlertCircle, X
+} from 'lucide-react';
+import { formatDate, calculateDaysRemaining, cn } from '@/lib/utils';
+import { format, addYears, parseISO } from 'date-fns';
+
+export default function RenewalsPage() {
+  const [customers, setCustomers] = useState<any[]>([]);
+  const [vendors, setVendors] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedVendor, setSelectedVendor] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Quick renew state
+  const [activeCustomer, setActiveCustomer] = useState<any>(null);
+  const [renewStartDate, setRenewStartDate] = useState('');
+  const [renewEndDate, setRenewEndDate] = useState('');
+  const [renewing, setRenewing] = useState(false);
+
+  const today = new Date();
+  const currentMonthName = format(today, 'MMMM yyyy');
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        // Fetch expiring this month
+        const [cRes, vRes] = await Promise.all([
+          fetch('/api/customers?status=expiring_this_month&limit=200'),
+          fetch('/api/vendors'),
+        ]);
+        const cData = await cRes.json();
+        const vData = await vRes.json();
+        if (cData.customers) setCustomers(cData.customers);
+        if (vData.vendors) setVendors(vData.vendors);
+      } catch (err) {
+        console.error('Failed to load renewals:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  function handleOpenRenew(c: any) {
+    setActiveCustomer(c);
+    const endStr = c.subscriptions?.[0]?.end_date;
+    try {
+      const prevEnd = parseISO(endStr);
+      const nextStart = new Date(prevEnd);
+      nextStart.setDate(nextStart.getDate() + 1);
+      const nextEnd = addYears(nextStart, 1);
+      nextEnd.setDate(nextEnd.getDate() - 1);
+      setRenewStartDate(format(nextStart, 'yyyy-MM-dd'));
+      setRenewEndDate(format(nextEnd, 'yyyy-MM-dd'));
+    } catch {
+      setRenewStartDate(format(today, 'yyyy-MM-dd'));
+      setRenewEndDate(format(addYears(today, 1), 'yyyy-MM-dd'));
+    }
+  }
+
+  async function handleRenewSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!activeCustomer || !renewStartDate || !renewEndDate) return;
+    try {
+      setRenewing(true);
+      const res = await fetch(`/api/customers/${activeCustomer.id}/renew`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ start_date: renewStartDate, end_date: renewEndDate }),
+      });
+      const data = await res.json();
+      if (data.subscription) {
+        // Remove from list since it is renewed
+        setCustomers((prev) => prev.filter((c) => c.id !== activeCustomer.id));
+        setActiveCustomer(null);
+      }
+    } catch (err: any) {
+      alert('Failed to renew: ' + err.message);
+    } finally {
+      setRenewing(false);
+    }
+  }
+
+  const filteredCustomers = customers.filter((c) => {
+    const matchesVendor =
+      !selectedVendor ||
+      c.vendor_id === selectedVendor ||
+      c.vendor_name?.toLowerCase() === selectedVendor.toLowerCase() ||
+      c.vendors?.vendor_name?.toLowerCase() === selectedVendor.toLowerCase();
+
+    const q = searchTerm.toLowerCase();
+    const matchesSearch =
+      !searchTerm ||
+      c.customer_name?.toLowerCase().includes(q) ||
+      c.order_id?.toLowerCase().includes(q) ||
+      c.mobile_number?.includes(q) ||
+      c.address?.toLowerCase().includes(q);
+
+    return matchesVendor && matchesSearch;
+  });
+
+  return (
+    <div className="space-y-6">
+      {/* Header Banner */}
+      <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 text-white p-6 rounded-2xl shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
+              <CalendarClock className="w-3.5 h-3.5" />
+              <span>Current Month Alone</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Upcoming Renewals — {currentMonthName}
+            </h1>
+            <p className="text-white/80 text-sm mt-1">
+              Active subscriptions expiring during this month alone. Timely follow-up ensures zero circulation disruption.
+            </p>
+          </div>
+          <div className="text-left sm:text-right bg-white/10 px-5 py-3 rounded-xl border border-white/20">
+            <span className="text-xs uppercase font-medium text-white/80 block">Total Due This Month</span>
+            <span className="text-3xl font-black">{customers.length}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter and Search Bar */}
+      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div className="flex flex-1 items-center gap-3 w-full sm:w-auto">
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search by customer name, order ID, phone..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-gray-400 flex-shrink-0" />
+            <select
+              value={selectedVendor}
+              onChange={(e) => setSelectedVendor(e.target.value)}
+              className="px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+            >
+              <option value="">All Vendors ({vendors.length})</option>
+              {vendors.map((v) => (
+                <option key={v.id} value={v.vendor_name}>
+                  {v.vendor_name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <span className="text-xs font-medium text-gray-500 self-end sm:self-center">
+          Showing {filteredCustomers.length} renewals
+        </span>
+      </div>
+
+      {/* Renewals Table */}
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+        {loading ? (
+          <div className="py-20 text-center">
+            <div className="w-8 h-8 border-3 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-sm text-gray-500">Checking this month&apos;s upcoming renewals...</p>
+          </div>
+        ) : filteredCustomers.length === 0 ? (
+          <div className="py-16 text-center text-gray-400 dark:text-gray-600">
+            <CheckCircle2 className="w-12 h-12 mx-auto mb-3 text-emerald-500 opacity-60" />
+            <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-1">
+              No Renewals Found
+            </h3>
+            <p className="text-xs text-gray-500 max-w-sm mx-auto">
+              {selectedVendor || searchTerm
+                ? 'No matching customer renewals found for the selected filter.'
+                : 'All customers under management are active and renewed!'}
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-100 dark:border-gray-800 text-xs font-semibold text-gray-600 dark:text-gray-400">
+                  <th className="py-3.5 px-4">Customer Details</th>
+                  <th className="py-3.5 px-4">Assigned Vendor</th>
+                  <th className="py-3.5 px-4">Order ID</th>
+                  <th className="py-3.5 px-4">Expiry Date</th>
+                  <th className="py-3.5 px-4">Days Left</th>
+                  <th className="py-3.5 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                {filteredCustomers.map((c) => {
+                  const sub = c.subscriptions?.[0];
+                  const days = calculateDaysRemaining(sub?.end_date || '', today);
+                  const vName = c.vendor_name || c.vendors?.vendor_name || 'Unassigned';
+
+                  return (
+                    <tr
+                      key={c.id}
+                      className="hover:bg-amber-50/40 dark:hover:bg-amber-950/10 transition-colors"
+                    >
+                      <td className="py-3.5 px-4">
+                        <Link
+                          href={`/customers/${c.id}`}
+                          className="font-bold text-gray-900 dark:text-gray-100 hover:text-blue-600 hover:underline block"
+                        >
+                          {c.customer_name}
+                        </Link>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 max-w-xs truncate mt-0.5">
+                          {c.address || c.depot || '—'}
+                        </p>
+                      </td>
+
+                      <td className="py-3.5 px-4">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 font-medium text-xs">
+                          <Building2 className="w-3.5 h-3.5" />
+                          <span>{vName}</span>
+                        </span>
+                      </td>
+
+                      <td className="py-3.5 px-4 text-xs font-mono font-medium text-gray-600 dark:text-gray-300">
+                        {c.order_id || '—'}
+                      </td>
+
+                      <td className="py-3.5 px-4 text-xs font-semibold text-gray-900 dark:text-gray-100">
+                        {formatDate(sub?.end_date)}
+                      </td>
+
+                      <td className="py-3.5 px-4">
+                        <span
+                          className={cn(
+                            'text-xs font-bold px-2.5 py-1 rounded-full',
+                            days <= 5
+                              ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400'
+                              : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-400'
+                          )}
+                        >
+                          {days <= 0 ? 'Expires Today' : `${days} days`}
+                        </span>
+                      </td>
+
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          {c.mobile_number && (
+                            <a
+                              href={`tel:${c.mobile_number}`}
+                              className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 hover:bg-emerald-100 transition-colors"
+                              title={`Call ${c.mobile_number}`}
+                            >
+                              <Phone className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                          <button
+                            onClick={() => handleOpenRenew(c)}
+                            className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1 transition-colors"
+                          >
+                            <RefreshCw className="w-3.5 h-3.5" />
+                            <span>Renew</span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Quick Renew Modal */}
+      {activeCustomer && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-xl border border-gray-200 dark:border-gray-800 animate-scaleIn">
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
+              <div className="flex items-center gap-2">
+                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600">
+                  <RefreshCw className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
+                  Renew Subscription
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveCustomer(null)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleRenewSubmit} className="space-y-4">
+              <div className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800 text-xs space-y-1">
+                <p>
+                  <strong>Customer:</strong> {activeCustomer.customer_name}
+                </p>
+                <p>
+                  <strong>Vendor:</strong> {activeCustomer.vendor_name || activeCustomer.vendors?.vendor_name}
+                </p>
+                <p>
+                  <strong>Current Expiry:</strong> {formatDate(activeCustomer.subscriptions?.[0]?.end_date)}
+                </p>
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
+                  New Start Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  value={renewStartDate}
+                  onChange={(e) => setRenewStartDate(e.target.value)}
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
+                  New Expiry Date (1 Year)
+                </label>
+                <input
+                  type="date"
+                  required
+                  value={renewEndDate}
+                  onChange={(e) => setRenewEndDate(e.target.value)}
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+                <button
+                  type="button"
+                  onClick={() => setActiveCustomer(null)}
+                  className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-gray-800"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={renewing}
+                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5"
+                >
+                  {renewing ? 'Renewing...' : 'Confirm Renewal'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
