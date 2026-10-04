@@ -31,7 +31,7 @@ export default function RenewalsPage() {
         setLoading(true);
         // Fetch expiring this month
         const [cRes, vRes] = await Promise.all([
-          fetch('/api/customers?status=expiring_this_month&limit=200'),
+          fetch('/api/customers?status=expiring_this_month&limit=500'),
           fetch('/api/vendors'),
         ]);
         const cData = await cRes.json();

@@ -1,6 +1,7 @@
 import { createClient, createServiceClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import seedData from '@/data/seedData.json';
 import { calculateStatus } from '@/lib/utils';
+import { format, startOfMonth, endOfMonth } from 'date-fns';
 import fs from 'fs';
 import path from 'path';
 
@@ -145,6 +146,30 @@ export async function getAllCustomers(options: {
         query = query.eq('vendor_id', vendorFilter);
       }
 
+      const today = new Date();
+      const todayStr = format(today, 'yyyy-MM-dd');
+      const thisMonthEnd = format(endOfMonth(today), 'yyyy-MM-dd');
+
+      if (statusFilter === 'expiring_this_month') {
+        query = query
+          .gte('subscriptions.end_date', todayStr)
+          .lte('subscriptions.end_date', thisMonthEnd);
+      } else if (statusFilter === 'expired') {
+        query = query.lt('subscriptions.end_date', todayStr);
+      } else if (statusFilter === 'active') {
+        query = query.gt('subscriptions.end_date', thisMonthEnd);
+      }
+
+      if (expiryFilter) {
+        const [y, m] = expiryFilter.split('-');
+        const startDay = `${y}-${m}-01`;
+        const lastDayNum = new Date(parseInt(y), parseInt(m), 0).getDate();
+        const endDay = `${y}-${m}-${lastDayNum < 10 ? '0' + lastDayNum : lastDayNum}`;
+        query = query
+          .gte('subscriptions.end_date', startDay)
+          .lte('subscriptions.end_date', endDay);
+      }
+
       const sortCol = ['customer_name', 'customer_id', 'mobile_number', 'created_at'].includes(sort)
         ? sort
         : 'customer_name';
@@ -153,26 +178,15 @@ export async function getAllCustomers(options: {
       const from = (page - 1) * limit;
       const { data, count, error } = await query.range(from, from + limit - 1);
 
-      if (!error && data && data.length > 0) {
-        const today = new Date();
+      if (!error && data) {
         const mapped = data.map((c: any) => ({
           ...c,
           computed_status: calculateStatus(c.subscriptions?.[0]?.end_date || '', today),
         }));
 
-        let filtered = mapped;
-        if (statusFilter) {
-          filtered = filtered.filter((c: any) => c.computed_status === statusFilter);
-        }
-        if (expiryFilter) {
-          filtered = filtered.filter((c: any) =>
-            (c.subscriptions?.[0]?.end_date || '').startsWith(expiryFilter)
-          );
-        }
-
         return {
-          customers: filtered,
-          total: count || filtered.length,
+          customers: mapped,
+          total: count ?? mapped.length,
         };
       }
     } catch (e) {
