@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   
   /* TOI Brand Colors */
   --color-toi-blue: #1e3a5f;
@@ -12,7 +13,7 @@
 }
 
 /* =========================================
-   BASE STYLES
+   BASE STYLES — Light Theme: "Minimal Slate Glass"
    ========================================= */
 * {
   box-sizing: border-box;
@@ -20,37 +21,100 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Inter', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  @apply bg-gray-50 text-gray-900;
+  background-color: #F1F5F9;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* =========================================
+   DARK THEME: "Obsidian Glow"
+   ========================================= */
 .dark body {
-  @apply bg-gray-950 text-gray-100;
+  background-color: #0B0F19;
+  color: #E2E8F0;
 }
 
-input, textarea, select {
-  color: #0f172a;
-  -webkit-text-fill-color: #0f172a;
+/* Dark mode: All inputs, textareas, selects properly styled with high-contrast borders and text */
+.dark input,
+.dark textarea,
+.dark select {
+  color: #F8FAFC !important;
+  background-color: #1E293B !important;
+  -webkit-text-fill-color: #F8FAFC !important;
+  border-color: #334155 !important;
 }
 
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748B !important;
+  -webkit-text-fill-color: #64748B !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25) !important;
+}
+
+/* Light mode inputs */
+input,
+textarea,
+select {
+  color: #0F172A;
+  -webkit-text-fill-color: #0F172A;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94A3B8;
+  -webkit-text-fill-color: #94A3B8;
+}
+
+/* =========================================
+   MODAL STYLES — Fully dark-mode aware
+   ========================================= */
 .modal-card {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
+  background-color: #ffffff;
+  color: #0F172A;
+}
+
+.dark .modal-card {
+  background-color: #111827 !important;
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
 }
 
 .modal-input {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
-  border-color: #cbd5e1 !important;
+  background-color: #ffffff;
+  color: #0F172A;
+  -webkit-text-fill-color: #0F172A;
+  border-color: #CBD5E1;
+  opacity: 1;
+}
+
+.dark .modal-input {
+  background-color: #1E293B !important;
+  color: #E2E8F0 !important;
+  -webkit-text-fill-color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
   opacity: 1 !important;
 }
 
 .modal-input::placeholder {
-  color: #94a3b8 !important;
-  -webkit-text-fill-color: #94a3b8 !important;
+  color: #94A3B8;
+  -webkit-text-fill-color: #94A3B8;
+  opacity: 1;
+}
+
+.dark .modal-input::placeholder {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
   opacity: 1 !important;
 }
 
@@ -63,13 +127,31 @@ input, textarea, select {
 
 /* =========================================
    CARD STYLES
+   Light: White card, micro-thin border, premium shadow
+   Dark: Dark glassmorphism card
    ========================================= */
 .card {
-  @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+.dark .card {
+  background-color: rgba(17, 24, 39, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 .card-header {
-  @apply px-5 py-4 border-b border-gray-100 dark:border-gray-800;
+  @apply px-5 py-4 border-b;
+  border-color: #F1F5F9;
+}
+
+.dark .card-header {
+  border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .card-body {
@@ -78,55 +160,175 @@ input, textarea, select {
 
 /* =========================================
    BUTTON STYLES
+   Light: Premium shadow + gradient feel
+   Dark: Glowing / neon-tinted
    ========================================= */
 .btn-primary {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1e3a5f] text-white font-medium text-sm
-    hover:bg-[#2d5080] active:scale-95 transition-all duration-150 shadow-sm;
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-semibold text-sm
+    active:scale-95 transition-all duration-150 shadow-sm;
+  background: linear-gradient(135deg, #1e3a5f, #2d5080);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2d5080, #3a6299);
+}
+
+.dark .btn-primary {
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+}
+
+.dark .btn-primary:hover {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200
-    border border-gray-200 dark:border-gray-700 font-medium text-sm
-    hover:bg-gray-50 dark:hover:bg-gray-700 active:scale-95 transition-all duration-150 shadow-sm;
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
+    active:scale-95 transition-all duration-150 shadow-sm;
+  background-color: #FFFFFF;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+
+.btn-secondary:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+.dark .btn-secondary {
+  background-color: #1E293B;
+  color: #94A3B8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .btn-secondary:hover {
+  background-color: #334155;
+  color: #E2E8F0;
 }
 
 .btn-danger {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white font-medium text-sm
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium text-sm
     hover:bg-red-700 active:scale-95 transition-all duration-150 shadow-sm;
+  background-color: #DC2626;
 }
 
 .btn-ghost {
-  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 font-medium text-sm
-    hover:bg-gray-100 dark:hover:bg-gray-800 active:scale-95 transition-all duration-150;
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium text-sm
+    active:scale-95 transition-all duration-150;
+  color: #64748B;
+}
+
+.btn-ghost:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
+}
+
+.dark .btn-ghost {
+  color: #94A3B8;
+}
+
+.dark .btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #E2E8F0;
 }
 
 /* =========================================
    FORM STYLES
+   Light: Clean white with subtle border
+   Dark: Obsidian glass inputs
    ========================================= */
 .input {
-  @apply w-full px-3.5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700
-    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium
-    placeholder:text-gray-400 text-sm
-    focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/25 focus:border-[#1e3a5f]
-    transition-colors duration-150 shadow-sm;
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.75rem;
+  border: 1px solid #E2E8F0;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1e3a5f;
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+}
+
+.dark .input {
+  background-color: #1E293B;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #E2E8F0;
+  -webkit-text-fill-color: #E2E8F0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark .input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .label {
-  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 0.25rem;
+}
+
+.dark .label {
+  color: #94A3B8;
 }
 
 /* =========================================
    BADGE STYLES
+   Light: Clean colored pill
+   Dark: Neon-tinted dark fills (Obsidian Glow)
    ========================================= */
 .badge {
   @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
 }
 
+/* Status badge - Dark mode overrides for "neon-tinted dark fills" */
+.dark .status-active {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: #10B981 !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.dark .status-expiring {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #F59E0B !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.dark .status-expired {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.dark .status-renewed {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  color: #60A5FA !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
 /* =========================================
    TABLE STYLES
+   Light: Clean white with soft row hover
+   Dark: Dark glass table
    ========================================= */
 .table-wrapper {
-  @apply overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800;
+  border-radius: 0.75rem;
+  border: 1px solid #E2E8F0;
+  overflow-x: auto;
+}
+
+.dark .table-wrapper {
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 table {
@@ -134,38 +336,174 @@ table {
 }
 
 thead {
-  @apply bg-gray-50 dark:bg-gray-900;
+  background-color: #F8FAFC;
+}
+
+.dark thead {
+  background-color: rgba(15, 23, 42, 0.8);
 }
 
 thead th {
-  @apply px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+
+.dark thead th {
+  color: #475569;
 }
 
 tbody tr {
-  @apply border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50/60 dark:hover:bg-gray-800/40 transition-colors;
+  border-top: 1px solid #F1F5F9;
+  transition: background-color 0.15s ease;
+}
+
+.dark tbody tr {
+  border-top-color: rgba(255, 255, 255, 0.04);
+}
+
+tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+.dark tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 tbody td {
-  @apply px-4 py-3 text-gray-700 dark:text-gray-300;
+  padding: 0.75rem 1rem;
+  color: #334155;
+}
+
+.dark tbody td {
+  color: #94A3B8;
 }
 
 /* =========================================
-   STATUS BADGE COLORS
+   STATUS BADGE COLORS — Light Mode
    ========================================= */
 .status-active {
-  @apply text-emerald-700 bg-emerald-50 border-emerald-200;
+  color: #059669;
+  background-color: #ECFDF5;
+  border-color: #A7F3D0;
 }
 
 .status-expiring {
-  @apply text-orange-700 bg-orange-50 border-orange-200;
+  color: #D97706;
+  background-color: #FFFBEB;
+  border-color: #FDE68A;
 }
 
 .status-expired {
-  @apply text-red-700 bg-red-50 border-red-200;
+  color: #DC2626;
+  background-color: #FEF2F2;
+  border-color: #FECACA;
 }
 
 .status-renewed {
-  @apply text-blue-700 bg-blue-50 border-blue-200;
+  color: #2563EB;
+  background-color: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+/* =========================================
+   DASHBOARD BANNER — Theme overrides
+   Light: Rich Deep Indigo-Navy gradient
+   Dark: Slightly lighter surface with glowing border
+   ========================================= */
+.dash-banner {
+  background: linear-gradient(135deg, #0F172A, #1E293B);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .dash-banner {
+  background: linear-gradient(135deg, #0B0F19, #1E293B);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 40px rgba(30, 41, 59, 0.8);
+}
+
+/* Amber/Marigold renewal badge on banner */
+.renewal-badge {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.renewal-badge:hover {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+}
+
+/* =========================================
+   VENDOR TAGS (secondary text tags)
+   Light: Elegant light fill
+   ========================================= */
+.vendor-tag {
+  background: #EEF2F6;
+  color: #475569;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.5rem;
+}
+
+.dark .vendor-tag {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94A3B8;
+}
+
+/* =========================================
+   KPI METRIC CARDS
+   Light: White bg, micro-thin border, premium shadow
+   Dark: Dark glassmorphism
+   ========================================= */
+.metric-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.dark .metric-card {
+  background-color: rgba(17, 24, 39, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .metric-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   SIDEBAR DARK MODE
+   ========================================= */
+.dark aside {
+  background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   WHATSAPP BUTTON — Semi-glossy
+   ========================================= */
+.whatsapp-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+.whatsapp-btn:hover {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
 }
 
 /* =========================================
@@ -186,14 +524,50 @@ tbody td {
   to   { opacity: 1; transform: scale(1); }
 }
 
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
+  50%       { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+}
+
 .animate-fadeIn  { animation: fadeIn  0.25s ease both; }
 .animate-slideIn { animation: slideInLeft 0.25s ease both; }
 .animate-scaleIn { animation: scaleIn 0.2s ease both; }
+.animate-glow    { animation: glowPulse 2s ease-in-out infinite; }
 
 /* =========================================
    SCROLLBAR
    ========================================= */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { @apply bg-transparent; }
-::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
-::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background-color: #94A3B8; }
+
+.dark ::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.12); }
+.dark ::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.2); }
+
+/* =========================================
+   SECTION HEADERS — Dark mode crisp white
+   ========================================= */
+.dark h1, .dark h2, .dark h3 {
+  color: #FFFFFF;
+}
+
+.dark p, .dark span {
+  /* Don't globally override spans — only the default prose */
+}
+
+/* =========================================
+   SELECT DROPDOWN — Dark mode
+   ========================================= */
+.dark select option {
+  background-color: #1E293B;
+  color: #E2E8F0;
+}
+
+/* =========================================
+   FOCUS RING — Global accessible dark mode
+   ========================================= */
+.dark *:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 2px;
+}

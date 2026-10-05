@@ -133,7 +133,7 @@ export async function getAllCustomers(options: {
         .select(`
           id, customer_id, customer_name, address, mobile_number, order_id, vendor_id,
           vendors(id, vendor_name),
-          subscriptions!inner(id, start_date, end_date, status, is_current, notification_date)
+          subscriptions(id, start_date, end_date, status, is_current, notification_date)
         `, { count: 'exact' })
         .eq('subscriptions.is_current', true);
 
@@ -179,14 +179,28 @@ export async function getAllCustomers(options: {
       const { data, count, error } = await query.range(from, from + limit - 1);
 
       if (!error && data) {
-        const mapped = data.map((c: any) => ({
-          ...c,
-          computed_status: calculateStatus(c.subscriptions?.[0]?.end_date || '', today),
-        }));
+        const seen = new Set<string>();
+        const deduped: any[] = [];
+        for (const c of data) {
+          if (!seen.has(c.id)) {
+            seen.add(c.id);
+            // Ensure subscriptions is always an array and take only the current one
+            const subs: any[] = Array.isArray(c.subscriptions) ? c.subscriptions : [];
+            const currentSub = subs.find((s: any) => s.is_current) || subs[0] || null;
+            const vendorObj = Array.isArray(c.vendors) ? c.vendors[0] : c.vendors;
+            deduped.push({
+              ...c,
+              vendors: vendorObj || null,
+              vendor_name: vendorObj?.vendor_name || 'Unassigned',
+              subscriptions: currentSub ? [currentSub] : [],
+              computed_status: calculateStatus(currentSub?.end_date || '', today),
+            });
+          }
+        }
 
         return {
-          customers: mapped,
-          total: count ?? mapped.length,
+          customers: deduped,
+          total: count ?? deduped.length,
         };
       }
     } catch (e) {
@@ -281,7 +295,14 @@ export async function getCustomerById(id: string) {
       }
 
       const { data, error } = await query.maybeSingle();
-      if (!error && data) return data;
+      if (!error && data) {
+        const vendorObj = Array.isArray(data.vendors) ? data.vendors[0] : data.vendors;
+        return {
+          ...data,
+          vendors: vendorObj || null,
+          vendor_name: vendorObj?.vendor_name || 'Unassigned',
+        };
+      }
     } catch (e) {
       // Fallback
     }
@@ -296,9 +317,10 @@ export async function getCustomerById(id: string) {
     notes: found.notes || '',
     vendors: {
       id: found.vendor_id || '',
-      vendor_name: found.vendor_name,
+      vendor_name: found.vendor_name || 'Unassigned',
       mobile_number: '',
     },
+    vendor_name: found.vendor_name || 'Unassigned',
   };
 }
 
@@ -384,8 +406,56 @@ export async function updateCustomer(id: string, updates: Partial<DataCustomer>)
       if (updates.mobile_number !== undefined) updateData.mobile_number = updates.mobile_number;
       if (updates.address !== undefined) updateData.address = updates.address;
       if (updates.order_id !== undefined) updateData.order_id = updates.order_id;
-      if (updates.vendor_id !== undefined) updateData.vendor_id = updates.vendor_id;
       if (updates.notes !== undefined) updateData.notes = updates.notes;
+
+      // Handle vendor assignment carefully
+      if (updates.vendor_id !== undefined) {
+        if (!updates.vendor_id || updates.vendor_id === 'unassigned') {
+          updateData.vendor_id = null;
+          updates.vendor_name = 'Unassigned';
+        } else {
+          const isVendorUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(updates.vendor_id);
+          if (isVendorUuid) {
+            updateData.vendor_id = updates.vendor_id;
+            // Fetch vendor name if not provided
+            if (!updates.vendor_name) {
+              const { data: vRow } = await supabase
+                .from('vendors')
+                .select('vendor_name')
+                .eq('id', updates.vendor_id)
+                .maybeSingle();
+              if (vRow) updates.vendor_name = vRow.vendor_name;
+            }
+          } else if (updates.vendor_name) {
+            // Find vendor UUID by vendor name
+            const { data: vRow } = await supabase
+              .from('vendors')
+              .select('id, vendor_name')
+              .ilike('vendor_name', updates.vendor_name.trim())
+              .maybeSingle();
+            if (vRow) {
+              updateData.vendor_id = vRow.id;
+              updates.vendor_id = vRow.id;
+              updates.vendor_name = vRow.vendor_name;
+            }
+          }
+        }
+      } else if (updates.vendor_name) {
+        if (updates.vendor_name === 'Unassigned') {
+          updateData.vendor_id = null;
+        } else {
+          const { data: vRow } = await supabase
+            .from('vendors')
+            .select('id, vendor_name')
+            .ilike('vendor_name', updates.vendor_name.trim())
+            .maybeSingle();
+          if (vRow) {
+            updateData.vendor_id = vRow.id;
+            updates.vendor_id = vRow.id;
+            updates.vendor_name = vRow.vendor_name;
+          }
+        }
+      }
 
       let query = supabase.from('customers').update(updateData);
       if (isUuid) {
@@ -394,15 +464,36 @@ export async function updateCustomer(id: string, updates: Partial<DataCustomer>)
         query = query.or(`customer_id.eq.${id},order_id.eq.${id}`);
       }
 
-      const { data, error } = await query.select().maybeSingle();
+      const { data, error } = await query
+        .select(`
+          id, customer_id, customer_name, address, mobile_number, order_id, notes, vendor_id,
+          vendors(id, vendor_name, mobile_number)
+        `)
+        .maybeSingle();
+
       if (!error && data) {
+        const vendorObj = Array.isArray(data.vendors) ? data.vendors[0] : data.vendors;
+        const normalizedData = {
+          ...data,
+          vendors: vendorObj || null,
+          vendor_name: vendorObj?.vendor_name || updates.vendor_name || 'Unassigned',
+        };
+
         ensureLatestLocalData();
-        const idx = localCustomers.findIndex((c) => c.id === id || c.order_id === id);
+        const targetId = data.customer_id || data.order_id || id;
+        const idx = localCustomers.findIndex((c) =>
+          c.id === id || c.id === targetId || c.customer_id === targetId || c.order_id === targetId || (data.id && c.id === data.id)
+        );
         if (idx !== -1) {
-          localCustomers[idx] = { ...localCustomers[idx], ...updates };
+          localCustomers[idx] = {
+            ...localCustomers[idx],
+            ...updates,
+            vendor_id: data.vendor_id,
+            vendor_name: normalizedData.vendor_name,
+          };
           saveLocal();
         }
-        return data;
+        return normalizedData;
       }
     } catch (e) {
       // Fallback

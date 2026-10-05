@@ -115,20 +115,20 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Top Banner / Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-[#1e3a5f] to-[#2d5584] text-white p-6 rounded-2xl shadow-sm">
+      <div className="dash-banner flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl shadow-sm">
         <div>
-          <span className="inline-block px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-white/20 rounded-md mb-2">
+          <span className="inline-block px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-white/15 text-white/90 rounded-md mb-2">
             Multi-Vendor Distribution Portal
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Times of India Admin</h1>
-          <p className="text-white/80 text-sm mt-1">
-            Tracking {stats.total} customers across {stats.totalVendors} distribution vendors in Royapuram & Chennai
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">Times of India Admin</h1>
+          <p className="text-white/70 text-sm mt-1">
+            Tracking {stats.total} customers across {stats.totalVendors} distribution vendors in Royapuram &amp; Chennai
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Link
             href="/renewals"
-            className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-gray-900 font-semibold text-xs rounded-xl shadow transition-all flex items-center gap-2"
+            className="renewal-badge px-4 py-2.5 text-xs rounded-xl shadow transition-all flex items-center gap-2"
           >
             <CalendarClock className="w-4 h-4" />
             <span>{stats.expiringThisMonth} Renewals This Month</span>
@@ -150,13 +150,12 @@ export default async function DashboardPage() {
               key={label}
               href={href}
               className={cn(
-                'group relative p-4 rounded-xl border bg-white dark:bg-gray-900 transition-all hover:shadow-md hover:-translate-y-0.5',
-                border,
-                highlight && 'ring-2 ring-amber-400/50 dark:ring-amber-500/30'
+                'metric-card group relative p-4 rounded-xl transition-all',
+                highlight && 'ring-2 ring-amber-400/40 dark:ring-amber-500/25'
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300">
+                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 leading-tight">
                   {label}
                 </span>
                 <div className={cn('p-2 rounded-lg', bg)}>

@@ -25,16 +25,33 @@ export async function PUT(
   const body = await req.json();
 
   try {
-    const updated = await updateCustomer(id, {
-      customer_name: body.customer_name?.trim(),
-      mobile_number: body.mobile_number?.trim() || null,
-      address: body.address?.trim() || null,
-      order_id: body.order_id?.trim() || null,
-      vendor_id: body.vendor_id || null,
-      vendor_name: body.vendor_name || null,
-      notes: body.notes !== undefined ? body.notes : undefined,
-    });
+    const updates: Record<string, any> = {};
 
+    if (body.customer_name !== undefined) {
+      updates.customer_name = body.customer_name?.trim();
+    }
+    if (body.mobile_number !== undefined) {
+      updates.mobile_number = body.mobile_number?.trim() || null;
+    }
+    if (body.address !== undefined) {
+      updates.address = body.address?.trim() || null;
+    }
+    if (body.order_id !== undefined) {
+      updates.order_id = body.order_id?.trim() || null;
+    }
+    if (body.vendor_id !== undefined) {
+      const vid = typeof body.vendor_id === 'string' ? body.vendor_id.trim() : body.vendor_id;
+      updates.vendor_id = vid || null;
+    }
+    if (body.vendor_name !== undefined) {
+      const vname = typeof body.vendor_name === 'string' ? body.vendor_name.trim() : body.vendor_name;
+      updates.vendor_name = vname || null;
+    }
+    if (body.notes !== undefined) {
+      updates.notes = typeof body.notes === 'string' ? body.notes : '';
+    }
+
+    const updated = await updateCustomer(id, updates);
     return NextResponse.json({ customer: updated });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });

@@ -32,6 +32,7 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
     mobile_number: '',
     address: '',
     order_id: '',
+    vendor_id: '',
     vendor_name: '',
     notes: '',
   });
@@ -62,15 +63,25 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
         const vData = await vRes.json();
 
         if (cData.customer) {
-          setCustomer(cData.customer);
-          setNotes(cData.customer.notes || '');
+          const cust = cData.customer;
+          const vendorObj = Array.isArray(cust.vendors) ? cust.vendors[0] : cust.vendors;
+          const resolvedVendorId = cust.vendor_id || vendorObj?.id || '';
+          const resolvedVendorName = cust.vendor_name || vendorObj?.vendor_name || '';
+
+          setCustomer({
+            ...cust,
+            vendors: vendorObj || null,
+            vendor_name: resolvedVendorName || 'Unassigned',
+          });
+          setNotes(cust.notes || '');
           setEditForm({
-            customer_name: cData.customer.customer_name || '',
-            mobile_number: cData.customer.mobile_number || '',
-            address: cData.customer.address || '',
-            order_id: cData.customer.order_id || '',
-            vendor_name: cData.customer.vendor_name || cData.customer.vendors?.vendor_name || '',
-            notes: cData.customer.notes || '',
+            customer_name: cust.customer_name || '',
+            mobile_number: cust.mobile_number || '',
+            address: cust.address || '',
+            order_id: cust.order_id || '',
+            vendor_id: resolvedVendorId,
+            vendor_name: resolvedVendorName,
+            notes: cust.notes || '',
           });
 
           // Set default renew dates
@@ -190,17 +201,39 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
       const res = await fetch(`/api/customers/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editForm),
+        body: JSON.stringify({
+          customer_name: editForm.customer_name,
+          mobile_number: editForm.mobile_number,
+          address: editForm.address,
+          order_id: editForm.order_id,
+          vendor_id: editForm.vendor_id || null,
+          vendor_name: editForm.vendor_name,
+          notes: editForm.notes,
+        }),
       });
       const data = await res.json();
       if (data.customer) {
+        const updatedCust = data.customer;
+        const selectedVendor = vendors.find((v) => v.id === editForm.vendor_id || v.vendor_name.toLowerCase() === editForm.vendor_name.toLowerCase());
+        const vendorObj = updatedCust.vendors || (selectedVendor ? { id: selectedVendor.id, vendor_name: selectedVendor.vendor_name } : null);
+        const resolvedVendorName = updatedCust.vendor_name || selectedVendor?.vendor_name || editForm.vendor_name || 'Unassigned';
+
         setCustomer((prev: any) => ({
           ...prev,
-          ...data.customer,
-          vendor_name: editForm.vendor_name,
+          ...updatedCust,
+          vendor_id: editForm.vendor_id || selectedVendor?.id || null,
+          vendor_name: resolvedVendorName,
+          vendors: vendorObj,
+        }));
+        setEditForm((prev) => ({
+          ...prev,
+          vendor_id: editForm.vendor_id || selectedVendor?.id || '',
+          vendor_name: resolvedVendorName,
         }));
         setNotes(editForm.notes || '');
         setShowEdit(false);
+      } else {
+        alert('Failed to save changes. Please try again.');
       }
     } catch (err: any) {
       alert('Error updating customer: ' + err.message);
@@ -260,11 +293,11 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
   const today = new Date();
   const computedStatus = sub ? calculateStatus(sub.end_date, today) : 'expired';
   const daysLeft = sub ? calculateDaysRemaining(sub.end_date, today) : 0;
-  const vendorName = customer.vendor_name || customer.vendors?.vendor_name || 'Unassigned';
+  const vendorObj = Array.isArray(customer.vendors) ? customer.vendors[0] : customer.vendors;
+  const vendorName = customer.vendor_name || vendorObj?.vendor_name || 'Unassigned';
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Top Navigation & Action Buttons Bar */}
       {/* Top Navigation & Action Buttons Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
         <Link
@@ -470,8 +503,8 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
           rows={3}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="e.g. Deliver to 2nd floor security desk. Prefers morning renewal call..."
-          className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none transition-colors"
+          placeholder=""
+          className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none transition-colors"
         />
 
         <div className="flex justify-end">
@@ -572,22 +605,19 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
       {/* Edit Customer Modal */}
       {showEdit && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
-            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
-          >
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
-              <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-700 animate-scaleIn">
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
+              <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
                 Edit Customer Information
               </h3>
-              <button onClick={() => setShowEdit(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setShowEdit(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSaveEdit} className="space-y-3.5">
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   Customer Name
                 </label>
                 <input
@@ -595,24 +625,33 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
                   required
                   value={editForm.customer_name}
                   onChange={(e) => setEditForm({ ...editForm, customer_name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   Assigned Vendor
                 </label>
                 <select
-                  value={editForm.vendor_name}
-                  onChange={(e) => setEditForm({ ...editForm, vendor_name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  value={
+                    editForm.vendor_id ||
+                    vendors.find((v) => v.vendor_name?.toLowerCase() === editForm.vendor_name?.toLowerCase())?.id ||
+                    ''
+                  }
+                  onChange={(e) => {
+                    const selected = vendors.find((v) => v.id === e.target.value);
+                    setEditForm({
+                      ...editForm,
+                      vendor_id: e.target.value,
+                      vendor_name: selected?.vendor_name || '',
+                    });
+                  }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
                 >
                   <option value="">Select Vendor...</option>
                   {vendors.map((v) => (
-                    <option key={v.id} value={v.vendor_name}>
+                    <option key={v.id} value={v.id}>
                       {v.vendor_name}
                     </option>
                   ))}
@@ -620,50 +659,47 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   Mobile Number
                 </label>
                 <input
                   type="text"
                   value={editForm.mobile_number}
                   onChange={(e) => setEditForm({ ...editForm, mobile_number: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
                   placeholder="e.g. 9840123456"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   Order / Coupon ID
                 </label>
                 <input
                   type="text"
                   value={editForm.order_id}
                   onChange={(e) => setEditForm({ ...editForm, order_id: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   Address
                 </label>
                 <textarea
                   rows={3}
                   value={editForm.address}
                   onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
                 <button
                   type="button"
                   onClick={() => setShowEdit(false)}
-                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
@@ -682,31 +718,28 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
       {/* Renew Subscription Modal */}
       {showRenew && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
-            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
-          >
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-700 animate-scaleIn">
+            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
+                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400">
                   <RefreshCw className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
+                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
                   Renew Subscription
                 </h3>
               </div>
-              <button onClick={() => setShowRenew(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setShowRenew(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleRenewSubmit} className="space-y-4">
-              <p className="text-xs text-gray-600" style={{ color: '#475569' }}>
-                Renew subscription for <strong>{customer.customer_name}</strong> under vendor <strong>{vendorName}</strong>.
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                Renew subscription for <strong className="text-gray-900 dark:text-gray-100">{customer.customer_name}</strong> under vendor <strong className="text-gray-900 dark:text-gray-100">{vendorName}</strong>.
               </p>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   New Start Date
                 </label>
                 <input
@@ -714,13 +747,12 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
                   required
                   value={renewStartDate}
                   onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
+                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
                   New Expiry Date
                 </label>
                 <input
@@ -728,16 +760,15 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
                   required
                   value={renewEndDate}
                   onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
                 <button
                   type="button"
                   onClick={() => setShowRenew(false)}
-                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
