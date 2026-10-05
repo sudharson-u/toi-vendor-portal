@@ -76,6 +76,7 @@ async function run() {
     { id: 'vendor-12', name: 'Rajaendiren', vendor_name: 'Rajaendiren', code: 'V10023 TOI', mobile: '+91 98412 34562' },
     { id: 'vendor-13', name: 'Srinivasan', vendor_name: 'Srinivasan', code: 'V10067 TOI', mobile: '+91 98413 45673' },
     { id: 'vendor-14', name: 'Suresh', vendor_name: 'Suresh', code: 'V12663 TOI', mobile: '+91 98414 56784' },
+    { id: 'vendor-15', name: 'Palani', vendor_name: 'Palani', code: 'V10077 TOI', mobile: '+91 98415 67895' },
   ];
 
   const vendorMap = {};
@@ -135,8 +136,16 @@ async function run() {
     }
     if (currentChunk) chunks.push(currentChunk);
 
-    for (const chunk of chunks) {
-      const lines = [];
+  const seenOrderIds = new Set();
+
+  for (const chunk of chunks) {
+    if (seenOrderIds.has(chunk.couponNo)) {
+      console.log(`Skipping duplicate coupon in PDF: ${chunk.couponNo}`);
+      continue;
+    }
+    seenOrderIds.add(chunk.couponNo);
+
+    const lines = [];
       if (chunk.remainder) lines.push(chunk.remainder);
       for (const l of chunk.lines) {
         const trimmed = l.trim();

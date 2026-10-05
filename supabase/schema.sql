@@ -32,7 +32,8 @@ insert into vendors (vendor_name) values
   ('Perumal'),
   ('Rajaendiren'),
   ('Srinivasan'),
-  ('Suresh')
+  ('Suresh'),
+  ('Palani')
 on conflict do nothing;
 
 -- =============================================

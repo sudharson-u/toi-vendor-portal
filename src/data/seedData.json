@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T17:55:30.316Z",
+  "updatedAt": "2026-10-05T15:19:45.201Z",
   "vendors": [
     {
       "id": "vendor-1",
@@ -98,6 +98,13 @@
       "vendor_name": "Suresh",
       "code": "V12663 TOI",
       "mobile": "+91 98414 56784"
+    },
+    {
+      "id": "vendor-15",
+      "name": "Palani",
+      "vendor_name": "Palani",
+      "code": "V10077 TOI",
+      "mobile": "+91 98415 67895"
     }
   ],
   "customers": [
@@ -3296,22 +3303,22 @@
     {
       "id": "cust-134",
       "customer_id": "cust-134",
-      "order_id": "SCT55863557",
-      "customer_name": "Mohammed Saifullah Advocate",
-      "address": "93/1, Thoppai Street, Royapuram, Near, Baba Clinic, 600013",
+      "order_id": "SCT49143896",
+      "customer_name": "Pramod Kumar",
+      "address": "No 13/2, East Kalmandapam, Road, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-134",
           "customer_id": "cust-134",
-          "start_date": "2026-09-01",
-          "end_date": "2027-08-31",
+          "start_date": "2026-02-07",
+          "end_date": "2027-02-06",
           "status": "active",
           "is_current": true
         }
@@ -3320,22 +3327,22 @@
     {
       "id": "cust-135",
       "customer_id": "cust-135",
-      "order_id": "SCF46454562",
-      "customer_name": "RobinSow",
-      "address": "No.9/5, G A Road, Oldwashermenpet, 600021",
+      "order_id": "SCT49800619",
+      "customer_name": "Roshan Kumari. L",
+      "address": "No 72/166, 2Nd Floor, M S Koil, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-135",
           "customer_id": "cust-135",
-          "start_date": "2025-10-07",
-          "end_date": "2026-10-06",
+          "start_date": "2026-03-01",
+          "end_date": "2027-02-28",
           "status": "active",
           "is_current": true
         }
@@ -3344,22 +3351,22 @@
     {
       "id": "cust-136",
       "customer_id": "cust-136",
-      "order_id": "SCT45667388",
-      "customer_name": "Vidyadaran And Associates",
-      "address": "No 61/3, No 90/3 Lotus Colony, Thandavarayan Street, Tondiarpet, 600021",
+      "order_id": "SCT43026684",
+      "customer_name": "Sampath A L",
+      "address": ", No 42/45 1St Floor, Thandavarayan Street, Old, Wasarmanpet, Loc - Royapuram, 600021",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-136",
           "customer_id": "cust-136",
-          "start_date": "2025-12-16",
-          "end_date": "2026-12-15",
+          "start_date": "2025-04-14",
+          "end_date": "2027-04-13",
           "status": "active",
           "is_current": true
         }
@@ -3368,22 +3375,22 @@
     {
       "id": "cust-137",
       "customer_id": "cust-137",
-      "order_id": "SCF46714322",
-      "customer_name": "Rinta.Ms",
-      "address": "90/164, 1 Floor, Adam Street, Royapuram, 600013",
+      "order_id": "SCT56702934",
+      "customer_name": "Sakthivel.R",
+      "address": "No 23/9, Kodimara Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-137",
           "customer_id": "cust-137",
-          "start_date": "2025-10-24",
-          "end_date": "2026-10-23",
+          "start_date": "2026-08-27",
+          "end_date": "2027-08-26",
           "status": "active",
           "is_current": true
         }
@@ -3392,22 +3399,22 @@
     {
       "id": "cust-138",
       "customer_id": "cust-138",
-      "order_id": "SCF47366066",
-      "customer_name": "Viswanathan. R",
-      "address": "46157, G A Road 4Th Lane Old, Washermanpet, Near Pak Palanisammy, School, 600021",
+      "order_id": "SCT58100456",
+      "customer_name": "David M",
+      "address": "No 127/55, P.V.Koil Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-138",
           "customer_id": "cust-138",
-          "start_date": "2025-11-07",
-          "end_date": "2026-11-06",
+          "start_date": "2026-10-01",
+          "end_date": "2028-10-01",
           "status": "active",
           "is_current": true
         }
@@ -3416,22 +3423,22 @@
     {
       "id": "cust-139",
       "customer_id": "cust-139",
-      "order_id": "SCT47558401",
-      "customer_name": "Sanjay Jewellers",
-      "address": "No 78, Thandavaraya Gramini Street, Tondiarpet, 600081",
+      "order_id": "SCT45456092",
+      "customer_name": "Sechachalam V",
+      "address": "No 35/17, 1St Floor, P V Koil, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-139",
           "customer_id": "cust-139",
-          "start_date": "2025-11-22",
-          "end_date": "2026-11-21",
+          "start_date": "2025-12-01",
+          "end_date": "2026-11-30",
           "status": "active",
           "is_current": true
         }
@@ -3440,22 +3447,22 @@
     {
       "id": "cust-140",
       "customer_id": "cust-140",
-      "order_id": "SCF47648301",
-      "customer_name": "Pramila. Ms",
-      "address": "No 8/60/2, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "order_id": "SCT57153057",
+      "customer_name": "Raja Mohamed.M",
+      "address": "44/111, Venkata Chalam, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-140",
           "customer_id": "cust-140",
-          "start_date": "2025-11-22",
-          "end_date": "2026-11-21",
+          "start_date": "2026-09-22",
+          "end_date": "2027-09-21",
           "status": "active",
           "is_current": true
         }
@@ -3464,22 +3471,22 @@
     {
       "id": "cust-141",
       "customer_id": "cust-141",
-      "order_id": "SCF47648352",
-      "customer_name": "Poovannan.Mr",
-      "address": "No 8/60/3, Fathima Nagar 3 Street, Royapuram, 600013",
+      "order_id": "SCT58859835",
+      "customer_name": "Balamurugan N",
+      "address": "No 40/A, 2Nd Floor, Balu Lane, Balu Mudali Street, Old, Washermenpet, 600021",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-141",
           "customer_id": "cust-141",
-          "start_date": "2025-11-22",
-          "end_date": "2026-11-21",
+          "start_date": "2026-09-16",
+          "end_date": "2027-09-15",
           "status": "active",
           "is_current": true
         }
@@ -3488,22 +3495,22 @@
     {
       "id": "cust-142",
       "customer_id": "cust-142",
-      "order_id": "SCF47655612",
-      "customer_name": "DevakiMs",
-      "address": "No 8/60, Kasmima Nagar 3Rd Street, Royapuram, 600013",
+      "order_id": "SCT45189205",
+      "customer_name": "Jai Shand",
+      "address": "No 5/3, Andiappa Mudali, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-142",
           "customer_id": "cust-142",
-          "start_date": "2025-11-22",
-          "end_date": "2026-11-21",
+          "start_date": "2025-10-24",
+          "end_date": "2028-10-23",
           "status": "active",
           "is_current": true
         }
@@ -3512,22 +3519,22 @@
     {
       "id": "cust-143",
       "customer_id": "cust-143",
-      "order_id": "SCF47658631",
-      "customer_name": "Naresh.K",
-      "address": "22129, 1 Floor, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "order_id": "SCT46721562",
+      "customer_name": "Murthy T C S",
+      "address": "New No 86, Old No 48, Venkadachalam Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-143",
           "customer_id": "cust-143",
-          "start_date": "2025-11-27",
-          "end_date": "2026-11-26",
+          "start_date": "2025-11-01",
+          "end_date": "2026-10-31",
           "status": "active",
           "is_current": true
         }
@@ -3536,22 +3543,22 @@
     {
       "id": "cust-144",
       "customer_id": "cust-144",
-      "order_id": "SCF47648270",
-      "customer_name": "PramilaMs",
-      "address": "22129, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "order_id": "SCF40053107",
+      "customer_name": "Ponmayandi B/O Vairamuthu",
+      "address": "No 44/111, Venkadachalam, Street, Kasimedu, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-144",
           "customer_id": "cust-144",
-          "start_date": "2025-11-27",
-          "end_date": "2026-11-26",
+          "start_date": "2025-11-01",
+          "end_date": "2026-10-31",
           "status": "active",
           "is_current": true
         }
@@ -3560,22 +3567,22 @@
     {
       "id": "cust-145",
       "customer_id": "cust-145",
-      "order_id": "SCT47916434",
-      "customer_name": "Sakthivel R",
-      "address": "No 2/1, Singara Garden, 4Th Lane, Old, Washermenpet, 600021",
+      "order_id": "SCT43614842",
+      "customer_name": "Balasubramanian K",
+      "address": "New 127, Old 55, P V Koil, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-145",
           "customer_id": "cust-145",
-          "start_date": "2025-12-08",
-          "end_date": "2026-12-07",
+          "start_date": "2025-11-07",
+          "end_date": "2026-11-06",
           "status": "active",
           "is_current": true
         }
@@ -3584,22 +3591,22 @@
     {
       "id": "cust-146",
       "customer_id": "cust-146",
-      "order_id": "SCF47917972",
-      "customer_name": "DhalaramDevasi",
-      "address": "No 19, 1St Floor, Manish Arcade, N N, Garden 10 Lane, M C Road, Old, Washermanpet, 600021",
+      "order_id": "SCT47565906",
+      "customer_name": "John Bosco K",
+      "address": "No 120/1, P V Koil Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-146",
           "customer_id": "cust-146",
-          "start_date": "2025-12-08",
-          "end_date": "2026-12-07",
+          "start_date": "2025-11-16",
+          "end_date": "2026-11-15",
           "status": "active",
           "is_current": true
         }
@@ -3608,22 +3615,22 @@
     {
       "id": "cust-147",
       "customer_id": "cust-147",
-      "order_id": "SCT47574378",
-      "customer_name": "D C Jain",
-      "address": "No 13/5, New Thandavarayan Street, Tondiarpet, 600021",
+      "order_id": "SCT38114419",
+      "customer_name": "Saravana Kumar. M",
+      "address": "No 50/80, 1 Floor, Thandavarayan. Gramini Street, Tondiarpet, 600081",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-147",
           "customer_id": "cust-147",
-          "start_date": "2025-12-08",
-          "end_date": "2026-12-07",
+          "start_date": "2025-12-16",
+          "end_date": "2026-12-15",
           "status": "active",
           "is_current": true
         }
@@ -3632,22 +3639,22 @@
     {
       "id": "cust-148",
       "customer_id": "cust-148",
-      "order_id": "SCT45719522",
-      "customer_name": "Mohammed.S",
-      "address": "99/2, Thoppai Street, Royapuram, 600013",
+      "order_id": "SCT48303641",
+      "customer_name": "Gopu P C/O Anandappa Medicals",
+      "address": "No 132/145, Adam Sahip, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-148",
           "customer_id": "cust-148",
-          "start_date": "2025-12-20",
-          "end_date": "2026-12-19",
+          "start_date": "2026-02-01",
+          "end_date": "2027-01-31",
           "status": "active",
           "is_current": true
         }
@@ -3656,22 +3663,22 @@
     {
       "id": "cust-149",
       "customer_id": "cust-149",
-      "order_id": "TS5343751A",
-      "customer_name": "Baburaj K",
-      "address": "No 19, Balu Street, Old Washermanpet, 600021",
+      "order_id": "SCT48307224",
+      "customer_name": "Abhay Marlecha. Mr",
+      "address": "No 30, M.S..Koil Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-149",
           "customer_id": "cust-149",
-          "start_date": "2025-12-24",
-          "end_date": "2026-12-23",
+          "start_date": "2026-01-16",
+          "end_date": "2027-01-15",
           "status": "active",
           "is_current": true
         }
@@ -3680,22 +3687,22 @@
     {
       "id": "cust-150",
       "customer_id": "cust-150",
-      "order_id": "TS5344502A",
-      "customer_name": "Selvaraj CSelvaraj C",
-      "address": "595/628, T.H.Road, Oldwashermanpet, 600021",
+      "order_id": "SCT48311832",
+      "customer_name": "Pandiaraj R",
+      "address": "No 173/56, 1, M.S. Koil St Nr, Pumping Station St, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-150",
           "customer_id": "cust-150",
-          "start_date": "2025-12-24",
-          "end_date": "2026-12-23",
+          "start_date": "2026-02-01",
+          "end_date": "2027-01-31",
           "status": "active",
           "is_current": true
         }
@@ -3704,22 +3711,22 @@
     {
       "id": "cust-151",
       "customer_id": "cust-151",
-      "order_id": "SCF48033612",
-      "customer_name": "Meenakshi. Ms",
-      "address": "22/49, 1 Floor, Solaiyappan Street Near, Police Qtrs, Tondiarpet, 600081",
+      "order_id": "SCT46621192",
+      "customer_name": "Dilip Kumar M",
+      "address": "No 127/55, 1St Floor, P V Koil, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-151",
           "customer_id": "cust-151",
-          "start_date": "2025-12-30",
-          "end_date": "2026-12-29",
+          "start_date": "2026-02-07",
+          "end_date": "2027-02-06",
           "status": "active",
           "is_current": true
         }
@@ -3728,22 +3735,22 @@
     {
       "id": "cust-152",
       "customer_id": "cust-152",
-      "order_id": "SCT51871950",
-      "customer_name": "Kalimuthu I",
-      "address": ", New No 89 Old No 32/1, Rama Naicken, Street, Royapuram, Loc - Royapuram, 600013",
+      "order_id": "SCT48941504",
+      "customer_name": "JeswanthMr",
+      "address": "46059, East Kalmandapam, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-152",
           "customer_id": "cust-152",
-          "start_date": "2026-04-24",
-          "end_date": "2027-04-23",
+          "start_date": "2026-02-01",
+          "end_date": "2027-01-31",
           "status": "active",
           "is_current": true
         }
@@ -3752,22 +3759,22 @@
     {
       "id": "cust-153",
       "customer_id": "cust-153",
-      "order_id": "SCT52375277",
-      "customer_name": "Naveen. Mr",
-      "address": "Newno.12/1, Old No.5/1, T H Road 2Nd, Street, Washermanpet, 600021",
+      "order_id": "SCT52280289",
+      "customer_name": "S P CellCity",
+      "address": "11/1/25, M.S. Kovil Street, Royapuram, Chennai 600013.",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-153",
           "customer_id": "cust-153",
-          "start_date": "2026-04-08",
-          "end_date": "2027-04-07",
+          "start_date": "2026-04-01",
+          "end_date": "2027-03-31",
           "status": "active",
           "is_current": true
         }
@@ -3776,22 +3783,22 @@
     {
       "id": "cust-154",
       "customer_id": "cust-154",
-      "order_id": "SCT43307124",
-      "customer_name": "Ramesh D",
-      "address": "No 25, 1St Floor, Anadiappan Street, Old, Washermanpet, 600021",
+      "order_id": "SCT52585652",
+      "customer_name": "Arokiaraj Raj.A",
+      "address": "No 10/4, .P.V..Koil Street 8, Lane, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-154",
           "customer_id": "cust-154",
-          "start_date": "2025-04-24",
-          "end_date": "2026-04-23",
+          "start_date": "2026-05-07",
+          "end_date": "2027-05-06",
           "status": "active",
           "is_current": true
         }
@@ -3800,116 +3807,20 @@
     {
       "id": "cust-155",
       "customer_id": "cust-155",
-      "order_id": "SCF43285049",
-      "customer_name": "Sathish KumarP",
-      "address": "No 14, 4Th Street, N N Garden, Oldwashermanpet, 600021",
+      "order_id": "SCT53608117",
+      "customer_name": "Manikandan P",
+      "address": "No 17/1, 2Nd Floor, Anand Apts, G.A..Road, Oldwashermanpet, 600021",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-155",
           "customer_id": "cust-155",
-          "start_date": "2025-04-24",
-          "end_date": "2026-04-23",
-          "status": "active",
-          "is_current": true
-        }
-      ]
-    },
-    {
-      "id": "cust-156",
-      "customer_id": "cust-156",
-      "order_id": "SCT43335402",
-      "customer_name": "Sudha P",
-      "address": "No 7, Rajagopal Street, Old, Washermanpet, 600021",
-      "depot": "Royapuram",
-      "mobile_number": null,
-      "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
-      "publication": "TOI",
-      "subscriptions": [
-        {
-          "id": "sub-156",
-          "customer_id": "cust-156",
-          "start_date": "2025-04-27",
-          "end_date": "2026-04-26",
-          "status": "active",
-          "is_current": true
-        }
-      ]
-    },
-    {
-      "id": "cust-157",
-      "customer_id": "cust-157",
-      "order_id": "SCT51417556",
-      "customer_name": "Dr.J.Vincent Comraj",
-      "address": "Old No 9, Srm Medical Staff Qtrs, New No, 37/1, Rathinasabapathy Street, Old, Washermanpet, 600021",
-      "depot": "Royapuram",
-      "mobile_number": null,
-      "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
-      "publication": "TOI",
-      "subscriptions": [
-        {
-          "id": "sub-157",
-          "customer_id": "cust-157",
-          "start_date": "2026-04-27",
-          "end_date": "2027-04-26",
-          "status": "active",
-          "is_current": true
-        }
-      ]
-    },
-    {
-      "id": "cust-158",
-      "customer_id": "cust-158",
-      "order_id": "SCT52614153",
-      "customer_name": "Mohamed",
-      "address": "No 22/7, Sakina Apts, Flat 1, Venkatesan, Street, Royapuram, 600013",
-      "depot": "Royapuram",
-      "mobile_number": null,
-      "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
-      "publication": "TOI",
-      "subscriptions": [
-        {
-          "id": "sub-158",
-          "customer_id": "cust-158",
-          "start_date": "2026-04-28",
-          "end_date": "2027-04-27",
-          "status": "active",
-          "is_current": true
-        }
-      ]
-    },
-    {
-      "id": "cust-159",
-      "customer_id": "cust-159",
-      "order_id": "SCT53529770",
-      "customer_name": "Hari Om",
-      "address": "Electricals -, No 82, K H Road, Korrkupet, 600021",
-      "depot": "Royapuram",
-      "mobile_number": null,
-      "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
-      "publication": "TOI",
-      "subscriptions": [
-        {
-          "id": "sub-159",
-          "customer_id": "cust-159",
           "start_date": "2026-05-16",
           "end_date": "2027-05-15",
           "status": "active",
@@ -3918,24 +3829,120 @@
       ]
     },
     {
-      "id": "cust-160",
-      "customer_id": "cust-160",
-      "order_id": "SCT52943038",
-      "customer_name": "Khaja Mydeen",
-      "address": "No 85/108, Thoppai Street, Royapuram, 600013",
+      "id": "cust-156",
+      "customer_id": "cust-156",
+      "order_id": "SCT52795312",
+      "customer_name": "Jeyabalan.S",
+      "address": "Flat 17, Doshi Apts, North, Madha Church Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-156",
+          "customer_id": "cust-156",
+          "start_date": "2026-05-16",
+          "end_date": "2027-05-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-157",
+      "customer_id": "cust-157",
+      "order_id": "SCT53625564",
+      "customer_name": "Saravana KumarM",
+      "address": "No 50/80, 1 St Floor, Thandavaraya Gramini Street, Tondiarpet, 600081",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-157",
+          "customer_id": "cust-157",
+          "start_date": "2026-05-15",
+          "end_date": "2027-05-14",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-158",
+      "customer_id": "cust-158",
+      "order_id": "SCT54100162",
+      "customer_name": "Shanmugavel S M",
+      "address": "No 144/B, G A Road, Old, Washermenpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-158",
+          "customer_id": "cust-158",
+          "start_date": "2026-06-10",
+          "end_date": "2027-06-09",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-159",
+      "customer_id": "cust-159",
+      "order_id": "SCT55980434",
+      "customer_name": "Gowtham Chand V",
+      "address": "New 42, Old No 179, Adam, Sahib Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-159",
+          "customer_id": "cust-159",
+          "start_date": "2026-07-23",
+          "end_date": "2027-07-22",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-160",
+      "customer_id": "cust-160",
+      "order_id": "SCT56332240",
+      "customer_name": "Suresh T",
+      "address": "No 7L, Veerasamy Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-160",
           "customer_id": "cust-160",
-          "start_date": "2026-08-07",
-          "end_date": "2027-08-06",
+          "start_date": "2026-08-01",
+          "end_date": "2027-07-31",
           "status": "active",
           "is_current": true
         }
@@ -3944,22 +3951,22 @@
     {
       "id": "cust-161",
       "customer_id": "cust-161",
-      "order_id": "SCT54220075",
-      "customer_name": "Sunil Medical",
-      "address": ", No 50 Balu Mudali Street, Old, Washermanpet, 600021",
+      "order_id": "SCT54991309",
+      "customer_name": "Gelada Elctricals",
+      "address": "-, 54(New) 142, P V Koil Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-161",
           "customer_id": "cust-161",
-          "start_date": "2026-06-23",
-          "end_date": "2027-06-22",
+          "start_date": "2026-09-07",
+          "end_date": "2027-09-06",
           "status": "active",
           "is_current": true
         }
@@ -3968,22 +3975,22 @@
     {
       "id": "cust-162",
       "customer_id": "cust-162",
-      "order_id": "SCT53944518",
-      "customer_name": "Meeran MohideenMr",
-      "address": "No.85, Thoppai Street, Royapuram, 600013",
+      "order_id": "SCT49353900",
+      "customer_name": "Pandian S S (C/O Hotel Pandian)",
+      "address": "No 93, G A Road, Old, Washermanpet, 600021",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-162",
           "customer_id": "cust-162",
-          "start_date": "2026-06-23",
-          "end_date": "2027-06-22",
+          "start_date": "2026-02-16",
+          "end_date": "2027-02-15",
           "status": "active",
           "is_current": true
         }
@@ -3992,22 +3999,22 @@
     {
       "id": "cust-163",
       "customer_id": "cust-163",
-      "order_id": "SCT43437811",
-      "customer_name": "Vijaya Ananth J",
-      "address": "No 3/4, 2Nd Floor, Venkadapathy Street, Old Washermenpet, 600021",
+      "order_id": "SCT51960913",
+      "customer_name": "Panneer Doss Johnson P",
+      "address": "-, No 9/21, Thoppai Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-163",
           "customer_id": "cust-163",
-          "start_date": "2025-08-02",
-          "end_date": "2027-08-01",
+          "start_date": "2026-04-14",
+          "end_date": "2027-04-13",
           "status": "active",
           "is_current": true
         }
@@ -4016,22 +4023,22 @@
     {
       "id": "cust-164",
       "customer_id": "cust-164",
-      "order_id": "SCT55406460",
-      "customer_name": "Saravanan S",
-      "address": "No 24/2, 1St Floor, No 32/2, Venkadachalam St, Oldwashermenpet, 600021",
+      "order_id": "SCT50627880",
+      "customer_name": "Kalpana.T.R",
+      "address": "117/1, Thoppai Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-164",
           "customer_id": "cust-164",
-          "start_date": "2026-07-16",
-          "end_date": "2027-07-15",
+          "start_date": "2026-03-22",
+          "end_date": "2028-03-21",
           "status": "active",
           "is_current": true
         }
@@ -4040,22 +4047,22 @@
     {
       "id": "cust-165",
       "customer_id": "cust-165",
-      "order_id": "SCT57960576",
-      "customer_name": "Vijaya Senthil. J",
-      "address": "49/22, Solaiyappan Street 0Ld, Washermanpet, Washermanpet, 600021",
+      "order_id": "SCT47660791",
+      "customer_name": "Devanathan.P",
+      "address": "113/45, Venkata Chalam, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-165",
           "customer_id": "cust-165",
-          "start_date": "2026-09-01",
-          "end_date": "2027-08-31",
+          "start_date": "2026-03-22",
+          "end_date": "2028-03-21",
           "status": "active",
           "is_current": true
         }
@@ -4064,22 +4071,22 @@
     {
       "id": "cust-166",
       "customer_id": "cust-166",
-      "order_id": "SCT45209928",
-      "customer_name": "T P M Steel",
-      "address": "No 3/2, T H Road 2Nd Lane, Old, Washermenpet Basin Bridge, 600021",
+      "order_id": "SCT52409648",
+      "customer_name": "Sivaguru S",
+      "address": "No 12/18, Nagathamman Koil, Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-166",
           "customer_id": "cust-166",
-          "start_date": "2025-10-07",
-          "end_date": "2026-10-06",
+          "start_date": "2026-04-14",
+          "end_date": "2027-04-13",
           "status": "active",
           "is_current": true
         }
@@ -4088,22 +4095,22 @@
     {
       "id": "cust-167",
       "customer_id": "cust-167",
-      "order_id": "SCT40269480",
-      "customer_name": "Anandan N",
-      "address": "No 12, N N Garden 10Th Lane, Old, Washermenpet, 600081",
+      "order_id": "SCT45646512",
+      "customer_name": "Sarath Babu K",
+      "address": "No. 32/154, Market Lane, Kalmandapam, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-167",
           "customer_id": "cust-167",
-          "start_date": "2024-12-16",
-          "end_date": "2026-12-15",
+          "start_date": "2025-12-14",
+          "end_date": "2026-12-13",
           "status": "active",
           "is_current": true
         }
@@ -4112,22 +4119,22 @@
     {
       "id": "cust-168",
       "customer_id": "cust-168",
-      "order_id": "SCT52609708",
-      "customer_name": "Padmanabhan A",
-      "address": "-, New 13 Old 7, Singara Garden 8Th, Lane, Old Washermanpet, Loc - Royapuram, 600021",
+      "order_id": "SCT30850020",
+      "customer_name": "Manobala P",
+      "address": "No 22/1, Veerasamy Street, Royapuram, 600013",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-168",
           "customer_id": "cust-168",
-          "start_date": "2026-04-20",
-          "end_date": "2027-04-19",
+          "start_date": "2025-12-24",
+          "end_date": "2026-12-23",
           "status": "active",
           "is_current": true
         }
@@ -4136,22 +4143,22 @@
     {
       "id": "cust-169",
       "customer_id": "cust-169",
-      "order_id": "SCT40718091",
-      "customer_name": "Ramesh Kumar H",
-      "address": "No 47/15, Veerakutty Street, Old, Washermanpet, 600021",
+      "order_id": "SCT47441148",
+      "customer_name": "Aashish Kataria P Old 8/1 New 19/1",
+      "address": "Venkatachalam Street, Royapuram.",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
           "id": "sub-169",
           "customer_id": "cust-169",
-          "start_date": "2025-03-01",
-          "end_date": "2027-02-28",
+          "start_date": "2026-03-08",
+          "end_date": "2027-03-07",
           "status": "active",
           "is_current": true
         }
@@ -4160,15 +4167,15 @@
     {
       "id": "cust-170",
       "customer_id": "cust-170",
-      "order_id": "SCF50522781",
-      "customer_name": "Leela Bai",
-      "address": "No 43, Rettai Kuzhi Street, Tondiarpet, 600081",
+      "order_id": "SCT50666127",
+      "customer_name": "Thirukannan K",
+      "address": "Old No 34/5, New No 105/5, G.A, Road, 4th Lane Near PAK, School, Old Washermanpet, Chennai 600021.",
       "depot": "Royapuram",
       "mobile_number": null,
       "notes": "",
-      "vendor_id": "vendor-11",
-      "vendor_name": "Perumal",
-      "vendor_code": "V10078 TOI",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
       "publication": "TOI",
       "subscriptions": [
         {
@@ -4184,6 +4191,1134 @@
     {
       "id": "cust-171",
       "customer_id": "cust-171",
+      "order_id": "SCT50710294",
+      "customer_name": "Manoharan R C",
+      "address": "No 2/21, 2, Appair Lane, Kasimedu, Royapuram, Chennai, 600013.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-171",
+          "customer_id": "cust-171",
+          "start_date": "2026-03-08",
+          "end_date": "2029-03-07",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-172",
+      "customer_id": "cust-172",
+      "order_id": "SCT51966739",
+      "customer_name": "Vipul",
+      "address": "No 2/5, P.V.Kovil 3rd lane, Royapuram, Chennai 600013.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-172",
+          "customer_id": "cust-172",
+          "start_date": "2026-03-26",
+          "end_date": "2029-03-25",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-173",
+      "customer_id": "cust-173",
+      "order_id": "SCF53200829",
+      "customer_name": "Venkateswara Transport",
+      "address": "No 14, No 5/14, North Railway, Terminus Road, Kasimedu, Chennai 600013.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-173",
+          "customer_id": "cust-173",
+          "start_date": "2026-04-30",
+          "end_date": "2027-04-29",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-174",
+      "customer_id": "cust-174",
+      "order_id": "SCF54859633",
+      "customer_name": "Ramesh .Mr",
+      "address": "50/80, Thandavarayan. Gramini, Street, Tondiarpet, Chennai, 600081.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-174",
+          "customer_id": "cust-174",
+          "start_date": "2026-06-23",
+          "end_date": "2027-06-22",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-175",
+      "customer_id": "cust-175",
+      "order_id": "SCF39613302",
+      "customer_name": "Saravanakumar",
+      "address": "52/79, Thandavaraya Gramini, Tondiarpet, Tondiarpet, Chennai, 600081.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-175",
+          "customer_id": "cust-175",
+          "start_date": "2026-06-23",
+          "end_date": "2027-06-22",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-176",
+      "customer_id": "cust-176",
+      "order_id": "SCF55550016",
+      "customer_name": "Elango D",
+      "address": "No 1, veerasamy Street, Royapuram, Chennai 600013.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-176",
+          "customer_id": "cust-176",
+          "start_date": "2026-07-06",
+          "end_date": "2027-07-05",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-177",
+      "customer_id": "cust-177",
+      "order_id": "SCF56294665",
+      "customer_name": "Sasikala E",
+      "address": "No 18/1/53, Venkatachalam, Street, Royapuram, Chennai, 600013.",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-177",
+          "customer_id": "cust-177",
+          "start_date": "2026-07-30",
+          "end_date": "2027-07-29",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-178",
+      "customer_id": "cust-178",
+      "order_id": "SCT57939764",
+      "customer_name": "Vilvasigamani R",
+      "address": "No 5/2, 2, Raman Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-178",
+          "customer_id": "cust-178",
+          "start_date": "2026-10-01",
+          "end_date": "2029-10-02",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-179",
+      "customer_id": "cust-179",
+      "order_id": "TS5147151A",
+      "customer_name": "Vilvasigamani R",
+      "address": "No 5/2, 2, Raman Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-179",
+          "customer_id": "cust-179",
+          "start_date": "2024-10-24",
+          "end_date": "2026-10-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-180",
+      "customer_id": "cust-180",
+      "order_id": "SCE53608121",
+      "customer_name": "Manikandan P",
+      "address": "Flat 17, Anand Apts, G A Road, Old Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-15",
+      "vendor_name": "Palani",
+      "vendor_code": "V10077 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-180",
+          "customer_id": "cust-180",
+          "start_date": "2026-06-18",
+          "end_date": "2027-06-17",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-181",
+      "customer_id": "cust-181",
+      "order_id": "SCT55863557",
+      "customer_name": "Mohammed Saifullah Advocate",
+      "address": "93/1, Thoppai Street, Royapuram, Near, Baba Clinic, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-181",
+          "customer_id": "cust-181",
+          "start_date": "2026-09-01",
+          "end_date": "2027-08-31",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-182",
+      "customer_id": "cust-182",
+      "order_id": "SCF46454562",
+      "customer_name": "RobinSow",
+      "address": "No.9/5, G A Road, Oldwashermenpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-182",
+          "customer_id": "cust-182",
+          "start_date": "2025-10-07",
+          "end_date": "2026-10-06",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-183",
+      "customer_id": "cust-183",
+      "order_id": "SCT45667388",
+      "customer_name": "Vidyadaran And Associates",
+      "address": "No 61/3, No 90/3 Lotus Colony, Thandavarayan Street, Tondiarpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-183",
+          "customer_id": "cust-183",
+          "start_date": "2025-12-16",
+          "end_date": "2026-12-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-184",
+      "customer_id": "cust-184",
+      "order_id": "SCF46714322",
+      "customer_name": "Rinta.Ms",
+      "address": "90/164, 1 Floor, Adam Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-184",
+          "customer_id": "cust-184",
+          "start_date": "2025-10-24",
+          "end_date": "2026-10-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-185",
+      "customer_id": "cust-185",
+      "order_id": "SCF47366066",
+      "customer_name": "Viswanathan. R",
+      "address": "46157, G A Road 4Th Lane Old, Washermanpet, Near Pak Palanisammy, School, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-185",
+          "customer_id": "cust-185",
+          "start_date": "2025-11-07",
+          "end_date": "2026-11-06",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-186",
+      "customer_id": "cust-186",
+      "order_id": "SCT47558401",
+      "customer_name": "Sanjay Jewellers",
+      "address": "No 78, Thandavaraya Gramini Street, Tondiarpet, 600081",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-186",
+          "customer_id": "cust-186",
+          "start_date": "2025-11-22",
+          "end_date": "2026-11-21",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-187",
+      "customer_id": "cust-187",
+      "order_id": "SCF47648301",
+      "customer_name": "Pramila. Ms",
+      "address": "No 8/60/2, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-187",
+          "customer_id": "cust-187",
+          "start_date": "2025-11-22",
+          "end_date": "2026-11-21",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-188",
+      "customer_id": "cust-188",
+      "order_id": "SCF47648352",
+      "customer_name": "Poovannan.Mr",
+      "address": "No 8/60/3, Fathima Nagar 3 Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-188",
+          "customer_id": "cust-188",
+          "start_date": "2025-11-22",
+          "end_date": "2026-11-21",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-189",
+      "customer_id": "cust-189",
+      "order_id": "SCF47655612",
+      "customer_name": "DevakiMs",
+      "address": "No 8/60, Kasmima Nagar 3Rd Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-189",
+          "customer_id": "cust-189",
+          "start_date": "2025-11-22",
+          "end_date": "2026-11-21",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-190",
+      "customer_id": "cust-190",
+      "order_id": "SCF47658631",
+      "customer_name": "Naresh.K",
+      "address": "22129, 1 Floor, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-190",
+          "customer_id": "cust-190",
+          "start_date": "2025-11-27",
+          "end_date": "2026-11-26",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-191",
+      "customer_id": "cust-191",
+      "order_id": "SCF47648270",
+      "customer_name": "PramilaMs",
+      "address": "22129, Kasima Nagar 3Rd Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-191",
+          "customer_id": "cust-191",
+          "start_date": "2025-11-27",
+          "end_date": "2026-11-26",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-192",
+      "customer_id": "cust-192",
+      "order_id": "SCT47916434",
+      "customer_name": "Sakthivel R",
+      "address": "No 2/1, Singara Garden, 4Th Lane, Old, Washermenpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-192",
+          "customer_id": "cust-192",
+          "start_date": "2025-12-08",
+          "end_date": "2026-12-07",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-193",
+      "customer_id": "cust-193",
+      "order_id": "SCF47917972",
+      "customer_name": "DhalaramDevasi",
+      "address": "No 19, 1St Floor, Manish Arcade, N N, Garden 10 Lane, M C Road, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-193",
+          "customer_id": "cust-193",
+          "start_date": "2025-12-08",
+          "end_date": "2026-12-07",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-194",
+      "customer_id": "cust-194",
+      "order_id": "SCT47574378",
+      "customer_name": "D C Jain",
+      "address": "No 13/5, New Thandavarayan Street, Tondiarpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-194",
+          "customer_id": "cust-194",
+          "start_date": "2025-12-08",
+          "end_date": "2026-12-07",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-195",
+      "customer_id": "cust-195",
+      "order_id": "SCT45719522",
+      "customer_name": "Mohammed.S",
+      "address": "99/2, Thoppai Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-195",
+          "customer_id": "cust-195",
+          "start_date": "2025-12-20",
+          "end_date": "2026-12-19",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-196",
+      "customer_id": "cust-196",
+      "order_id": "TS5343751A",
+      "customer_name": "Baburaj K",
+      "address": "No 19, Balu Street, Old Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-196",
+          "customer_id": "cust-196",
+          "start_date": "2025-12-24",
+          "end_date": "2026-12-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-197",
+      "customer_id": "cust-197",
+      "order_id": "TS5344502A",
+      "customer_name": "Selvaraj CSelvaraj C",
+      "address": "595/628, T.H.Road, Oldwashermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-197",
+          "customer_id": "cust-197",
+          "start_date": "2025-12-24",
+          "end_date": "2026-12-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-198",
+      "customer_id": "cust-198",
+      "order_id": "SCF48033612",
+      "customer_name": "Meenakshi. Ms",
+      "address": "22/49, 1 Floor, Solaiyappan Street Near, Police Qtrs, Tondiarpet, 600081",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-198",
+          "customer_id": "cust-198",
+          "start_date": "2025-12-30",
+          "end_date": "2026-12-29",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-199",
+      "customer_id": "cust-199",
+      "order_id": "SCT51871950",
+      "customer_name": "Kalimuthu I",
+      "address": ", New No 89 Old No 32/1, Rama Naicken, Street, Royapuram, Loc - Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-199",
+          "customer_id": "cust-199",
+          "start_date": "2026-04-24",
+          "end_date": "2027-04-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-200",
+      "customer_id": "cust-200",
+      "order_id": "SCT52375277",
+      "customer_name": "Naveen. Mr",
+      "address": "Newno.12/1, Old No.5/1, T H Road 2Nd, Street, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-200",
+          "customer_id": "cust-200",
+          "start_date": "2026-04-08",
+          "end_date": "2027-04-07",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-201",
+      "customer_id": "cust-201",
+      "order_id": "SCT43307124",
+      "customer_name": "Ramesh D",
+      "address": "No 25, 1St Floor, Anadiappan Street, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-201",
+          "customer_id": "cust-201",
+          "start_date": "2025-04-24",
+          "end_date": "2026-04-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-202",
+      "customer_id": "cust-202",
+      "order_id": "SCF43285049",
+      "customer_name": "Sathish KumarP",
+      "address": "No 14, 4Th Street, N N Garden, Oldwashermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-202",
+          "customer_id": "cust-202",
+          "start_date": "2025-04-24",
+          "end_date": "2026-04-23",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-203",
+      "customer_id": "cust-203",
+      "order_id": "SCT43335402",
+      "customer_name": "Sudha P",
+      "address": "No 7, Rajagopal Street, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-203",
+          "customer_id": "cust-203",
+          "start_date": "2025-04-27",
+          "end_date": "2026-04-26",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-204",
+      "customer_id": "cust-204",
+      "order_id": "SCT51417556",
+      "customer_name": "Dr.J.Vincent Comraj",
+      "address": "Old No 9, Srm Medical Staff Qtrs, New No, 37/1, Rathinasabapathy Street, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-204",
+          "customer_id": "cust-204",
+          "start_date": "2026-04-27",
+          "end_date": "2027-04-26",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-205",
+      "customer_id": "cust-205",
+      "order_id": "SCT52614153",
+      "customer_name": "Mohamed",
+      "address": "No 22/7, Sakina Apts, Flat 1, Venkatesan, Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-205",
+          "customer_id": "cust-205",
+          "start_date": "2026-04-28",
+          "end_date": "2027-04-27",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-206",
+      "customer_id": "cust-206",
+      "order_id": "SCT53529770",
+      "customer_name": "Hari Om",
+      "address": "Electricals -, No 82, K H Road, Korrkupet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-206",
+          "customer_id": "cust-206",
+          "start_date": "2026-05-16",
+          "end_date": "2027-05-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-207",
+      "customer_id": "cust-207",
+      "order_id": "SCT52943038",
+      "customer_name": "Khaja Mydeen",
+      "address": "No 85/108, Thoppai Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-207",
+          "customer_id": "cust-207",
+          "start_date": "2026-08-07",
+          "end_date": "2027-08-06",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-208",
+      "customer_id": "cust-208",
+      "order_id": "SCT54220075",
+      "customer_name": "Sunil Medical",
+      "address": ", No 50 Balu Mudali Street, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-208",
+          "customer_id": "cust-208",
+          "start_date": "2026-06-23",
+          "end_date": "2027-06-22",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-209",
+      "customer_id": "cust-209",
+      "order_id": "SCT53944518",
+      "customer_name": "Meeran MohideenMr",
+      "address": "No.85, Thoppai Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-209",
+          "customer_id": "cust-209",
+          "start_date": "2026-06-23",
+          "end_date": "2027-06-22",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-210",
+      "customer_id": "cust-210",
+      "order_id": "SCT43437811",
+      "customer_name": "Vijaya Ananth J",
+      "address": "No 3/4, 2Nd Floor, Venkadapathy Street, Old Washermenpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-210",
+          "customer_id": "cust-210",
+          "start_date": "2025-08-02",
+          "end_date": "2027-08-01",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-211",
+      "customer_id": "cust-211",
+      "order_id": "SCT55406460",
+      "customer_name": "Saravanan S",
+      "address": "No 24/2, 1St Floor, No 32/2, Venkadachalam St, Oldwashermenpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-211",
+          "customer_id": "cust-211",
+          "start_date": "2026-07-16",
+          "end_date": "2027-07-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-212",
+      "customer_id": "cust-212",
+      "order_id": "SCT57960576",
+      "customer_name": "Vijaya Senthil. J",
+      "address": "49/22, Solaiyappan Street 0Ld, Washermanpet, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-212",
+          "customer_id": "cust-212",
+          "start_date": "2026-09-01",
+          "end_date": "2027-08-31",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-213",
+      "customer_id": "cust-213",
+      "order_id": "SCT45209928",
+      "customer_name": "T P M Steel",
+      "address": "No 3/2, T H Road 2Nd Lane, Old, Washermenpet Basin Bridge, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-213",
+          "customer_id": "cust-213",
+          "start_date": "2025-10-07",
+          "end_date": "2026-10-06",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-214",
+      "customer_id": "cust-214",
+      "order_id": "SCT40269480",
+      "customer_name": "Anandan N",
+      "address": "No 12, N N Garden 10Th Lane, Old, Washermenpet, 600081",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-214",
+          "customer_id": "cust-214",
+          "start_date": "2024-12-16",
+          "end_date": "2026-12-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-215",
+      "customer_id": "cust-215",
+      "order_id": "SCT52609708",
+      "customer_name": "Padmanabhan A",
+      "address": "-, New 13 Old 7, Singara Garden 8Th, Lane, Old Washermanpet, Loc - Royapuram, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-215",
+          "customer_id": "cust-215",
+          "start_date": "2026-04-20",
+          "end_date": "2027-04-19",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-216",
+      "customer_id": "cust-216",
+      "order_id": "SCT40718091",
+      "customer_name": "Ramesh Kumar H",
+      "address": "No 47/15, Veerakutty Street, Old, Washermanpet, 600021",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-216",
+          "customer_id": "cust-216",
+          "start_date": "2025-03-01",
+          "end_date": "2027-02-28",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-217",
+      "customer_id": "cust-217",
+      "order_id": "SCF50522781",
+      "customer_name": "Leela Bai",
+      "address": "No 43, Rettai Kuzhi Street, Tondiarpet, 600081",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "",
+      "vendor_id": "vendor-11",
+      "vendor_name": "Perumal",
+      "vendor_code": "V10078 TOI",
+      "publication": "TOI",
+      "subscriptions": [
+        {
+          "id": "sub-217",
+          "customer_id": "cust-217",
+          "start_date": "2026-03-16",
+          "end_date": "2027-03-15",
+          "status": "active",
+          "is_current": true
+        }
+      ]
+    },
+    {
+      "id": "cust-218",
+      "customer_id": "cust-218",
       "order_id": "SCT52431779",
       "customer_name": "SwathySwathy . S",
       "address": "No 169/62, Adam Street, Royapuram, 600013",
@@ -4196,8 +5331,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-171",
-          "customer_id": "cust-171",
+          "id": "sub-218",
+          "customer_id": "cust-218",
           "start_date": "2026-04-07",
           "end_date": "2027-04-06",
           "status": "active",
@@ -4206,8 +5341,8 @@
       ]
     },
     {
-      "id": "cust-172",
-      "customer_id": "cust-172",
+      "id": "cust-219",
+      "customer_id": "cust-219",
       "order_id": "SCT41033269",
       "customer_name": "Mohan Kumar. Mr",
       "address": "70, Kamaraj Colony Elaya Mudali, Street, 600021",
@@ -4220,8 +5355,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-172",
-          "customer_id": "cust-172",
+          "id": "sub-219",
+          "customer_id": "cust-219",
           "start_date": "2025-03-22",
           "end_date": "2026-03-21",
           "status": "active",
@@ -4230,8 +5365,8 @@
       ]
     },
     {
-      "id": "cust-173",
-      "customer_id": "cust-173",
+      "id": "cust-220",
+      "customer_id": "cust-220",
       "order_id": "SCF52637091",
       "customer_name": "Giri Enterprises",
       "address": "No 7/19, N.N. Garden 4th Street, Washermanpet East, Old Washermanpet, Chennai 600021.",
@@ -4244,8 +5379,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-173",
-          "customer_id": "cust-173",
+          "id": "sub-220",
+          "customer_id": "cust-220",
           "start_date": "2026-04-14",
           "end_date": "2027-04-13",
           "status": "active",
@@ -4254,8 +5389,8 @@
       ]
     },
     {
-      "id": "cust-174",
-      "customer_id": "cust-174",
+      "id": "cust-221",
+      "customer_id": "cust-221",
       "order_id": "SCT53063889",
       "customer_name": "Pavithran.Mr",
       "address": "35/1, Thandavarayan Street, Washermanpet, Chennai 600021.",
@@ -4268,8 +5403,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-174",
-          "customer_id": "cust-174",
+          "id": "sub-221",
+          "customer_id": "cust-221",
           "start_date": "2026-04-24",
           "end_date": "2026-10-23",
           "status": "active",
@@ -4278,8 +5413,8 @@
       ]
     },
     {
-      "id": "cust-175",
-      "customer_id": "cust-175",
+      "id": "cust-222",
+      "customer_id": "cust-222",
       "order_id": "SCT53063868",
       "customer_name": "Devi kamatchi M",
       "address": "No 173/22, GA Road Old Washermanpet, Chennai 600021.",
@@ -4292,8 +5427,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-175",
-          "customer_id": "cust-175",
+          "id": "sub-222",
+          "customer_id": "cust-222",
           "start_date": "2026-04-28",
           "end_date": "2026-10-27",
           "status": "active",
@@ -4302,8 +5437,8 @@
       ]
     },
     {
-      "id": "cust-176",
-      "customer_id": "cust-176",
+      "id": "cust-223",
+      "customer_id": "cust-223",
       "order_id": "SCT54462106",
       "customer_name": "Radhakrishnan",
       "address": "101, Ramakrishna Galaxy Homes, First, Floor, Landmark: Behind Tondiarpet Mani, Koondu New No:640, T.H Road, Old, Washermanpet, Chennai 600021.",
@@ -4316,8 +5451,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-176",
-          "customer_id": "cust-176",
+          "id": "sub-223",
+          "customer_id": "cust-223",
           "start_date": "2026-07-31",
           "end_date": "2027-07-30",
           "status": "active",
@@ -4326,8 +5461,8 @@
       ]
     },
     {
-      "id": "cust-177",
-      "customer_id": "cust-177",
+      "id": "cust-224",
+      "customer_id": "cust-224",
       "order_id": "SCF54007815",
       "customer_name": "Sunil Kumar",
       "address": "No 186/287, Kr Stores, Kasimedu, Opposite, To Appollo Pharmacy., Suryanarayanan, Road, Royapuram, Chennai 600013.",
@@ -4340,8 +5475,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-177",
-          "customer_id": "cust-177",
+          "id": "sub-224",
+          "customer_id": "cust-224",
           "start_date": "2026-05-30",
           "end_date": "2027-05-29",
           "status": "active",
@@ -4350,8 +5485,8 @@
       ]
     },
     {
-      "id": "cust-178",
-      "customer_id": "cust-178",
+      "id": "cust-225",
+      "customer_id": "cust-225",
       "order_id": "TS5486199A",
       "customer_name": "Ganesh Kumar",
       "address": "No.31/14, Solaiappan Street, Old, Washermenpet, Chennai 600021.",
@@ -4364,8 +5499,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-178",
-          "customer_id": "cust-178",
+          "id": "sub-225",
+          "customer_id": "cust-225",
           "start_date": "2026-06-10",
           "end_date": "2027-06-09",
           "status": "active",
@@ -4374,8 +5509,8 @@
       ]
     },
     {
-      "id": "cust-179",
-      "customer_id": "cust-179",
+      "id": "cust-226",
+      "customer_id": "cust-226",
       "order_id": "SCF55611802",
       "customer_name": "Keerti Kothari",
       "address": "No 4/5, V P Koil Street, Tondiarpet, Chennai, 600081.",
@@ -4388,8 +5523,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-179",
-          "customer_id": "cust-179",
+          "id": "sub-226",
+          "customer_id": "cust-226",
           "start_date": "2026-07-06",
           "end_date": "2027-07-05",
           "status": "active",
@@ -4398,8 +5533,8 @@
       ]
     },
     {
-      "id": "cust-180",
-      "customer_id": "cust-180",
+      "id": "cust-227",
+      "customer_id": "cust-227",
       "order_id": "SCF55666374",
       "customer_name": "Addiction",
       "address": "No 1, M.C road, Old Washermanpet, Chennai 600021",
@@ -4412,8 +5547,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-180",
-          "customer_id": "cust-180",
+          "id": "sub-227",
+          "customer_id": "cust-227",
           "start_date": "2026-07-16",
           "end_date": "2027-07-15",
           "status": "active",
@@ -4422,8 +5557,8 @@
       ]
     },
     {
-      "id": "cust-181",
-      "customer_id": "cust-181",
+      "id": "cust-228",
+      "customer_id": "cust-228",
       "order_id": "SCF56298710",
       "customer_name": "Pooja Chopra",
       "address": "No 21/11, New Solaiyappan Street, Washermanpet, Old Washermanpet, Chennai 600021.",
@@ -4436,8 +5571,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-181",
-          "customer_id": "cust-181",
+          "id": "sub-228",
+          "customer_id": "cust-228",
           "start_date": "2026-07-30",
           "end_date": "2027-07-29",
           "status": "active",
@@ -4446,8 +5581,8 @@
       ]
     },
     {
-      "id": "cust-182",
-      "customer_id": "cust-182",
+      "id": "cust-229",
+      "customer_id": "cust-229",
       "order_id": "SCF56197090",
       "customer_name": "Dhakshayini Ms",
       "address": "No 12/24, New Solaiyappan Street, Washermanpet, Chennai 600021.",
@@ -4460,8 +5595,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-182",
-          "customer_id": "cust-182",
+          "id": "sub-229",
+          "customer_id": "cust-229",
           "start_date": "2026-07-30",
           "end_date": "2027-07-29",
           "status": "active",
@@ -4470,8 +5605,8 @@
       ]
     },
     {
-      "id": "cust-183",
-      "customer_id": "cust-183",
+      "id": "cust-230",
+      "customer_id": "cust-230",
       "order_id": "SCT56224501",
       "customer_name": "Tuticorin Store",
       "address": "No 100, MC Road, Royapuram, Chennai, 600013.",
@@ -4484,8 +5619,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-183",
-          "customer_id": "cust-183",
+          "id": "sub-230",
+          "customer_id": "cust-230",
           "start_date": "2026-07-30",
           "end_date": "2027-07-29",
           "status": "active",
@@ -4494,8 +5629,8 @@
       ]
     },
     {
-      "id": "cust-184",
-      "customer_id": "cust-184",
+      "id": "cust-231",
+      "customer_id": "cust-231",
       "order_id": "SCF56873556",
       "customer_name": "Balaji R",
       "address": "No 57/36, 2Nd Floor, Old Amaranjipuram, Royapuram, Chennai 600013.",
@@ -4508,8 +5643,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-184",
-          "customer_id": "cust-184",
+          "id": "sub-231",
+          "customer_id": "cust-231",
           "start_date": "2026-08-07",
           "end_date": "2027-08-06",
           "status": "active",
@@ -4518,8 +5653,8 @@
       ]
     },
     {
-      "id": "cust-185",
-      "customer_id": "cust-185",
+      "id": "cust-232",
+      "customer_id": "cust-232",
       "order_id": "SCT57822392",
       "customer_name": "Miruthula Ms",
       "address": "No 19, TH Road, Washermanpet, Chennai, 600021.",
@@ -4532,8 +5667,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-185",
-          "customer_id": "cust-185",
+          "id": "sub-232",
+          "customer_id": "cust-232",
           "start_date": "2026-08-27",
           "end_date": "2027-06-26",
           "status": "active",
@@ -4542,8 +5677,8 @@
       ]
     },
     {
-      "id": "cust-186",
-      "customer_id": "cust-186",
+      "id": "cust-233",
+      "customer_id": "cust-233",
       "order_id": "SCT57841710",
       "customer_name": "Manikandan Mr",
       "address": "No 11, C G Colony 3Rd Street, Royapuram, Chennai 600013.",
@@ -4556,8 +5691,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-186",
-          "customer_id": "cust-186",
+          "id": "sub-233",
+          "customer_id": "cust-233",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4566,8 +5701,8 @@
       ]
     },
     {
-      "id": "cust-187",
-      "customer_id": "cust-187",
+      "id": "cust-234",
+      "customer_id": "cust-234",
       "order_id": "SCT57758261",
       "customer_name": "Madhu Boosan Mr",
       "address": "No 85, M C Road, Washermanpet, Chennai, 600021.",
@@ -4580,8 +5715,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-187",
-          "customer_id": "cust-187",
+          "id": "sub-234",
+          "customer_id": "cust-234",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4590,8 +5725,8 @@
       ]
     },
     {
-      "id": "cust-188",
-      "customer_id": "cust-188",
+      "id": "cust-235",
+      "customer_id": "cust-235",
       "order_id": "SCT57773401",
       "customer_name": "Abinesh Mr",
       "address": "No 9, Friends Colony G A Road, Washermanpet, Chennai 600021.",
@@ -4604,8 +5739,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-188",
-          "customer_id": "cust-188",
+          "id": "sub-235",
+          "customer_id": "cust-235",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4614,8 +5749,8 @@
       ]
     },
     {
-      "id": "cust-189",
-      "customer_id": "cust-189",
+      "id": "cust-236",
+      "customer_id": "cust-236",
       "order_id": "SCT57814298",
       "customer_name": "Clinton Mr",
       "address": "No 82.M C Road, Washermanpet, Chennai, 600021.",
@@ -4628,8 +5763,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-189",
-          "customer_id": "cust-189",
+          "id": "sub-236",
+          "customer_id": "cust-236",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4638,8 +5773,8 @@
       ]
     },
     {
-      "id": "cust-190",
-      "customer_id": "cust-190",
+      "id": "cust-237",
+      "customer_id": "cust-237",
       "order_id": "SCTS7774156",
       "customer_name": "Aravinth Mr",
       "address": "No 72, Kamaraj Colony, Tondiarpet, Chennai 600081.",
@@ -4652,8 +5787,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-190",
-          "customer_id": "cust-190",
+          "id": "sub-237",
+          "customer_id": "cust-237",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4662,8 +5797,8 @@
       ]
     },
     {
-      "id": "cust-191",
-      "customer_id": "cust-191",
+      "id": "cust-238",
+      "customer_id": "cust-238",
       "order_id": "SCT57865588",
       "customer_name": "Rabin. Mr",
       "address": "No 85, Gf, M C Road, Washermanpet, Chennai 600021.",
@@ -4676,8 +5811,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-191",
-          "customer_id": "cust-191",
+          "id": "sub-238",
+          "customer_id": "cust-238",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4686,8 +5821,8 @@
       ]
     },
     {
-      "id": "cust-192",
-      "customer_id": "cust-192",
+      "id": "cust-239",
+      "customer_id": "cust-239",
       "order_id": "SCTS7747170",
       "customer_name": "Simon Mr",
       "address": "No 25. Kanniappan Colony, Tondiarpet, Chennai 600081.",
@@ -4700,8 +5835,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-192",
-          "customer_id": "cust-192",
+          "id": "sub-239",
+          "customer_id": "cust-239",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4710,8 +5845,8 @@
       ]
     },
     {
-      "id": "cust-193",
-      "customer_id": "cust-193",
+      "id": "cust-240",
+      "customer_id": "cust-240",
       "order_id": "SCT57755627",
       "customer_name": "Karthikeyan",
       "address": "No 40, Shanthi Colony, GA Road, Washermanpet, Chennai 600021.",
@@ -4724,8 +5859,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-193",
-          "customer_id": "cust-193",
+          "id": "sub-240",
+          "customer_id": "cust-240",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4734,8 +5869,8 @@
       ]
     },
     {
-      "id": "cust-194",
-      "customer_id": "cust-194",
+      "id": "cust-241",
+      "customer_id": "cust-241",
       "order_id": "SCT57750058",
       "customer_name": "Senthil Murugan",
       "address": "No 35, kanniappan Colony, Tondiarpet, Tondiarpet, Chennai 600081.",
@@ -4748,8 +5883,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-194",
-          "customer_id": "cust-194",
+          "id": "sub-241",
+          "customer_id": "cust-241",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4758,8 +5893,8 @@
       ]
     },
     {
-      "id": "cust-195",
-      "customer_id": "cust-195",
+      "id": "cust-242",
+      "customer_id": "cust-242",
       "order_id": "SCT57781587",
       "customer_name": "Dharanish Mr",
       "address": "No 12.N N Garden Main Street, Washermanpet, Chennai 600021.",
@@ -4772,8 +5907,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-195",
-          "customer_id": "cust-195",
+          "id": "sub-242",
+          "customer_id": "cust-242",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4782,8 +5917,8 @@
       ]
     },
     {
-      "id": "cust-196",
-      "customer_id": "cust-196",
+      "id": "cust-243",
+      "customer_id": "cust-243",
       "order_id": "SCT57866711",
       "customer_name": "M Gnaneswari",
       "address": "No 36/71, 2Nd Floor, Kappal Polu Street, Washermanpet, Chennai 600021",
@@ -4796,8 +5931,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-196",
-          "customer_id": "cust-196",
+          "id": "sub-243",
+          "customer_id": "cust-243",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4806,8 +5941,8 @@
       ]
     },
     {
-      "id": "cust-197",
-      "customer_id": "cust-197",
+      "id": "cust-244",
+      "customer_id": "cust-244",
       "order_id": "SCT57867264",
       "customer_name": "Sai Balaji",
       "address": "No 12/13, 82 3Rd Block, G A Road Shanthi, Colony, Golluvar Agraharam Road Old, Washermenpet, Chennai 600021.",
@@ -4820,8 +5955,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-197",
-          "customer_id": "cust-197",
+          "id": "sub-244",
+          "customer_id": "cust-244",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4830,8 +5965,8 @@
       ]
     },
     {
-      "id": "cust-198",
-      "customer_id": "cust-198",
+      "id": "cust-245",
+      "customer_id": "cust-245",
       "order_id": "SCT57865752",
       "customer_name": "Jero R",
       "address": "No 83, M C Road, Washermanpet, Chennai, 600021.",
@@ -4844,8 +5979,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-198",
-          "customer_id": "cust-198",
+          "id": "sub-245",
+          "customer_id": "cust-245",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4854,8 +5989,8 @@
       ]
     },
     {
-      "id": "cust-199",
-      "customer_id": "cust-199",
+      "id": "cust-246",
+      "customer_id": "cust-246",
       "order_id": "SCT57860479",
       "customer_name": "Kathir Me",
       "address": "No 1/1, M C Road, Washermanpet, Chennai, 600021",
@@ -4868,8 +6003,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-199",
-          "customer_id": "cust-199",
+          "id": "sub-246",
+          "customer_id": "cust-246",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4878,8 +6013,8 @@
       ]
     },
     {
-      "id": "cust-200",
-      "customer_id": "cust-200",
+      "id": "cust-247",
+      "customer_id": "cust-247",
       "order_id": "SCT57867754",
       "customer_name": "Santhosh",
       "address": "No13A/6084, Shanti Colony Ga Road, Old, Washermenpet, Chennai 600021.",
@@ -4892,8 +6027,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-200",
-          "customer_id": "cust-200",
+          "id": "sub-247",
+          "customer_id": "cust-247",
           "start_date": "2026-08-27",
           "end_date": "2027-02-26",
           "status": "active",
@@ -4902,8 +6037,8 @@
       ]
     },
     {
-      "id": "cust-201",
-      "customer_id": "cust-201",
+      "id": "cust-248",
+      "customer_id": "cust-248",
       "order_id": "SCT59005091",
       "customer_name": "Shruti",
       "address": "No 5, Gf, G A Road, Washermanpet, Tondiarpet, Chennai 600021.",
@@ -4916,8 +6051,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-201",
-          "customer_id": "cust-201",
+          "id": "sub-248",
+          "customer_id": "cust-248",
           "start_date": "2026-09-16",
           "end_date": "2027-09-15",
           "status": "active",
@@ -4926,8 +6061,8 @@
       ]
     },
     {
-      "id": "cust-202",
-      "customer_id": "cust-202",
+      "id": "cust-249",
+      "customer_id": "cust-249",
       "order_id": "SCT59636550",
       "customer_name": "Kumar Mr",
       "address": "No 12, C G Colony Main Street, Royapuram, Chennai 600013.",
@@ -4940,8 +6075,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-202",
-          "customer_id": "cust-202",
+          "id": "sub-249",
+          "customer_id": "cust-249",
           "start_date": "2026-09-22",
           "end_date": "2027-09-21",
           "status": "active",
@@ -4950,8 +6085,8 @@
       ]
     },
     {
-      "id": "cust-203",
-      "customer_id": "cust-203",
+      "id": "cust-250",
+      "customer_id": "cust-250",
       "order_id": "TS5558584A",
       "customer_name": "Chandru",
       "address": "NO 55, Near Model matriculation School), Thandavarayan Mudali Street, Washermanpet, Chennai 600021.",
@@ -4964,8 +6099,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-203",
-          "customer_id": "cust-203",
+          "id": "sub-250",
+          "customer_id": "cust-250",
           "start_date": "2026-09-22",
           "end_date": "2027-09-21",
           "status": "active",
@@ -4974,8 +6109,8 @@
       ]
     },
     {
-      "id": "cust-204",
-      "customer_id": "cust-204",
+      "id": "cust-251",
+      "customer_id": "cust-251",
       "order_id": "SCF59663594",
       "customer_name": "Bhawarlal.R",
       "address": "No 31/28, Andiappan Street, Old, Washermanpet, Chennai 600021.",
@@ -4988,8 +6123,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-204",
-          "customer_id": "cust-204",
+          "id": "sub-251",
+          "customer_id": "cust-251",
           "start_date": "2026-09-30",
           "end_date": "2027-09-29",
           "status": "active",
@@ -4998,8 +6133,8 @@
       ]
     },
     {
-      "id": "cust-205",
-      "customer_id": "cust-205",
+      "id": "cust-252",
+      "customer_id": "cust-252",
       "order_id": "SCT59778940",
       "customer_name": "Dinesh Kumar Mr",
       "address": "No 15, Friends Colony G A d., Washermanpet, Chennai 600021",
@@ -5012,8 +6147,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-205",
-          "customer_id": "cust-205",
+          "id": "sub-252",
+          "customer_id": "cust-252",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5022,8 +6157,8 @@
       ]
     },
     {
-      "id": "cust-206",
-      "customer_id": "cust-206",
+      "id": "cust-253",
+      "customer_id": "cust-253",
       "order_id": "SCT59702992",
       "customer_name": "Ashok Mr",
       "address": "No 14, C G Colony Royapuram, Chennai, 600013.",
@@ -5036,8 +6171,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-206",
-          "customer_id": "cust-206",
+          "id": "sub-253",
+          "customer_id": "cust-253",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5046,8 +6181,8 @@
       ]
     },
     {
-      "id": "cust-207",
-      "customer_id": "cust-207",
+      "id": "cust-254",
+      "customer_id": "cust-254",
       "order_id": "SCT59740563",
       "customer_name": "Alagu Lakshmi. Ms",
       "address": "No 14, Ganesh Colony, G A. Road, Washermanpet, Chennai 600021.",
@@ -5060,8 +6195,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-207",
-          "customer_id": "cust-207",
+          "id": "sub-254",
+          "customer_id": "cust-254",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5070,8 +6205,8 @@
       ]
     },
     {
-      "id": "cust-208",
-      "customer_id": "cust-208",
+      "id": "cust-255",
+      "customer_id": "cust-255",
       "order_id": "SCT59804345",
       "customer_name": "Dharshini Ms",
       "address": "No 15, M C Road, Washermanpet, Chennai, 600021.",
@@ -5084,8 +6219,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-208",
-          "customer_id": "cust-208",
+          "id": "sub-255",
+          "customer_id": "cust-255",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5094,8 +6229,8 @@
       ]
     },
     {
-      "id": "cust-209",
-      "customer_id": "cust-209",
+      "id": "cust-256",
+      "customer_id": "cust-256",
       "order_id": "SCT59805436",
       "customer_name": "Manju Ms",
       "address": "No 18, G A Road, Washer manpet, Chennai, 600021.",
@@ -5108,8 +6243,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-209",
-          "customer_id": "cust-209",
+          "id": "sub-256",
+          "customer_id": "cust-256",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5118,8 +6253,8 @@
       ]
     },
     {
-      "id": "cust-210",
-      "customer_id": "cust-210",
+      "id": "cust-257",
+      "customer_id": "cust-257",
       "order_id": "SCT59784835",
       "customer_name": "Gayathri Ms",
       "address": "No 20, AJ Colony, Royapuram, Chennai, 600013.",
@@ -5132,8 +6267,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-210",
-          "customer_id": "cust-210",
+          "id": "sub-257",
+          "customer_id": "cust-257",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5142,8 +6277,8 @@
       ]
     },
     {
-      "id": "cust-211",
-      "customer_id": "cust-211",
+      "id": "cust-258",
+      "customer_id": "cust-258",
       "order_id": "SCF59718144",
       "customer_name": "Anil Kumar M",
       "address": "No 33/12, New Thandavarayan Street, Washermanpet, Chennai 600021.",
@@ -5156,8 +6291,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-211",
-          "customer_id": "cust-211",
+          "id": "sub-258",
+          "customer_id": "cust-258",
           "start_date": "2026-09-30",
           "end_date": "2027-09-29",
           "status": "active",
@@ -5166,8 +6301,8 @@
       ]
     },
     {
-      "id": "cust-212",
-      "customer_id": "cust-212",
+      "id": "cust-259",
+      "customer_id": "cust-259",
       "order_id": "SCT59777993",
       "customer_name": "Maniraj Mr",
       "address": "No 12, Friends Colony, G A Road, Washermanpet, Chennai 600021.",
@@ -5180,8 +6315,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-212",
-          "customer_id": "cust-212",
+          "id": "sub-259",
+          "customer_id": "cust-259",
           "start_date": "2026-09-30",
           "end_date": "2027-03-30",
           "status": "active",
@@ -5190,8 +6325,8 @@
       ]
     },
     {
-      "id": "cust-213",
-      "customer_id": "cust-213",
+      "id": "cust-260",
+      "customer_id": "cust-260",
       "order_id": "SCF59970266",
       "customer_name": "Kumar Mr",
       "address": "No 14.N N Garden 4Th Street, Washermanpet, Chennai 600021.",
@@ -5204,8 +6339,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-213",
-          "customer_id": "cust-213",
+          "id": "sub-260",
+          "customer_id": "cust-260",
           "start_date": "2026-09-30",
           "end_date": "2027-09-29",
           "status": "active",
@@ -5214,8 +6349,8 @@
       ]
     },
     {
-      "id": "cust-214",
-      "customer_id": "cust-214",
+      "id": "cust-261",
+      "customer_id": "cust-261",
       "order_id": "SCT45203264",
       "customer_name": "Shabbar Ali Husein Kangroo",
       "address": "No 13, 1St Floor Bay View, Apts, B-Block West Matha, Church Street, Royapuram, 600013",
@@ -5228,8 +6363,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-214",
-          "customer_id": "cust-214",
+          "id": "sub-261",
+          "customer_id": "cust-261",
           "start_date": "2025-10-16",
           "end_date": "2026-10-15",
           "status": "active",
@@ -5238,8 +6373,8 @@
       ]
     },
     {
-      "id": "cust-215",
-      "customer_id": "cust-215",
+      "id": "cust-262",
+      "customer_id": "cust-262",
       "order_id": "SCT53043843",
       "customer_name": "Chandrasekar V V",
       "address": "No 98/40, 1, West Matha, Church Street, Royapuram, 600013",
@@ -5252,8 +6387,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-215",
-          "customer_id": "cust-215",
+          "id": "sub-262",
+          "customer_id": "cust-262",
           "start_date": "2026-06-01",
           "end_date": "2027-05-31",
           "status": "active",
@@ -5262,8 +6397,8 @@
       ]
     },
     {
-      "id": "cust-216",
-      "customer_id": "cust-216",
+      "id": "cust-263",
+      "customer_id": "cust-263",
       "order_id": "SCT54343367",
       "customer_name": "Roslyn Durai",
       "address": "-, No 18/67, Arthoon Road, Royapuram, 600013",
@@ -5276,8 +6411,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-216",
-          "customer_id": "cust-216",
+          "id": "sub-263",
+          "customer_id": "cust-263",
           "start_date": "2026-07-16",
           "end_date": "2027-07-15",
           "status": "active",
@@ -5286,8 +6421,8 @@
       ]
     },
     {
-      "id": "cust-217",
-      "customer_id": "cust-217",
+      "id": "cust-264",
+      "customer_id": "cust-264",
       "order_id": "SCT53565203",
       "customer_name": "Murtaza",
       "address": "No 11/6, Mohammadi Manzil, Apartment, Flat 23 4Th Flr, Burhani Towers B-Blk, Thavamurthy Lane, Tank, Street, Royapuram, 600013",
@@ -5300,8 +6435,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-217",
-          "customer_id": "cust-217",
+          "id": "sub-264",
+          "customer_id": "cust-264",
           "start_date": "2026-07-31",
           "end_date": "2027-05-30",
           "status": "active",
@@ -5310,8 +6445,8 @@
       ]
     },
     {
-      "id": "cust-218",
-      "customer_id": "cust-218",
+      "id": "cust-265",
+      "customer_id": "cust-265",
       "order_id": "SCT53021910",
       "customer_name": "Ammar Zainuddin Kangroo",
       "address": "No 13, Bay View Apts, Flat B4, West Matha Chruch Street, Royapuram, 600013",
@@ -5324,8 +6459,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-218",
-          "customer_id": "cust-218",
+          "id": "sub-265",
+          "customer_id": "cust-265",
           "start_date": "2026-08-07",
           "end_date": "2027-08-06",
           "status": "active",
@@ -5334,8 +6469,8 @@
       ]
     },
     {
-      "id": "cust-219",
-      "customer_id": "cust-219",
+      "id": "cust-266",
+      "customer_id": "cust-266",
       "order_id": "SCT45207175",
       "customer_name": "Shabhir D Lokhandwal",
       "address": "No 13, 2Nd Floor Block-B, Bay View Apts, Door B3 West, Matha Church Street, Royapuram, 600013",
@@ -5348,8 +6483,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-219",
-          "customer_id": "cust-219",
+          "id": "sub-266",
+          "customer_id": "cust-266",
           "start_date": "2025-11-01",
           "end_date": "2027-10-31",
           "status": "active",
@@ -5358,8 +6493,8 @@
       ]
     },
     {
-      "id": "cust-220",
-      "customer_id": "cust-220",
+      "id": "cust-267",
+      "customer_id": "cust-267",
       "order_id": "SCT49114538",
       "customer_name": "Vallal Rajan L",
       "address": "No 4B, Tank Street, Royapuram, 600013",
@@ -5372,8 +6507,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-220",
-          "customer_id": "cust-220",
+          "id": "sub-267",
+          "customer_id": "cust-267",
           "start_date": "2026-02-16",
           "end_date": "2027-02-15",
           "status": "active",
@@ -5382,8 +6517,8 @@
       ]
     },
     {
-      "id": "cust-221",
-      "customer_id": "cust-221",
+      "id": "cust-268",
+      "customer_id": "cust-268",
       "order_id": "SCT38953256",
       "customer_name": "Hasani Khasamwala",
       "address": ", Flat 6A 6Th Floor Salma, Classic Terrace, West Matha, Church Street, Royapuram, 600013",
@@ -5396,8 +6531,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-221",
-          "customer_id": "cust-221",
+          "id": "sub-268",
+          "customer_id": "cust-268",
           "start_date": "2024-11-01",
           "end_date": "2026-10-31",
           "status": "active",
@@ -5406,8 +6541,8 @@
       ]
     },
     {
-      "id": "cust-222",
-      "customer_id": "cust-222",
+      "id": "cust-269",
+      "customer_id": "cust-269",
       "order_id": "SCT48377933",
       "customer_name": "Taher Kaizar",
       "address": "No 2, Burhani Apts, South, Masha Church St, Royapuarm, 600013",
@@ -5420,8 +6555,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-222",
-          "customer_id": "cust-222",
+          "id": "sub-269",
+          "customer_id": "cust-269",
           "start_date": "2026-01-23",
           "end_date": "2027-01-22",
           "status": "active",
@@ -5430,8 +6565,8 @@
       ]
     },
     {
-      "id": "cust-223",
-      "customer_id": "cust-223",
+      "id": "cust-270",
+      "customer_id": "cust-270",
       "order_id": "SCT53095932",
       "customer_name": "Shanmugam R",
       "address": "No 5, Venkatesan Street, Kasimedu, Royapuram, Chennai 600013.",
@@ -5444,8 +6579,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-223",
-          "customer_id": "cust-223",
+          "id": "sub-270",
+          "customer_id": "cust-270",
           "start_date": "2026-04-28",
           "end_date": "2027-04-27",
           "status": "active",
@@ -5454,8 +6589,8 @@
       ]
     },
     {
-      "id": "cust-224",
-      "customer_id": "cust-224",
+      "id": "cust-271",
+      "customer_id": "cust-271",
       "order_id": "SCT56397673",
       "customer_name": "Mohd Nazim Mr",
       "address": "46, West Madha Church Street, Royapuram, Royapuram, Chennai, 600013.",
@@ -5468,8 +6603,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-224",
-          "customer_id": "cust-224",
+          "id": "sub-271",
+          "customer_id": "cust-271",
           "start_date": "2026-07-31",
           "end_date": "2027-07-30",
           "status": "active",
@@ -5478,8 +6613,8 @@
       ]
     },
     {
-      "id": "cust-225",
-      "customer_id": "cust-225",
+      "id": "cust-272",
+      "customer_id": "cust-272",
       "order_id": "SCF56890254",
       "customer_name": "Jayachandran S",
       "address": "No 5/2, 1St Floor, North Madha, Square Lane, Royapuram, Chennai 600013.",
@@ -5492,8 +6627,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-225",
-          "customer_id": "cust-225",
+          "id": "sub-272",
+          "customer_id": "cust-272",
           "start_date": "2026-08-07",
           "end_date": "2027-08-06",
           "status": "active",
@@ -5502,8 +6637,8 @@
       ]
     },
     {
-      "id": "cust-226",
-      "customer_id": "cust-226",
+      "id": "cust-273",
+      "customer_id": "cust-273",
       "order_id": "SCF53922868",
       "customer_name": "Shabbir N K",
       "address": "NO 37/104, Salma Classic, terrace apts, Flat 64, West, Madha Church St, Chennai 600013",
@@ -5516,8 +6651,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-226",
-          "customer_id": "cust-226",
+          "id": "sub-273",
+          "customer_id": "cust-273",
           "start_date": "2026-05-25",
           "end_date": "2027-05-24",
           "status": "active",
@@ -5526,8 +6661,8 @@
       ]
     },
     {
-      "id": "cust-227",
-      "customer_id": "cust-227",
+      "id": "cust-274",
+      "customer_id": "cust-274",
       "order_id": "SCF57170613",
       "customer_name": "Shabbar A K",
       "address": "No 13, 1st floor, Bay view, apartment, B- Block, west, church road, Royapuram, Chennai 600013.",
@@ -5540,8 +6675,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-227",
-          "customer_id": "cust-227",
+          "id": "sub-274",
+          "customer_id": "cust-274",
           "start_date": "2026-08-16",
           "end_date": "2027-08-15",
           "status": "active",
@@ -5550,8 +6685,8 @@
       ]
     },
     {
-      "id": "cust-228",
-      "customer_id": "cust-228",
+      "id": "cust-275",
+      "customer_id": "cust-275",
       "order_id": "SCT56925802",
       "customer_name": "Lingadurai. Mr",
       "address": "95/2, 2 Floor, P V Koil, 6Th Lane, Royapuram, 600013",
@@ -5564,8 +6699,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-228",
-          "customer_id": "cust-228",
+          "id": "sub-275",
+          "customer_id": "cust-275",
           "start_date": "2026-08-27",
           "end_date": "2027-08-26",
           "status": "active",
@@ -5574,8 +6709,8 @@
       ]
     },
     {
-      "id": "cust-229",
-      "customer_id": "cust-229",
+      "id": "cust-276",
+      "customer_id": "cust-276",
       "order_id": "SCT58958555",
       "customer_name": "Aliasgar A",
       "address": "No 35/22, Sakina Apts, Venkatesan Street, Royapuram, 600013",
@@ -5588,8 +6723,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-229",
-          "customer_id": "cust-229",
+          "id": "sub-276",
+          "customer_id": "cust-276",
           "start_date": "2026-09-16",
           "end_date": "2027-09-15",
           "status": "active",
@@ -5598,8 +6733,8 @@
       ]
     },
     {
-      "id": "cust-230",
-      "customer_id": "cust-230",
+      "id": "cust-277",
+      "customer_id": "cust-277",
       "order_id": "SCC47191103",
       "customer_name": "Sreenivasan C",
       "address": "No 99/51, East Madha, Church Street, Royapuram, 600013",
@@ -5612,8 +6747,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-230",
-          "customer_id": "cust-230",
+          "id": "sub-277",
+          "customer_id": "cust-277",
           "start_date": "2025-10-30",
           "end_date": "2026-10-29",
           "status": "active",
@@ -5622,8 +6757,8 @@
       ]
     },
     {
-      "id": "cust-231",
-      "customer_id": "cust-231",
+      "id": "cust-278",
+      "customer_id": "cust-278",
       "order_id": "SCT47418158",
       "customer_name": "Sathiamoorthy R",
       "address": "No 8/21, 2Nd Floor, Thiruvengadam Street, Royapuram, 600013",
@@ -5636,8 +6771,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-231",
-          "customer_id": "cust-231",
+          "id": "sub-278",
+          "customer_id": "cust-278",
           "start_date": "2025-11-16",
           "end_date": "2026-11-15",
           "status": "active",
@@ -5646,8 +6781,8 @@
       ]
     },
     {
-      "id": "cust-232",
-      "customer_id": "cust-232",
+      "id": "cust-279",
+      "customer_id": "cust-279",
       "order_id": "SCT47893017",
       "customer_name": "Shahabi Traders",
       "address": "No 170, Gf, Pycrofts, Road, Royapettah, 600014",
@@ -5660,8 +6795,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-232",
-          "customer_id": "cust-232",
+          "id": "sub-279",
+          "customer_id": "cust-279",
           "start_date": "2025-12-08",
           "end_date": "2026-12-07",
           "status": "active",
@@ -5670,8 +6805,8 @@
       ]
     },
     {
-      "id": "cust-233",
-      "customer_id": "cust-233",
+      "id": "cust-280",
+      "customer_id": "cust-280",
       "order_id": "SCT45993760",
       "customer_name": "Raja D",
       "address": "No 7, Corporation 2Nd, Lane, Royapuram, 600013",
@@ -5684,8 +6819,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-233",
-          "customer_id": "cust-233",
+          "id": "sub-280",
+          "customer_id": "cust-280",
           "start_date": "2026-01-01",
           "end_date": "2026-12-31",
           "status": "active",
@@ -5694,8 +6829,8 @@
       ]
     },
     {
-      "id": "cust-234",
-      "customer_id": "cust-234",
+      "id": "cust-281",
+      "customer_id": "cust-281",
       "order_id": "SCT42148114",
       "customer_name": "Prem Kumar B M",
       "address": "No 2/12, Square Lane, North Madha Church, Royapuram, 600013",
@@ -5708,8 +6843,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-234",
-          "customer_id": "cust-234",
+          "id": "sub-281",
+          "customer_id": "cust-281",
           "start_date": "2025-05-01",
           "end_date": "2026-04-30",
           "status": "active",
@@ -5718,8 +6853,8 @@
       ]
     },
     {
-      "id": "cust-235",
-      "customer_id": "cust-235",
+      "id": "cust-282",
+      "customer_id": "cust-282",
       "order_id": "SCT52884529",
       "customer_name": "Sirajudeen M",
       "address": "No De-1, Tnphc Own, Your House Scheme, Melakottaiyur, 600127",
@@ -5732,8 +6867,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-235",
-          "customer_id": "cust-235",
+          "id": "sub-282",
+          "customer_id": "cust-282",
           "start_date": "2026-05-16",
           "end_date": "2027-05-15",
           "status": "active",
@@ -5742,8 +6877,8 @@
       ]
     },
     {
-      "id": "cust-236",
-      "customer_id": "cust-236",
+      "id": "cust-283",
+      "customer_id": "cust-283",
       "order_id": "SCT52940778",
       "customer_name": "Mohan.Mr",
       "address": "46023, B C Press, Road 2 Nnd Lane, 600013",
@@ -5756,8 +6891,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-236",
-          "customer_id": "cust-236",
+          "id": "sub-283",
+          "customer_id": "cust-283",
           "start_date": "2026-07-23",
           "end_date": "2027-07-22",
           "status": "active",
@@ -5766,8 +6901,8 @@
       ]
     },
     {
-      "id": "cust-237",
-      "customer_id": "cust-237",
+      "id": "cust-284",
+      "customer_id": "cust-284",
       "order_id": "SCT53980928",
       "customer_name": "Byram Shaw F B",
       "address": ", No 9/19 Ground Floor, West Mada Church, Street, Royapuram, Loc -, Royapuram, 600013",
@@ -5780,8 +6915,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-237",
-          "customer_id": "cust-237",
+          "id": "sub-284",
+          "customer_id": "cust-284",
           "start_date": "2026-06-01",
           "end_date": "2027-05-31",
           "status": "active",
@@ -5790,8 +6925,8 @@
       ]
     },
     {
-      "id": "cust-238",
-      "customer_id": "cust-238",
+      "id": "cust-285",
+      "customer_id": "cust-285",
       "order_id": "SCF54171231",
       "customer_name": "Avinash Mr",
       "address": "No 100, East Madha, Street, Royapuram, 600013",
@@ -5804,8 +6939,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-238",
-          "customer_id": "cust-238",
+          "id": "sub-285",
+          "customer_id": "cust-285",
           "start_date": "2026-06-10",
           "end_date": "2027-06-09",
           "status": "active",
@@ -5814,8 +6949,8 @@
       ]
     },
     {
-      "id": "cust-239",
-      "customer_id": "cust-239",
+      "id": "cust-286",
+      "customer_id": "cust-286",
       "order_id": "SCT56663944",
       "customer_name": "Sivakumar V K",
       "address": "No 12/87, No 3A, Doshi, Nivedita Apts, B Block, West Madha Chruch, Street, Royapuram, 600013",
@@ -5828,8 +6963,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-239",
-          "customer_id": "cust-239",
+          "id": "sub-286",
+          "customer_id": "cust-286",
           "start_date": "2026-08-16",
           "end_date": "2027-08-15",
           "status": "active",
@@ -5838,8 +6973,8 @@
       ]
     },
     {
-      "id": "cust-240",
-      "customer_id": "cust-240",
+      "id": "cust-287",
+      "customer_id": "cust-287",
       "order_id": "SCT30553131",
       "customer_name": "United MarineM R",
       "address": "No 1, Madha Church, Street, Royapuram, 600013",
@@ -5852,8 +6987,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-240",
-          "customer_id": "cust-240",
+          "id": "sub-287",
+          "customer_id": "cust-287",
           "start_date": "2025-02-16",
           "end_date": "2027-02-15",
           "status": "active",
@@ -5862,8 +6997,8 @@
       ]
     },
     {
-      "id": "cust-241",
-      "customer_id": "cust-241",
+      "id": "cust-288",
+      "customer_id": "cust-288",
       "order_id": "SCT39624089",
       "customer_name": "Altaf A",
       "address": "New 69, 1St Floor, Raj, Park, Old 37, East Madha, Church Rd, Royapuram, 600013",
@@ -5876,8 +7011,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-241",
-          "customer_id": "cust-241",
+          "id": "sub-288",
+          "customer_id": "cust-288",
           "start_date": "2024-09-01",
           "end_date": "2027-08-31",
           "status": "active",
@@ -5886,8 +7021,8 @@
       ]
     },
     {
-      "id": "cust-242",
-      "customer_id": "cust-242",
+      "id": "cust-289",
+      "customer_id": "cust-289",
       "order_id": "SCT54605970",
       "customer_name": "Michael M",
       "address": "No 17/8, Amman Koil, Street 2Nd Street, Royapuram, 600013",
@@ -5900,8 +7035,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-242",
-          "customer_id": "cust-242",
+          "id": "sub-289",
+          "customer_id": "cust-289",
           "start_date": "2026-07-16",
           "end_date": "2029-07-15",
           "status": "active",
@@ -5910,8 +7045,8 @@
       ]
     },
     {
-      "id": "cust-243",
-      "customer_id": "cust-243",
+      "id": "cust-290",
+      "customer_id": "cust-290",
       "order_id": "SCT52205956",
       "customer_name": "Dhiraj K Singh",
       "address": "-, No 87, Cementry, Road, Royapuram, 600013",
@@ -5924,8 +7059,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-243",
-          "customer_id": "cust-243",
+          "id": "sub-290",
+          "customer_id": "cust-290",
           "start_date": "2026-04-14",
           "end_date": "2027-04-13",
           "status": "active",
@@ -5934,8 +7069,8 @@
       ]
     },
     {
-      "id": "cust-244",
-      "customer_id": "cust-244",
+      "id": "cust-291",
+      "customer_id": "cust-291",
       "order_id": "SCT39640101",
       "customer_name": "Deepak Dinesh.S",
       "address": "T..5, No:74/1, 3 Floor, Agile, Abode Apts, T Block, V M, Street, Mylapore, 600004",
@@ -5948,8 +7083,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-244",
-          "customer_id": "cust-244",
+          "id": "sub-291",
+          "customer_id": "cust-291",
           "start_date": "2024-12-16",
           "end_date": "2026-12-15",
           "status": "active",
@@ -5958,8 +7093,8 @@
       ]
     },
     {
-      "id": "cust-245",
-      "customer_id": "cust-245",
+      "id": "cust-292",
+      "customer_id": "cust-292",
       "order_id": "SCT40436113",
       "customer_name": "Madhavan R",
       "address": "46024, Smr Complex, Singara Garden 4Th, Lane, Old, Washermanpet, 600021",
@@ -5972,8 +7107,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-245",
-          "customer_id": "cust-245",
+          "id": "sub-292",
+          "customer_id": "cust-292",
           "start_date": "2025-01-01",
           "end_date": "2027-12-31",
           "status": "active",
@@ -5982,32 +7117,8 @@
       ]
     },
     {
-      "id": "cust-246",
-      "customer_id": "cust-246",
-      "order_id": "SCC47191103",
-      "customer_name": "Sreenivasan C",
-      "address": "No 99/51, East Madha, Church Street, Royapuram, 600013",
-      "depot": "Royapuram",
-      "mobile_number": null,
-      "notes": "",
-      "vendor_id": "vendor-13",
-      "vendor_name": "Srinivasan",
-      "vendor_code": "V10067 TOI",
-      "publication": "TOI",
-      "subscriptions": [
-        {
-          "id": "sub-246",
-          "customer_id": "cust-246",
-          "start_date": "2025-10-30",
-          "end_date": "2026-10-29",
-          "status": "active",
-          "is_current": true
-        }
-      ]
-    },
-    {
-      "id": "cust-247",
-      "customer_id": "cust-247",
+      "id": "cust-293",
+      "customer_id": "cust-293",
       "order_id": "SCE47893032",
       "customer_name": "Shahabi Traders",
       "address": "No 170, Gf, Pycrofts, Road, Royapettah, 600014",
@@ -6020,8 +7131,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-247",
-          "customer_id": "cust-247",
+          "id": "sub-293",
+          "customer_id": "cust-293",
           "start_date": "2025-12-08",
           "end_date": "2026-12-07",
           "status": "active",
@@ -6030,8 +7141,8 @@
       ]
     },
     {
-      "id": "cust-248",
-      "customer_id": "cust-248",
+      "id": "cust-294",
+      "customer_id": "cust-294",
       "order_id": "SCT51184656",
       "customer_name": "Raj Kumar",
       "address": "7/4, Madha Church Street, Royapuram, Chennai, 600013.",
@@ -6044,8 +7155,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-248",
-          "customer_id": "cust-248",
+          "id": "sub-294",
+          "customer_id": "cust-294",
           "start_date": "2026-03-16",
           "end_date": "2027-03-15",
           "status": "active",
@@ -6054,8 +7165,8 @@
       ]
     },
     {
-      "id": "cust-249",
-      "customer_id": "cust-249",
+      "id": "cust-295",
+      "customer_id": "cust-295",
       "order_id": "SCF51425971",
       "customer_name": "Kadir A",
       "address": "No 3/2, Mariadoss Street, Royapuram, chennai, 600013.",
@@ -6068,8 +7179,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-249",
-          "customer_id": "cust-249",
+          "id": "sub-295",
+          "customer_id": "cust-295",
           "start_date": "2026-03-16",
           "end_date": "2027-03-15",
           "status": "active",
@@ -6078,8 +7189,8 @@
       ]
     },
     {
-      "id": "cust-250",
-      "customer_id": "cust-250",
+      "id": "cust-296",
+      "customer_id": "cust-296",
       "order_id": "SCT46426968",
       "customer_name": "Jayakumar M",
       "address": "No 10/2, Ga Road, Old, Washermenpet, 600021",
@@ -6092,8 +7203,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-250",
-          "customer_id": "cust-250",
+          "id": "sub-296",
+          "customer_id": "cust-296",
           "start_date": "2025-10-07",
           "end_date": "2026-10-06",
           "status": "active",
@@ -6102,8 +7213,8 @@
       ]
     },
     {
-      "id": "cust-251",
-      "customer_id": "cust-251",
+      "id": "cust-297",
+      "customer_id": "cust-297",
       "order_id": "SCT46497078",
       "customer_name": "Antony MuthuT",
       "address": "I, Kasi Garden 3Rd Street, Royapuram, 600013",
@@ -6116,8 +7227,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-251",
-          "customer_id": "cust-251",
+          "id": "sub-297",
+          "customer_id": "cust-297",
           "start_date": "2025-10-07",
           "end_date": "2026-10-06",
           "status": "active",
@@ -6126,8 +7237,8 @@
       ]
     },
     {
-      "id": "cust-252",
-      "customer_id": "cust-252",
+      "id": "cust-298",
+      "customer_id": "cust-298",
       "order_id": "SCF46581016",
       "customer_name": "Senthil Kumar S",
       "address": "No 3/2, Bentleman Garden, 1St Street Kasimedu, Kasimedu, 600013",
@@ -6140,8 +7251,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-252",
-          "customer_id": "cust-252",
+          "id": "sub-298",
+          "customer_id": "cust-298",
           "start_date": "2025-10-16",
           "end_date": "2026-10-15",
           "status": "active",
@@ -6150,8 +7261,8 @@
       ]
     },
     {
-      "id": "cust-253",
-      "customer_id": "cust-253",
+      "id": "cust-299",
+      "customer_id": "cust-299",
       "order_id": "SCF46642354",
       "customer_name": "Senthil Kumar. Mr",
       "address": "46074, Bendil Man Garden, 1St, Royapuram, 600013",
@@ -6164,8 +7275,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-253",
-          "customer_id": "cust-253",
+          "id": "sub-299",
+          "customer_id": "cust-299",
           "start_date": "2025-10-16",
           "end_date": "2026-10-15",
           "status": "active",
@@ -6174,8 +7285,8 @@
       ]
     },
     {
-      "id": "cust-254",
-      "customer_id": "cust-254",
+      "id": "cust-300",
+      "customer_id": "cust-300",
       "order_id": "SCT46658436",
       "customer_name": "Jayakumar R",
       "address": "No 2/92, New, Amaranjipuram, Tondiarpet, 600081",
@@ -6188,8 +7299,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-254",
-          "customer_id": "cust-254",
+          "id": "sub-300",
+          "customer_id": "cust-300",
           "start_date": "2025-10-16",
           "end_date": "2026-10-15",
           "status": "active",
@@ -6198,8 +7309,8 @@
       ]
     },
     {
-      "id": "cust-255",
-      "customer_id": "cust-255",
+      "id": "cust-301",
+      "customer_id": "cust-301",
       "order_id": "SCF46658466",
       "customer_name": "KaviyaU",
       "address": "33635, New, Amaranjapuram, Tondiarpet, 600081",
@@ -6212,8 +7323,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-255",
-          "customer_id": "cust-255",
+          "id": "sub-301",
+          "customer_id": "cust-301",
           "start_date": "2025-10-16",
           "end_date": "2026-10-15",
           "status": "active",
@@ -6222,8 +7333,8 @@
       ]
     },
     {
-      "id": "cust-256",
-      "customer_id": "cust-256",
+      "id": "cust-302",
+      "customer_id": "cust-302",
       "order_id": "SCT48384677",
       "customer_name": "Murugesan T",
       "address": "No 105, 3Rd Floor, G A, Road, G A Road, Old, Washermanpet, 600021",
@@ -6236,8 +7347,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-256",
-          "customer_id": "cust-256",
+          "id": "sub-302",
+          "customer_id": "cust-302",
           "start_date": "2026-01-23",
           "end_date": "2027-01-22",
           "status": "active",
@@ -6246,8 +7357,8 @@
       ]
     },
     {
-      "id": "cust-257",
-      "customer_id": "cust-257",
+      "id": "cust-303",
+      "customer_id": "cust-303",
       "order_id": "SCT43620767",
       "customer_name": "Sukumaran. Mr",
       "address": "No 5/3, Pandalai Salai, Washermanpet, 600021",
@@ -6260,8 +7371,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-257",
-          "customer_id": "cust-257",
+          "id": "sub-303",
+          "customer_id": "cust-303",
           "start_date": "2025-05-24",
           "end_date": "2027-05-23",
           "status": "active",
@@ -6270,8 +7381,8 @@
       ]
     },
     {
-      "id": "cust-258",
-      "customer_id": "cust-258",
+      "id": "cust-304",
+      "customer_id": "cust-304",
       "order_id": "SCT52280052",
       "customer_name": "Anthony MuthuAnthony Muthu",
       "address": "No 2, A Block, Jeeva, Rathinam Nagar, Royapuram, 600013",
@@ -6284,8 +7395,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-258",
-          "customer_id": "cust-258",
+          "id": "sub-304",
+          "customer_id": "cust-304",
           "start_date": "2026-04-14",
           "end_date": "2027-04-13",
           "status": "active",
@@ -6294,8 +7405,8 @@
       ]
     },
     {
-      "id": "cust-259",
-      "customer_id": "cust-259",
+      "id": "cust-305",
+      "customer_id": "cust-305",
       "order_id": "SCT54361243",
       "customer_name": "Thaneesh V",
       "address": "No 3, Srisulo Illam, 1 Floor, G.A.Road, 8Th Lane, Old, Washermanpet, 600021",
@@ -6308,8 +7419,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-259",
-          "customer_id": "cust-259",
+          "id": "sub-305",
+          "customer_id": "cust-305",
           "start_date": "2027-07-16",
           "end_date": "2027-07-15",
           "status": "active",
@@ -6318,8 +7429,8 @@
       ]
     },
     {
-      "id": "cust-260",
-      "customer_id": "cust-260",
+      "id": "cust-306",
+      "customer_id": "cust-306",
       "order_id": "SCT45881013",
       "customer_name": "Anthony.A",
       "address": "No 1, Kasi Garden 3Rd, Street, Royapuram, 600013",
@@ -6332,8 +7443,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-260",
-          "customer_id": "cust-260",
+          "id": "sub-306",
+          "customer_id": "cust-306",
           "start_date": "2025-10-01",
           "end_date": "2026-09-30",
           "status": "active",
@@ -6342,8 +7453,8 @@
       ]
     },
     {
-      "id": "cust-261",
-      "customer_id": "cust-261",
+      "id": "cust-307",
+      "customer_id": "cust-307",
       "order_id": "SCT52668667",
       "customer_name": "Schwartz EnochP",
       "address": "No 17/3, G A Road 8Th, Lane, Old Washerman Pet, 600021",
@@ -6356,8 +7467,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-261",
-          "customer_id": "cust-261",
+          "id": "sub-307",
+          "customer_id": "cust-307",
           "start_date": "2026-04-14",
           "end_date": "2027-04-13",
           "status": "active",
@@ -6366,8 +7477,8 @@
       ]
     },
     {
-      "id": "cust-262",
-      "customer_id": "cust-262",
+      "id": "cust-308",
+      "customer_id": "cust-308",
       "order_id": "SCT57940071",
       "customer_name": "Thangarajan A",
       "address": "No 10/6, 1St Floor G A, Road, Old Washermenpet, 600021",
@@ -6380,8 +7491,8 @@
       "publication": "TOI",
       "subscriptions": [
         {
-          "id": "sub-262",
-          "customer_id": "cust-262",
+          "id": "sub-308",
+          "customer_id": "cust-308",
           "start_date": "2026-09-16",
           "end_date": "2027-09-15",
           "status": "active",

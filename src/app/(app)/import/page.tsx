@@ -81,7 +81,28 @@ export default function ImportExportPage() {
         return;
       }
 
-      // Format for spreadsheet (Clean printing format without Status/Publication)
+      // Helper to format ISO YYYY-MM-DD to DD-MM-YYYY for Excel export
+      function formatToDDMMYYYY(dateStr?: string | null): string {
+        if (!dateStr) return '';
+        const trimmed = String(dateStr).trim();
+        if (/^\d{2}-\d{2}-\d{4}$/.test(trimmed)) return trimmed;
+        const match = trimmed.match(/^(\d{4})[.\/\-](\d{2})[.\/\-](\d{2})/);
+        if (match) {
+          return `${match[3]}-${match[2]}-${match[1]}`;
+        }
+        try {
+          const d = new Date(trimmed);
+          if (!isNaN(d.getTime())) {
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}-${month}-${year}`;
+          }
+        } catch {}
+        return dateStr;
+      }
+
+      // Format for spreadsheet (Clean printing format with DD-MM-YYYY dates)
       const sheetData = exportList.map((c: any, idx: number) => {
         const sub = c.subscriptions?.[0];
         return {
@@ -91,8 +112,8 @@ export default function ImportExportPage() {
           'Vendor Name': c.vendor_name || c.vendors?.vendor_name || '',
           'Coupon / Order ID': c.order_id || '',
           'Mobile Number': c.mobile_number || '',
-          'Start Date': sub?.start_date || '',
-          'Expiry Date': sub?.end_date || '',
+          'Start Date': formatToDDMMYYYY(sub?.start_date),
+          'Expiry Date': formatToDDMMYYYY(sub?.end_date),
           'Depot': c.depot || 'Royapuram',
         };
       });
@@ -156,16 +177,26 @@ export default function ImportExportPage() {
           const orderId = row['Coupon / Order ID'] || row['Order ID'] || row['order_id'] || row['coupon No'] || row['Coupon No'] || '';
           const mobile = row['Mobile Number'] || row['Mobile'] || row['mobile_number'] || row['Phone'] || '';
           const address = row['Address'] || row['address'] || '';
-          const startDate = row['Start Date'] || row['start_date'] || '2026-10-01';
-          const endDate = row['Expiry Date'] || row['end_date'] || '2027-09-30';
+          function toIsoDate(dStr: string) {
+            if (!dStr) return '';
+            const trimmed = String(dStr).trim();
+            const match = trimmed.match(/^(\d{1,2})[.\/\-](\d{1,2})[.\/\-](\d{4})$/);
+            if (match) {
+              return `${match[3]}-${match[2].padStart(2, '0')}-${match[1].padStart(2, '0')}`;
+            }
+            return trimmed;
+          }
+
+          const rawStart = row['Start Date'] || row['start_date'] || '2026-10-01';
+          const rawEnd = row['Expiry Date'] || row['end_date'] || '2027-09-30';
 
           return {
             customer_name: String(name).trim(),
             order_id: String(orderId).trim(),
             mobile_number: String(mobile).trim(),
             address: String(address).trim(),
-            start_date: String(startDate).trim(),
-            end_date: String(endDate).trim(),
+            start_date: toIsoDate(String(rawStart)),
+            end_date: toIsoDate(String(rawEnd)),
           };
         }).filter((r) => r.customer_name);
 
@@ -230,8 +261,8 @@ export default function ImportExportPage() {
         'Customer Name': 'John Doe',
         'Coupon / Order ID': 'SCT45298124',
         'Mobile Number': '9840123456',
-        'Start Date': '2026-10-01',
-        'Expiry Date': '2027-09-30',
+        'Start Date': '01-10-2026',
+        'Expiry Date': '30-09-2027',
         'Address': 'No 12, Main Street, Royapuram, Chennai 600013',
         'Depot': 'Royapuram',
       },
@@ -239,8 +270,8 @@ export default function ImportExportPage() {
         'Customer Name': 'Ayesha Banu',
         'Coupon / Order ID': 'SCF47587784',
         'Mobile Number': '9840654321',
-        'Start Date': '2026-10-15',
-        'Expiry Date': '2027-10-14',
+        'Start Date': '15-10-2026',
+        'Expiry Date': '14-10-2027',
         'Address': 'Flat 4A, Casa Grand, Royapuram, Chennai',
         'Depot': 'Royapuram',
       },
