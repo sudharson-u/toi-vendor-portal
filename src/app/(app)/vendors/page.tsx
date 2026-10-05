@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { UserCheck, Plus, Users, Phone, Edit, Trash2, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Modal from '@/components/ui/Modal';
 
 interface Vendor {
   id: string;
@@ -183,53 +184,52 @@ export default function VendorsPage() {
       )}
 
       {/* Add/Edit Modal */}
-      {showAdd && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card w-full max-w-sm animate-scaleIn">
-            <div className="card-header">
-              <h2 className="font-semibold text-gray-900 dark:text-gray-100">
-                {editVendor ? 'Edit Vendor' : 'Add Vendor'}
-              </h2>
-            </div>
-            <div className="p-5 space-y-4">
-              <div>
-                <label className="label">Vendor Name *</label>
-                <input
-                  className="input"
-                  placeholder="e.g. Arumugam"
-                  value={form.vendor_name}
-                  onChange={e => setForm(f => ({ ...f, vendor_name: e.target.value }))}
-                />
-              </div>
-              <div>
-                <label className="label">Mobile Number</label>
-                <input
-                  className="input"
-                  placeholder="e.g. 9876543210"
-                  value={form.mobile_number}
-                  onChange={e => setForm(f => ({ ...f, mobile_number: e.target.value }))}
-                />
-              </div>
-              {error && <p className="text-sm text-red-600">{error}</p>}
-              <div className="flex gap-2 justify-end pt-2">
-                <button
-                  onClick={() => { setShowAdd(false); setEditVendor(null); }}
-                  className="btn-secondary text-sm"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSave}
-                  disabled={saving}
-                  className="btn-primary text-sm"
-                >
-                  {saving ? 'Saving...' : editVendor ? 'Save Changes' : 'Add Vendor'}
-                </button>
-              </div>
-            </div>
+      <Modal
+        isOpen={showAdd}
+        onClose={() => { setShowAdd(false); setEditVendor(null); }}
+        title={editVendor ? 'Edit Vendor' : 'Add Vendor'}
+        maxWidth="max-w-md"
+      >
+        <div className="p-6 space-y-4">
+          <div>
+            <label className="label">Vendor Name *</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="e.g. Arumugam"
+              value={form.vendor_name}
+              onChange={e => setForm(f => ({ ...f, vendor_name: e.target.value }))}
+              autoFocus
+            />
+          </div>
+          <div>
+            <label className="label">Mobile Number</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="e.g. 9876543210"
+              value={form.mobile_number}
+              onChange={e => setForm(f => ({ ...f, mobile_number: e.target.value }))}
+            />
+          </div>
+          {error && <p className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>}
+          <div className="flex gap-2 justify-end pt-3 border-t border-gray-100 dark:border-gray-800">
+            <button
+              type="button"
+              onClick={() => { setShowAdd(false); setEditVendor(null); }}
+              className="btn-secondary text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              disabled={saving}
+              className="btn-primary text-sm shadow-md"
+            >
+              {saving ? 'Saving...' : editVendor ? 'Save Changes' : 'Add Vendor'}
+            </button>
           </div>
         </div>
-      )}
+      </Modal>
     </div>
   );
 }

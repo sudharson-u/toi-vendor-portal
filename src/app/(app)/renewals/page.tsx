@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { formatDate, calculateDaysRemaining, cn } from '@/lib/utils';
 import { format, addYears, addMonths, parseISO } from 'date-fns';
+import Modal from '@/components/ui/Modal';
 
 export default function RenewalsPage() {
   const [customers, setCustomers] = useState<any[]>([]);
@@ -42,9 +43,9 @@ export default function RenewalsPage() {
     async function fetchRenewals() {
       try {
         setLoading(true);
-        let url = '/api/customers?limit=1000';
+        let url = '/api/customers?limit=1000&sort=end_date&dir=asc';
         if (selectedMonth && selectedMonth !== 'all') {
-          url = `/api/customers?expiry=${selectedMonth}&limit=1000`;
+          url = `/api/customers?expiry=${selectedMonth}&limit=1000&sort=end_date&dir=asc`;
         }
         const res = await fetch(url);
         const data = await res.json();
@@ -372,8 +373,10 @@ export default function RenewalsPage() {
             {/* MOBILE COMPACT CARDS VIEW (No horizontal sliding needed on mobile phones!) */}
             <div className="block md:hidden divide-y divide-gray-100 dark:divide-gray-800">
               {filteredCustomers.map((c) => {
-                const sub = c.subscriptions?.[0];
-                const days = calculateDaysRemaining(sub?.end_date || '', today);
+                const sub = c.subscriptions?.[0] || c.subscription;
+                const endDate = sub?.end_date || c.end_date || '';
+                const hasEndDate = !!endDate;
+                const days = hasEndDate ? calculateDaysRemaining(endDate, today) : null;
                 const vName = c.vendor_name || c.vendors?.vendor_name || 'Unassigned';
 
                 return (
@@ -396,13 +399,25 @@ export default function RenewalsPage() {
 
                       <span
                         className={cn(
-                          'text-[11px] font-bold px-2 py-0.5 rounded-full flex-shrink-0',
-                          days <= 5
-                            ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400'
-                            : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-400'
+                          'text-xs font-bold px-2.5 py-0.5 rounded-full flex-shrink-0 shadow-xs',
+                          days === null
+                            ? 'bg-gray-100 text-gray-500'
+                            : days < 0
+                            ? 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300'
+                            : days === 0
+                            ? 'bg-rose-600 text-white font-black'
+                            : days <= 7
+                            ? 'bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300'
+                            : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300'
                         )}
                       >
-                        {days <= 0 ? 'Expires Today' : `${days}d left`}
+                        {days === null
+                          ? '—'
+                          : days < 0
+                          ? `${Math.abs(days)}d overdue`
+                          : days === 0
+                          ? 'Expires Today'
+                          : `${days}d left`}
                       </span>
                     </div>
 
@@ -416,8 +431,8 @@ export default function RenewalsPage() {
                         {c.order_id || '—'}
                       </span>
 
-                      <span className="font-medium text-gray-700 dark:text-gray-300">
-                        Exp: {formatDate(sub?.end_date)}
+                      <span className="font-bold text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-[11px]">
+                        Exp: {hasEndDate ? formatDate(endDate) : '—'}
                       </span>
                     </div>
 
@@ -459,8 +474,10 @@ export default function RenewalsPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                   {filteredCustomers.map((c) => {
-                    const sub = c.subscriptions?.[0];
-                    const days = calculateDaysRemaining(sub?.end_date || '', today);
+                    const sub = c.subscriptions?.[0] || c.subscription;
+                    const endDate = sub?.end_date || c.end_date || '';
+                    const hasEndDate = !!endDate;
+                    const days = hasEndDate ? calculateDaysRemaining(endDate, today) : null;
                     const vName = c.vendor_name || c.vendors?.vendor_name || 'Unassigned';
 
                     return (
@@ -491,21 +508,44 @@ export default function RenewalsPage() {
                           {c.order_id || '—'}
                         </td>
 
-                        <td className="py-3.5 px-4 text-xs font-semibold text-gray-900 dark:text-gray-100">
-                          {formatDate(sub?.end_date)}
+                        <td className="py-3.5 px-4">
+                          {hasEndDate ? (
+                            <div className="flex flex-col">
+                              <span className="text-xs font-bold text-gray-900 dark:text-gray-100">
+                                {formatDate(endDate)}
+                              </span>
+                              <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400">
+                                {endDate}
+                              </span>
+                            </div>
+                          ) : (
+                            <span className="text-xs text-gray-400">—</span>
+                          )}
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <span
-                            className={cn(
-                              'text-xs font-bold px-2.5 py-1 rounded-full',
-                              days <= 5
-                                ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400'
-                                : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-400'
-                            )}
-                          >
-                            {days <= 0 ? 'Expires Today' : `${days} days`}
-                          </span>
+                          {days !== null ? (
+                            <span
+                              className={cn(
+                                'inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shadow-xs',
+                                days < 0
+                                  ? 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200 dark:border-rose-900'
+                                  : days === 0
+                                  ? 'bg-rose-600 text-white font-black animate-pulse'
+                                  : days <= 7
+                                  ? 'bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
+                                  : 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                              )}
+                            >
+                              {days < 0
+                                ? `${Math.abs(days)}d overdue`
+                                : days === 0
+                                ? 'Expires Today'
+                                : `${days} days left`}
+                            </span>
+                          ) : (
+                            <span className="text-xs text-gray-400">—</span>
+                          )}
                         </td>
 
                         <td className="py-3.5 px-4 text-right">
@@ -539,90 +579,67 @@ export default function RenewalsPage() {
       </div>
 
       {/* Quick Renew Modal */}
-      {activeCustomer && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-scaleIn text-gray-900 modal-card"
-            style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
-          >
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
-                  <RefreshCw className="w-4 h-4" />
-                </div>
-                <h3 className="font-bold text-base text-gray-900" style={{ color: '#0f172a' }}>
-                  Renew Subscription
-                </h3>
-              </div>
-              <button
-                onClick={() => setActiveCustomer(null)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button>
+      <Modal
+        isOpen={!!activeCustomer}
+        onClose={() => setActiveCustomer(null)}
+        title="Renew Subscription"
+        maxWidth="max-w-md"
+      >
+        {activeCustomer && (
+          <form onSubmit={handleRenewSubmit} className="p-6 space-y-4">
+            <div className="p-3.5 bg-amber-50/60 dark:bg-amber-950/30 rounded-xl border border-amber-200/60 dark:border-amber-900/40 text-xs space-y-1 text-gray-800 dark:text-gray-200">
+              <p>
+                <strong>Customer:</strong> {activeCustomer.customer_name}
+              </p>
+              <p>
+                <strong>Vendor:</strong> {activeCustomer.vendor_name || activeCustomer.vendors?.vendor_name || 'Unassigned'}
+              </p>
+              <p>
+                <strong>Current Expiry:</strong> {formatDate(activeCustomer.subscriptions?.[0]?.end_date || activeCustomer.end_date)}
+              </p>
             </div>
 
-            <form onSubmit={handleRenewSubmit} className="space-y-4">
-              <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs space-y-1 text-gray-800" style={{ backgroundColor: '#f8fafc', color: '#1e293b' }}>
-                <p>
-                  <strong>Customer:</strong> {activeCustomer.customer_name}
-                </p>
-                <p>
-                  <strong>Vendor:</strong> {activeCustomer.vendor_name || activeCustomer.vendors?.vendor_name}
-                </p>
-                <p>
-                  <strong>Current Expiry:</strong> {formatDate(activeCustomer.subscriptions?.[0]?.end_date)}
-                </p>
-              </div>
+            <div>
+              <label className="label">New Start Date</label>
+              <input
+                type="date"
+                required
+                value={renewStartDate}
+                onChange={(e) => setRenewStartDate(e.target.value)}
+                className="input text-base sm:text-sm font-semibold"
+              />
+            </div>
 
-              <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
-                  New Start Date
-                </label>
-                <input
-                  type="date"
-                  required
-                  value={renewStartDate}
-                  onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
-                />
-              </div>
+            <div>
+              <label className="label">New Expiry Date (1 Year)</label>
+              <input
+                type="date"
+                required
+                value={renewEndDate}
+                onChange={(e) => setRenewEndDate(e.target.value)}
+                className="input text-base sm:text-sm font-semibold"
+              />
+            </div>
 
-              <div>
-                <label className="text-xs font-bold text-gray-800 block mb-1" style={{ color: '#1e293b' }}>
-                  New Expiry Date (1 Year)
-                </label>
-                <input
-                  type="date"
-                  required
-                  value={renewEndDate}
-                  onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 bg-white text-gray-900 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 modal-input"
-                  style={{ color: '#0f172a', backgroundColor: '#ffffff', WebkitTextFillColor: '#0f172a' }}
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setActiveCustomer(null)}
-                  className="px-4 py-2 text-xs font-bold text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={renewing}
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors"
-                >
-                  {renewing ? 'Renewing...' : 'Confirm Renewal'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <button
+                type="button"
+                onClick={() => setActiveCustomer(null)}
+                className="btn-secondary text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={renewing}
+                className="btn-primary text-sm shadow-md"
+              >
+                {renewing ? 'Renewing...' : 'Confirm Renewal'}
+              </button>
+            </div>
+          </form>
+        )}
+      </Modal>
     </div>
   );
 }

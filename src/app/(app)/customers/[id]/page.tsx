@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { formatDate, calculateStatus, calculateDaysRemaining, getStatusLabel, getStatusColor, cn } from '@/lib/utils';
 import { format, addYears, parseISO } from 'date-fns';
+import Modal from '@/components/ui/Modal';
 
 export default function CustomerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -567,223 +568,191 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
       </div>
 
       {/* DELETE CONFIRMATION MODAL */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-800 animate-scaleIn text-center space-y-4">
-            <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center mx-auto">
-              <AlertOctagon className="w-6 h-6" />
-            </div>
+      <Modal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        title="Confirm Deletion"
+        maxWidth="max-w-sm"
+      >
+        <div className="p-6 text-center space-y-4">
+          <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-600 flex items-center justify-center mx-auto">
+            <AlertOctagon className="w-6 h-6" />
+          </div>
 
-            <div>
-              <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Confirm Deletion</h3>
-              <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
-                Are you sure you want to delete customer <strong>{customer.customer_name}</strong>? All associated subscriptions and notes will be permanently removed.
-              </p>
-            </div>
+          <div>
+            <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Confirm Deletion</h3>
+            <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+              Are you sure you want to delete customer <strong>{customer.customer_name}</strong>? All associated subscriptions and notes will be permanently removed.
+            </p>
+          </div>
 
-            <div className="flex items-center gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setShowDeleteModal(false)}
-                className="flex-1 py-2 px-3 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-xl"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleDeleteConfirm}
-                disabled={deleting}
-                className="flex-1 py-2 px-3 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow-sm transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50"
-              >
-                {deleting ? 'Deleting...' : 'Yes, Delete'}
-              </button>
-            </div>
+          <div className="flex items-center gap-2 pt-2">
+            <button
+              type="button"
+              onClick={() => setShowDeleteModal(false)}
+              className="flex-1 py-2 px-3 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-xl"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleDeleteConfirm}
+              disabled={deleting}
+              className="flex-1 py-2 px-3 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow-sm transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50"
+            >
+              {deleting ? 'Deleting...' : 'Yes, Delete'}
+            </button>
           </div>
         </div>
-      )}
+      </Modal>
 
       {/* Edit Customer Modal */}
-      {showEdit && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-700 animate-scaleIn">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
-              <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
-                Edit Customer Information
-              </h3>
-              <button onClick={() => setShowEdit(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSaveEdit} className="space-y-3.5">
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  Customer Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={editForm.customer_name}
-                  onChange={(e) => setEditForm({ ...editForm, customer_name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  Assigned Vendor
-                </label>
-                <select
-                  value={
-                    editForm.vendor_id ||
-                    vendors.find((v) => v.vendor_name?.toLowerCase() === editForm.vendor_name?.toLowerCase())?.id ||
-                    ''
-                  }
-                  onChange={(e) => {
-                    const selected = vendors.find((v) => v.id === e.target.value);
-                    setEditForm({
-                      ...editForm,
-                      vendor_id: e.target.value,
-                      vendor_name: selected?.vendor_name || '',
-                    });
-                  }}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
-                >
-                  <option value="">Select Vendor...</option>
-                  {vendors.map((v) => (
-                    <option key={v.id} value={v.id}>
-                      {v.vendor_name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  Mobile Number
-                </label>
-                <input
-                  type="text"
-                  value={editForm.mobile_number}
-                  onChange={(e) => setEditForm({ ...editForm, mobile_number: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
-                  placeholder="e.g. 9840123456"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  Order / Coupon ID
-                </label>
-                <input
-                  type="text"
-                  value={editForm.order_id}
-                  onChange={(e) => setEditForm({ ...editForm, order_id: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  Address
-                </label>
-                <textarea
-                  rows={3}
-                  value={editForm.address}
-                  onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition-colors"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
-                <button
-                  type="button"
-                  onClick={() => setShowEdit(false)}
-                  className="px-4 py-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2 bg-[#1e3a5f] hover:bg-[#2d5080] text-white text-xs font-bold rounded-lg shadow-sm transition-colors"
-                >
-                  Save Changes
-                </button>
-              </div>
-            </form>
+      <Modal
+        isOpen={showEdit}
+        onClose={() => setShowEdit(false)}
+        title="Edit Customer Information"
+        maxWidth="max-w-md"
+      >
+        <form onSubmit={handleSaveEdit} className="p-6 space-y-4">
+          <div>
+            <label className="label">Customer Name</label>
+            <input
+              type="text"
+              required
+              value={editForm.customer_name}
+              onChange={(e) => setEditForm({ ...editForm, customer_name: e.target.value })}
+              className="input text-base sm:text-sm font-semibold"
+            />
           </div>
-        </div>
-      )}
+
+          <div>
+            <label className="label">Assigned Vendor</label>
+            <select
+              value={
+                editForm.vendor_id ||
+                vendors.find((v) => v.vendor_name?.toLowerCase() === editForm.vendor_name?.toLowerCase())?.id ||
+                ''
+              }
+              onChange={(e) => {
+                const selected = vendors.find((v) => v.id === e.target.value);
+                setEditForm({
+                  ...editForm,
+                  vendor_id: e.target.value,
+                  vendor_name: selected?.vendor_name || '',
+                });
+              }}
+              className="input text-base sm:text-sm font-semibold"
+            >
+              <option value="">Select Vendor...</option>
+              {vendors.map((v) => (
+                <option key={v.id} value={v.id}>
+                  {v.vendor_name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="label">Mobile Number</label>
+            <input
+              type="text"
+              value={editForm.mobile_number}
+              onChange={(e) => setEditForm({ ...editForm, mobile_number: e.target.value })}
+              className="input text-base sm:text-sm font-semibold"
+              placeholder="e.g. 9840123456"
+            />
+          </div>
+
+          <div>
+            <label className="label">Order / Coupon ID</label>
+            <input
+              type="text"
+              value={editForm.order_id}
+              onChange={(e) => setEditForm({ ...editForm, order_id: e.target.value })}
+              className="input text-base sm:text-sm font-semibold"
+            />
+          </div>
+
+          <div>
+            <label className="label">Address</label>
+            <textarea
+              rows={3}
+              value={editForm.address}
+              onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
+              className="input text-base sm:text-sm resize-none"
+            />
+          </div>
+
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+            <button
+              type="button"
+              onClick={() => setShowEdit(false)}
+              className="btn-secondary text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="btn-primary text-sm shadow-md"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </Modal>
 
       {/* Renew Subscription Modal */}
-      {showRenew && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-700 animate-scaleIn">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800 mb-4">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400">
-                  <RefreshCw className="w-4 h-4" />
-                </div>
-                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">
-                  Renew Subscription
-                </h3>
-              </div>
-              <button onClick={() => setShowRenew(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+      <Modal
+        isOpen={showRenew}
+        onClose={() => setShowRenew(false)}
+        title="Renew Subscription"
+        maxWidth="max-w-md"
+      >
+        <form onSubmit={handleRenewSubmit} className="p-6 space-y-4">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            Renew subscription for <strong className="text-gray-900 dark:text-gray-100">{customer.customer_name}</strong> under vendor <strong className="text-gray-900 dark:text-gray-100">{vendorName}</strong>.
+          </p>
 
-            <form onSubmit={handleRenewSubmit} className="space-y-4">
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                Renew subscription for <strong className="text-gray-900 dark:text-gray-100">{customer.customer_name}</strong> under vendor <strong className="text-gray-900 dark:text-gray-100">{vendorName}</strong>.
-              </p>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  New Start Date
-                </label>
-                <input
-                  type="date"
-                  required
-                  value={renewStartDate}
-                  onChange={(e) => setRenewStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-gray-700 dark:text-gray-300 block mb-1">
-                  New Expiry Date
-                </label>
-                <input
-                  type="date"
-                  required
-                  value={renewEndDate}
-                  onChange={(e) => setRenewEndDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
-                <button
-                  type="button"
-                  onClick={() => setShowRenew(false)}
-                  className="px-4 py-2 text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={renewing}
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-gray-900 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors"
-                >
-                  {renewing ? 'Processing...' : 'Confirm Renewal'}
-                </button>
-              </div>
-            </form>
+          <div>
+            <label className="label">New Start Date</label>
+            <input
+              type="date"
+              required
+              value={renewStartDate}
+              onChange={(e) => setRenewStartDate(e.target.value)}
+              className="input text-base sm:text-sm font-semibold"
+            />
           </div>
-        </div>
-      )}
+
+          <div>
+            <label className="label">New Expiry Date</label>
+            <input
+              type="date"
+              required
+              value={renewEndDate}
+              onChange={(e) => setRenewEndDate(e.target.value)}
+              className="input text-base sm:text-sm font-semibold"
+            />
+          </div>
+
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+            <button
+              type="button"
+              onClick={() => setShowRenew(false)}
+              className="btn-secondary text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={renewing}
+              className="btn-primary text-sm shadow-md"
+            >
+              {renewing ? 'Processing...' : 'Confirm Renewal'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

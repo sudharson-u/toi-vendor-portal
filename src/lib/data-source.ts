@@ -128,12 +128,17 @@ export async function getAllCustomers(options: {
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createServiceClient();
+      const useInnerSubs = !!(expiryFilter || statusFilter);
+      const subsSelect = useInnerSubs
+        ? 'subscriptions!inner(id, start_date, end_date, status, is_current, notification_date)'
+        : 'subscriptions(id, start_date, end_date, status, is_current, notification_date)';
+
       let query = supabase
         .from('customers')
         .select(`
           id, customer_id, customer_name, address, mobile_number, order_id, vendor_id,
           vendors(id, vendor_name),
-          subscriptions(id, start_date, end_date, status, is_current, notification_date)
+          ${subsSelect}
         `, { count: 'exact' })
         .eq('subscriptions.is_current', true);
 
@@ -187,6 +192,12 @@ export async function getAllCustomers(options: {
             // Ensure subscriptions is always an array and take only the current one
             const subs: any[] = Array.isArray(c.subscriptions) ? c.subscriptions : [];
             const currentSub = subs.find((s: any) => s.is_current) || subs[0] || null;
+
+            // If an expiry or status filter was requested, only include customers who have a matching subscription
+            if (useInnerSubs && !currentSub) {
+              continue;
+            }
+
             const vendorObj = Array.isArray(c.vendors) ? c.vendors[0] : c.vendors;
             deduped.push({
               ...c,
@@ -198,9 +209,17 @@ export async function getAllCustomers(options: {
           }
         }
 
+        if (sort === 'end_date') {
+          deduped.sort((a, b) => {
+            const endA = a.subscriptions?.[0]?.end_date || '';
+            const endB = b.subscriptions?.[0]?.end_date || '';
+            return dir === 'desc' ? endB.localeCompare(endA) : endA.localeCompare(endB);
+          });
+        }
+
         return {
           customers: deduped,
-          total: count ?? deduped.length,
+          total: useInnerSubs ? deduped.length : (count ?? deduped.length),
         };
       }
     } catch (e) {

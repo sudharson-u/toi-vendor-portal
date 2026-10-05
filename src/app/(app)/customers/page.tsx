@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { Search, Filter, Plus, Phone, ArrowUpDown, ChevronLeft, ChevronRight, X, Download, UserCheck } from 'lucide-react';
 import { formatDate, calculateStatus, getStatusLabel, getStatusColor, cn } from '@/lib/utils';
 import { SubscriptionStatus } from '@/lib/types';
+import Modal from '@/components/ui/Modal';
 
 const PAGE_SIZE = 20;
 
@@ -359,63 +360,108 @@ function AddCustomerModal({ vendors, onClose, onSaved }: {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="card w-full max-w-lg animate-scaleIn max-h-[90vh] overflow-y-auto">
-        <div className="card-header flex items-center justify-between sticky top-0 bg-white dark:bg-gray-900 z-10">
-          <h2 className="font-semibold text-gray-900 dark:text-gray-100">Add Customer</h2>
-          <button onClick={onClose} className="btn-ghost p-1"><X className="w-4 h-4" /></button>
+    <Modal
+      isOpen={true}
+      onClose={onClose}
+      title="Add Customer"
+      maxWidth="max-w-lg"
+    >
+      <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <div className="grid grid-cols-2 gap-3.5">
+          <div className="col-span-2">
+            <label className="label">Customer Name *</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="e.g. Ramesh Kumar"
+              value={form.customer_name}
+              onChange={e => setForm(f => ({ ...f, customer_name: e.target.value }))}
+              autoFocus
+            />
+          </div>
+          <div>
+            <label className="label">Customer ID</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="e.g. CUST-1001"
+              value={form.customer_id}
+              onChange={e => setForm(f => ({ ...f, customer_id: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="label">Order ID</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="e.g. 50012345"
+              value={form.order_id}
+              onChange={e => setForm(f => ({ ...f, order_id: e.target.value }))}
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="label">Vendor</label>
+            <select
+              className="input text-base sm:text-sm"
+              value={form.vendor_id}
+              onChange={e => setForm(f => ({ ...f, vendor_id: e.target.value }))}
+            >
+              <option value="">Select vendor...</option>
+              {vendors.map(v => <option key={v.id} value={v.id}>{v.vendor_name}</option>)}
+            </select>
+          </div>
+          <div className="col-span-2">
+            <label className="label">Address</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder="Delivery address..."
+              value={form.address}
+              onChange={e => setForm(f => ({ ...f, address: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="label">Mobile</label>
+            <input
+              className="input text-base sm:text-sm"
+              type="tel"
+              placeholder="e.g. 9876543210"
+              value={form.mobile_number}
+              onChange={e => setForm(f => ({ ...f, mobile_number: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="label">Notes</label>
+            <input
+              className="input text-base sm:text-sm"
+              placeholder=""
+              value={form.notes}
+              onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="label">Start Date *</label>
+            <input
+              className="input text-base sm:text-sm"
+              type="date"
+              value={form.start_date}
+              onChange={e => setForm(f => ({ ...f, start_date: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="label">End Date *</label>
+            <input
+              className="input text-base sm:text-sm"
+              type="date"
+              value={form.end_date}
+              onChange={e => setForm(f => ({ ...f, end_date: e.target.value }))}
+            />
+          </div>
         </div>
-        <form onSubmit={handleSubmit} className="p-5 space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="col-span-2">
-              <label className="label">Customer Name *</label>
-              <input className="input" value={form.customer_name} onChange={e => setForm(f => ({ ...f, customer_name: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">Customer ID</label>
-              <input className="input" value={form.customer_id} onChange={e => setForm(f => ({ ...f, customer_id: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">Order ID</label>
-              <input className="input" value={form.order_id} onChange={e => setForm(f => ({ ...f, order_id: e.target.value }))} />
-            </div>
-            <div className="col-span-2">
-              <label className="label">Vendor</label>
-              <select className="input" value={form.vendor_id} onChange={e => setForm(f => ({ ...f, vendor_id: e.target.value }))}>
-                <option value="">Select vendor...</option>
-                {vendors.map(v => <option key={v.id} value={v.id}>{v.vendor_name}</option>)}
-              </select>
-            </div>
-            <div className="col-span-2">
-              <label className="label">Address</label>
-              <input className="input" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">Mobile</label>
-              <input className="input" type="tel" value={form.mobile_number} onChange={e => setForm(f => ({ ...f, mobile_number: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">Notes</label>
-              <input className="input" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">Start Date *</label>
-              <input className="input" type="date" value={form.start_date} onChange={e => setForm(f => ({ ...f, start_date: e.target.value }))} />
-            </div>
-            <div>
-              <label className="label">End Date *</label>
-              <input className="input" type="date" value={form.end_date} onChange={e => setForm(f => ({ ...f, end_date: e.target.value }))} />
-            </div>
-          </div>
-          {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
-          <div className="flex gap-2 justify-end pt-2 border-t border-gray-100 dark:border-gray-800">
-            <button type="button" onClick={onClose} className="btn-secondary text-sm">Cancel</button>
-            <button type="submit" disabled={saving} className="btn-primary text-sm">
-              {saving ? 'Adding...' : 'Add Customer'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        {error && <p className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>}
+        <div className="flex gap-2 justify-end pt-3 border-t border-gray-100 dark:border-gray-800">
+          <button type="button" onClick={onClose} className="btn-secondary text-sm">Cancel</button>
+          <button type="submit" disabled={saving} className="btn-primary text-sm shadow-md">
+            {saving ? 'Adding...' : 'Add Customer'}
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 }
