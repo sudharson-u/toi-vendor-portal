@@ -7499,6 +7499,30 @@
           "is_current": true
         }
       ]
+    },
+    {
+      "id": "cust-srini-22",
+      "customer_id": "cust-srini-22",
+      "order_id": "SCC47191103",
+      "customer_name": "Sreenivasan C",
+      "address": "No 99/51, East Madha Church Street, Royapuram, 600013",
+      "depot": "Royapuram",
+      "mobile_number": null,
+      "notes": "Publication: TOI,ET (S.No 19 in Srinivasan.pdf)",
+      "vendor_id": "758b0a6c-8766-4483-9388-d4cd4754759b",
+      "vendor_name": "Srinivasan",
+      "vendor_code": "V12495",
+      "publication": "TOI,ET",
+      "subscriptions": [
+        {
+          "id": "sub-srini-22",
+          "customer_id": "cust-srini-22",
+          "start_date": "2025-10-30",
+          "end_date": "2026-10-29",
+          "status": "active",
+          "is_current": true
+        }
+      ]
     }
   ]
 }
