@@ -27,15 +27,15 @@ export function calculateStatus(
   if (!isValid(end)) return 'expired';
 
   const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const thisMonthEnd = endOfMonth(todayStart);
   const thisMonthStart = startOfMonth(todayStart);
-
-  if (isBefore(end, todayStart)) {
-    return 'expired';
-  }
+  const thisMonthEnd = endOfMonth(todayStart);
 
   if (end >= thisMonthStart && end <= thisMonthEnd) {
     return 'expiring_this_month';
+  }
+
+  if (isBefore(end, thisMonthStart)) {
+    return 'expired';
   }
 
   return 'active';

@@ -144,23 +144,37 @@ export async function getAllCustomers(options: {
 
       if (search) {
         query = query.or(
-          `customer_name.ilike.%${search}%,customer_id.ilike.%${search}%,mobile_number.ilike.%${search}%,order_id.ilike.%${search}%`
+          `customer_name.ilike.%${search}%,customer_id.ilike.%${search}%,mobile_number.ilike.%${search}%,order_id.ilike.%${search}%,address.ilike.%${search}%`
         );
       }
       if (vendorFilter) {
-        query = query.eq('vendor_id', vendorFilter);
+        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(vendorFilter);
+        if (isUuid) {
+          query = query.eq('vendor_id', vendorFilter);
+        } else {
+          const { data: vRow } = await supabase
+            .from('vendors')
+            .select('id')
+            .ilike('vendor_name', vendorFilter.trim())
+            .maybeSingle();
+          if (vRow?.id) {
+            query = query.eq('vendor_id', vRow.id);
+          } else {
+            query = query.eq('vendor_id', vendorFilter);
+          }
+        }
       }
 
       const today = new Date();
-      const todayStr = format(today, 'yyyy-MM-dd');
+      const thisMonthStart = format(startOfMonth(today), 'yyyy-MM-dd');
       const thisMonthEnd = format(endOfMonth(today), 'yyyy-MM-dd');
 
       if (statusFilter === 'expiring_this_month') {
         query = query
-          .gte('subscriptions.end_date', todayStr)
+          .gte('subscriptions.end_date', thisMonthStart)
           .lte('subscriptions.end_date', thisMonthEnd);
       } else if (statusFilter === 'expired') {
-        query = query.lt('subscriptions.end_date', todayStr);
+        query = query.lt('subscriptions.end_date', thisMonthStart);
       } else if (statusFilter === 'active') {
         query = query.gt('subscriptions.end_date', thisMonthEnd);
       }
@@ -219,7 +233,7 @@ export async function getAllCustomers(options: {
 
         return {
           customers: deduped,
-          total: useInnerSubs ? deduped.length : (count ?? deduped.length),
+          total: count ?? deduped.length,
         };
       }
     } catch (e) {
@@ -346,6 +360,7 @@ export async function getCustomerById(id: string) {
 export async function createCustomer(data: {
   customer_name: string;
   order_id?: string;
+  customer_id?: string;
   address?: string;
   mobile_number?: string;
   notes?: string;
@@ -354,49 +369,123 @@ export async function createCustomer(data: {
   start_date: string;
   end_date: string;
 }) {
+  let resolvedVendorId = data.vendor_id || null;
+  let resolvedVendorName = data.vendor_name || '';
+
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createServiceClient();
+
+      // Resolve vendor_id and vendor_name bidirectionally
+      const isVendorUuid = resolvedVendorId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(resolvedVendorId);
+      if (resolvedVendorId && !isVendorUuid) {
+        resolvedVendorName = resolvedVendorName || resolvedVendorId;
+        resolvedVendorId = null;
+      }
+
+      if (!resolvedVendorId && resolvedVendorName) {
+        const { data: vRow } = await supabase
+          .from('vendors')
+          .select('id, vendor_name')
+          .ilike('vendor_name', resolvedVendorName.trim())
+          .maybeSingle();
+        if (vRow) {
+          resolvedVendorId = vRow.id;
+          resolvedVendorName = vRow.vendor_name;
+        }
+      } else if (resolvedVendorId && !resolvedVendorName) {
+        const { data: vRow } = await supabase
+          .from('vendors')
+          .select('id, vendor_name')
+          .eq('id', resolvedVendorId)
+          .maybeSingle();
+        if (vRow) {
+          resolvedVendorName = vRow.vendor_name;
+        }
+      }
+
+      const generatedCustId = data.customer_id || 'cust-' + (Date.now().toString().slice(-6));
       const { data: cust, error: custErr } = await supabase
         .from('customers')
         .insert({
+          customer_id: generatedCustId,
           customer_name: data.customer_name.trim(),
           order_id: data.order_id?.trim() || null,
           address: data.address?.trim() || null,
           mobile_number: data.mobile_number?.trim() || null,
           notes: data.notes?.trim() || null,
-          vendor_id: data.vendor_id || null,
+          vendor_id: resolvedVendorId,
         })
-        .select()
+        .select(`
+          id, customer_id, customer_name, address, mobile_number, order_id, notes, vendor_id,
+          vendors(id, vendor_name)
+        `)
         .single();
 
       if (!custErr && cust) {
-        await supabase.from('subscriptions').insert({
+        const { data: newSub } = await supabase.from('subscriptions').insert({
           customer_id: cust.id,
           start_date: data.start_date,
           end_date: data.end_date,
           status: 'active',
           is_current: true,
+        }).select().single();
+
+        const vendorObj = Array.isArray(cust.vendors) ? cust.vendors[0] : cust.vendors;
+        const normalized = {
+          ...cust,
+          vendors: vendorObj || null,
+          vendor_name: vendorObj?.vendor_name || resolvedVendorName || 'Unassigned',
+          subscriptions: newSub ? [newSub] : [],
+        };
+
+        // Also sync local cache
+        ensureLatestLocalData();
+        localCustomers.unshift({
+          id: cust.id,
+          customer_id: cust.customer_id || generatedCustId,
+          order_id: cust.order_id || '',
+          customer_name: cust.customer_name,
+          address: cust.address || '',
+          depot: 'Royapuram',
+          mobile_number: cust.mobile_number || null,
+          notes: cust.notes || '',
+          vendor_id: resolvedVendorId,
+          vendor_name: normalized.vendor_name,
+          subscriptions: [
+            {
+              id: newSub?.id || 'sub-' + Date.now(),
+              customer_id: cust.id,
+              start_date: data.start_date,
+              end_date: data.end_date,
+              status: 'active',
+              is_current: true,
+            },
+          ],
         });
-        return cust;
+        saveLocal();
+
+        return normalized;
+      } else if (custErr) {
+        console.error('Failed to insert customer into Supabase:', custErr);
       }
     } catch (e) {
-      // Fallback
+      console.error('Supabase createCustomer exception:', e);
     }
   }
 
   const newId = 'cust-' + (localCustomers.length + 1);
   const newCustomer: DataCustomer = {
     id: newId,
-    customer_id: newId,
+    customer_id: data.customer_id || newId,
     order_id: data.order_id || 'ORD-' + Math.floor(10000000 + Math.random() * 90000000),
     customer_name: data.customer_name,
     address: data.address || '',
     depot: 'Royapuram',
     mobile_number: data.mobile_number || null,
     notes: data.notes || '',
-    vendor_id: data.vendor_id || null,
-    vendor_name: data.vendor_name || 'Unassigned',
+    vendor_id: resolvedVendorId,
+    vendor_name: resolvedVendorName || 'Unassigned',
     subscriptions: [
       {
         id: 'sub-' + (localCustomers.length + 1),

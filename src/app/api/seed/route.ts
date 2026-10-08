@@ -39,17 +39,43 @@ export async function POST() {
       }
     }
 
-    // 2. Insert customers & subscriptions in chunks
+    // 2. Insert customers & subscriptions in chunks (idempotent, skips existing)
     let insertedCustCount = 0;
     const chunkSize = 25;
     for (let i = 0; i < seedData.customers.length; i += chunkSize) {
       const chunk = seedData.customers.slice(i, i + chunkSize);
       for (const c of chunk) {
         const vId = vendorMap[c.vendor_name] || null;
+
+        // Skip if customer already exists by order_id or name+vendor
+        let existingCust = null;
+        if (c.order_id) {
+          const { data: found } = await supabase
+            .from('customers')
+            .select('id')
+            .eq('order_id', c.order_id)
+            .maybeSingle();
+          existingCust = found;
+        }
+        if (!existingCust && vId) {
+          const { data: found } = await supabase
+            .from('customers')
+            .select('id')
+            .eq('customer_name', c.customer_name)
+            .eq('vendor_id', vId)
+            .maybeSingle();
+          existingCust = found;
+        }
+
+        if (existingCust) {
+          continue; // Already exists, do not duplicate
+        }
+
         const { data: cust, error: cErr } = await supabase
           .from('customers')
           .insert({
             customer_name: c.customer_name,
+            customer_id: c.customer_id || null,
             address: c.address,
             mobile_number: c.mobile_number,
             order_id: c.order_id,

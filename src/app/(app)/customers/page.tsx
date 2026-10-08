@@ -54,8 +54,16 @@ function CustomersContent() {
 
   // Fetch vendors for filter
   useEffect(() => {
-    fetch('/api/vendors').then(r => r.json()).then(d => setVendors(d.vendors || []));
-  }, []);
+    fetch('/api/vendors').then(r => r.json()).then(d => {
+      const list = d.vendors || [];
+      setVendors(list);
+      const urlVendor = searchParams.get('vendor');
+      if (urlVendor && list.length > 0) {
+        const match = list.find((v: Vendor) => v.id === urlVendor || v.vendor_name.toLowerCase() === urlVendor.toLowerCase());
+        if (match) setVendorFilter(match.vendor_name);
+      }
+    });
+  }, [searchParams]);
 
   const fetchCustomers = useCallback(async () => {
     setLoading(true);
@@ -343,10 +351,14 @@ function AddCustomerModal({ vendors, onClose, onSaved }: {
     setSaving(true);
     setError('');
     try {
+      const selectedVendor = vendors.find(v => v.id === form.vendor_id);
       const res = await fetch('/api/customers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          vendor_name: selectedVendor ? selectedVendor.vendor_name : '',
+        }),
       });
       if (!res.ok) {
         const d = await res.json();

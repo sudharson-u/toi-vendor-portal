@@ -2,33 +2,13 @@
 
 import { useState } from 'react';
 import {
-  Settings, Database, Smartphone, ShieldCheck, RefreshCw,
+  Settings, Database, Smartphone, ShieldCheck,
   CheckCircle2, AlertTriangle, ExternalLink, Moon, Sun, Copy, Check
 } from 'lucide-react';
 import ThemeToggle from '@/components/theme/ThemeToggle';
 
 export default function SettingsPage() {
-  const [seeding, setSeeding] = useState(false);
-  const [seedResult, setSeedResult] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-
-  async function handleSeedSupabase() {
-    try {
-      setSeeding(true);
-      setSeedResult(null);
-      const res = await fetch('/api/seed', { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        setSeedResult(data.message || 'Database successfully seeded with vendors and customers!');
-      } else {
-        setSeedResult(`Notice: ${data.error || 'Please run schema.sql in Supabase SQL editor first.'}`);
-      }
-    } catch (err: any) {
-      setSeedResult('Seed failed: ' + err.message);
-    } finally {
-      setSeeding(false);
-    }
-  }
 
   function copyProjectUrl() {
     navigator.clipboard.writeText('https://eqsjancsvtjwhcsmnbjm.supabase.co');
@@ -86,29 +66,18 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Sync / Seed Button */}
-        <div className="p-4 bg-blue-50/60 dark:bg-blue-950/30 rounded-xl border border-blue-100 dark:border-blue-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* Database Status Info */}
+        <div className="p-4 bg-emerald-50/60 dark:bg-emerald-950/30 rounded-xl border border-emerald-100 dark:border-emerald-900/40 flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">
+            <CheckCircle2 className="w-5 h-5" />
+          </div>
           <div>
-            <h3 className="font-bold text-xs text-blue-900 dark:text-blue-200">Sync Seed Data to Supabase</h3>
-            <p className="text-[11px] text-blue-700/80 dark:text-blue-300/80 mt-0.5">
-              Syncs all 14 vendors and 262 extracted customer records into the Supabase database.
+            <h3 className="font-bold text-xs text-emerald-900 dark:text-emerald-200">Supabase Database Connected &amp; Synced</h3>
+            <p className="text-[11px] text-emerald-700/80 dark:text-emerald-300/80 mt-0.5">
+              Live database active. All customer, vendor, and subscription records are synchronized in real-time.
             </p>
           </div>
-          <button
-            onClick={handleSeedSupabase}
-            disabled={seeding}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-lg shadow-sm flex items-center gap-1.5 transition-colors self-start sm:self-center disabled:opacity-50"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${seeding ? 'animate-spin' : ''}`} />
-            <span>{seeding ? 'Syncing...' : 'Sync to Supabase'}</span>
-          </button>
         </div>
-
-        {seedResult && (
-          <div className="p-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-xs font-semibold text-gray-800 dark:text-gray-200">
-            {seedResult}
-          </div>
-        )}
       </div>
 
       {/* Mobile PWA & Installation */}

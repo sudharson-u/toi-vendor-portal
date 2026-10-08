@@ -9,18 +9,19 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getDashboardData() {
-  const [vendors, { customers }] = await Promise.all([
+  const [vendors, { customers, total }] = await Promise.all([
     getAllVendors(),
-    getAllCustomers({ limit: 500 }),
+    getAllCustomers({ limit: 1000 }),
   ]);
 
   const today = new Date();
   const currentMonth = format(today, 'MMMM yyyy');
 
   const stats = {
-    total: customers.length,
+    total: total ?? customers.length,
     active: 0,
     expiringThisMonth: 0,
     expired: 0,
@@ -33,7 +34,7 @@ async function getDashboardData() {
   customers.forEach((c: any) => {
     const sub = c.subscriptions?.[0];
     if (!sub) return;
-    const status = c.computed_status || calculateStatus(sub.end_date, today);
+    const status = calculateStatus(sub.end_date, today);
     if (status === 'active') {
       stats.active++;
     } else if (status === 'expiring_this_month') {
@@ -155,7 +156,7 @@ export default async function DashboardPage() {
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 leading-tight">
+                <span className="text-xs font-semibold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white leading-tight">
                   {label}
                 </span>
                 <div className={cn('p-2 rounded-lg', bg)}>
@@ -163,7 +164,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="mt-3">
-                <p className={cn('text-2xl font-black', highlight ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-white')}>
+                <p className={cn('text-2xl font-black tracking-tight', highlight ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-white')}>
                   {value}
                 </p>
               </div>
@@ -234,11 +235,13 @@ export default async function DashboardPage() {
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <span className={cn(
                         'text-xs font-semibold px-2.5 py-1 rounded-full',
-                        days <= 5
+                        days < 0
                           ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400'
-                          : 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400'
+                          : days <= 5
+                          ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400'
+                          : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400'
                       )}>
-                        {days <= 0 ? 'Expires today' : `${days} days left`}
+                        {days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'Expires today' : `${days} days left`}
                       </span>
                       <Link
                         href={`/customers/${customer.id}`}
